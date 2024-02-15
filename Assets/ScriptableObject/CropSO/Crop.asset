@@ -12,3 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4f89ad48e4bb64c9ed21b876bbc58e, type: 3}
   m_Name: Crop
   m_EditorClassIdentifier: 
+  cropName: Test
+  timeGrowth: 3
+  cropState:
+  - {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
