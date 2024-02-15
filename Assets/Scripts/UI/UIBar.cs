@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 using UnityEditor;
+using System.Xml.Schema;
 
 public class UIBar : MonoBehaviour
 {
@@ -49,12 +50,13 @@ public class UIBar : MonoBehaviour
 
             if (GameManager.instance.PlayerHp < currentPlayerHp)
             {
-                StartCoroutine(HpBerAni(currentPlayerHp, GameManager.instance.PlayerHp, mphp));
+                StartCoroutine(HpBerAni(currentPlayerHp, GameManager.instance.PlayerHp, true));
                 currentPlayerHp = GameManager.instance.PlayerHp;
+                maxPlayerHp = GameManager.instance.MaxPlayerHp;
             }
             if (GameManager.instance.PlayerHp > currentPlayerHp)
             {
-                StartCoroutine(HpBerAni(currentPlayerHp, GameManager.instance.PlayerHp, mphp));
+                StartCoroutine(HpBerAni(currentPlayerHp, GameManager.instance.PlayerHp, false));
                 currentPlayerHp = GameManager.instance.PlayerHp;
                 php = GameManager.instance.PlayerHp;
                 maxPlayerHp = GameManager.instance.MaxPlayerHp;
@@ -95,8 +97,11 @@ public class UIBar : MonoBehaviour
     {
         point.text = GameManager.instance.CurrentPoint.ToString();
     }
-    IEnumerator HpBerAni(float curr, float target, float maxhp)
+    IEnumerator HpBerAni(float curr, float target, bool u)
     {
+        Debug.Log(curr);
+        Debug.Log(target);
+
         float persent = 0;
         float speed = 100f;
         float time = Mathf.Abs(target - curr) / speed;
@@ -107,7 +112,22 @@ public class UIBar : MonoBehaviour
             ontime += Time.deltaTime;
             persent = ontime / time;
             var g = Mathf.Lerp(curr, target, persent);
-            ShowUi((int)Mathf.Floor(g), target);
+
+            var php = (int)Mathf.Floor(g);
+
+            if (u)
+            {
+                playerHpText.text = $"{(int)Mathf.Floor(g)} / {target}";
+                if (persent >= 1)
+                    playerHpBar.fillAmount = php == 0 && curr == 0 ? 0 : php / target;
+                else
+                    playerHpBar.fillAmount = php == 0 && curr == 0 ? 0 : php / curr;
+            }
+            else
+            {
+                playerHpText.text = $"{(int)Mathf.Floor(g)} / {target}";
+                playerHpBar.fillAmount = php == 0 && target == 0 ? 0 : php / target;
+            }
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
