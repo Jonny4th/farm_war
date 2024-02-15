@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class Raidable : MonoBehaviour
 {
+    public bool IsRaidable => m_IsRaidable;
+    public bool IsOccupied => m_IsOccupied;
+    
     [SerializeField]
     private bool m_IsRaidable;
-    public bool IsRaidable => m_IsRaidable;
 
     [SerializeField]
     private bool m_IsOccupied;
-    public bool IsOccupied => m_IsOccupied;
 
     public void SetOccupied(bool isOccupied) => m_IsOccupied = isOccupied;
 

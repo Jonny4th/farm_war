@@ -15,6 +15,9 @@ public class Raid : MonoBehaviour
     public float RemainLifeTime => m_RemainLifeTime;
 
     [SerializeField]
+    private FloatMono m_NormalizedTime;
+
+    [SerializeField]
     private Animator m_Animator;
 
     private Raidable currentTarget;
@@ -30,6 +33,7 @@ public class Raid : MonoBehaviour
         while(m_RemainLifeTime > 0)
         {
             m_RemainLifeTime -= Time.deltaTime;
+            m_NormalizedTime.SetValue(m_RemainLifeTime / m_LifeTime);
             yield return null;
         }
         OnRaidComplete?.Invoke(this);
