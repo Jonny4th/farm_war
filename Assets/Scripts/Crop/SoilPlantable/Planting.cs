@@ -26,4 +26,5 @@ public class Planting : MonoBehaviour
         planted = true;
         Instantiate(crops[0], new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 2, gameObject.transform.position.z), Quaternion.identity );
     }
+
 }

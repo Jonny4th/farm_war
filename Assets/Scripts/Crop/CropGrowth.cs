@@ -11,6 +11,7 @@ public class CropGrowth : MonoBehaviour
     [SerializeField] private GameObject particle;
     [SerializeField] private bool cropIsReady;
     [SerializeField] private bool particleIsPlay;
+    private bool onSoil = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +45,11 @@ public class CropGrowth : MonoBehaviour
         {
             CropGrowing();
         }
+
+        if(onSoil)
+        {
+            OnSoilCheck();
+        }
     }
 
     private void CropGrowing()
@@ -56,5 +62,18 @@ public class CropGrowth : MonoBehaviour
     private void CropPartical()
     {
         Instantiate(particle, gameObject.transform.position,Quaternion.identity);
+    }
+
+    private void OnSoilCheck()
+    {
+        Destroy(GetComponent<Rigidbody>());
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.CompareTag("Plantable"))
+        {
+            onSoil = true;
+        }
     }
 }
