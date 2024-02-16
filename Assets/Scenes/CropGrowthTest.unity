@@ -209,7 +209,7 @@ Transform:
   m_GameObject: {fileID: 1042264298}
   serializedVersion: 2
   m_LocalRotation: {x: 0.14763674, y: 0, z: 0, w: 0.9890417}
-  m_LocalPosition: {x: -1.63, y: 2.005, z: -3.987}
+  m_LocalPosition: {x: -1.63, y: 3.77, z: -9.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -344,7 +344,6 @@ MonoBehaviour:
   crops:
   - {fileID: 5102757813000107390, guid: 978ea4531cfe1a34785fa9df8bd36d82, type: 3}
   planted: 0
-  cast: {fileID: 0}
 --- !u!33 &3910915008171251438
 MeshFilter:
   m_ObjectHideFlags: 0

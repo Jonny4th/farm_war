@@ -6,7 +6,6 @@ public class Planting : MonoBehaviour
 {
     [SerializeField] private GameObject[] crops;
     [SerializeField] private bool planted;
-    [SerializeField] private GameObject cast;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,8 +15,9 @@ public class Planting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && planted == false)
+        if (Input.GetKeyDown(KeyCode.Space) && planted == false)
         {
+            planted = true;
             PlantTheCrop();
         }
 
@@ -25,12 +25,15 @@ public class Planting : MonoBehaviour
 
     private void PlantTheCrop()
     {
-        planted = true;
-        Instantiate(crops[0], new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 2, gameObject.transform.position.z), Quaternion.identity );
+        Instantiate(crops[0], new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 2, gameObject.transform.position.z), Quaternion.identity);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionExit(Collision collision)
     {
-        
+        if (collision.collider.CompareTag("Crop"))
+        {
+            planted = false;
+        }
     }
+
 }

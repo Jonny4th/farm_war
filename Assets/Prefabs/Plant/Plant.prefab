@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63977f0d73c90ca489d0907b45d9d54a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   meshFilter: {fileID: 0}
   _soCrop: {fileID: 11400000, guid: d934e08349d4f114d9695fbb9f4d73de, type: 2}
   cropCurrentState: 0
@@ -128,6 +129,7 @@ MonoBehaviour:
   particle: {fileID: 7095035740552459824, guid: fb367b6b17962084dbc560302ec1ad99, type: 3}
   cropIsReady: 0
   particleIsPlay: 0
+  CropJump: 0.5
 --- !u!54 &-6523960203369218100
 Rigidbody:
   m_ObjectHideFlags: 0

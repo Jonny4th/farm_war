@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CropGrowth : MonoBehaviour
 {
+    [SerializeField] private Rigidbody rb;
     [SerializeField] private MeshFilter meshFilter;
     [SerializeField] private SOcrop _soCrop;
     [SerializeField] private int cropCurrentState;
@@ -11,10 +12,11 @@ public class CropGrowth : MonoBehaviour
     [SerializeField] private GameObject particle;
     [SerializeField] private bool cropIsReady;
     [SerializeField] private bool particleIsPlay;
-    private bool onSoil = false;
+    [SerializeField] private float CropJump;
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         particleIsPlay = false;
         cropIsReady = false;
         cropCurrentState = 0;
@@ -46,11 +48,6 @@ public class CropGrowth : MonoBehaviour
             CropGrowing();
         }
 
-        if(onSoil)
-        {
-            OnSoilCheck();
-        }
-
     }
 
     private void CropGrowing()
@@ -65,22 +62,12 @@ public class CropGrowth : MonoBehaviour
         Instantiate(particle, gameObject.transform.position,Quaternion.identity);
     }
 
-    private void OnSoilCheck()
-    {
-        Destroy(GetComponent<Rigidbody>());
-    }
-
     private void CropStealing()
     {
-        Destroy(this.gameObject);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.collider.CompareTag("Plantable"))
-        {
-            onSoil = true;
-        }
+        rb.MovePosition(gameObject.transform.position + new Vector3(0,CropJump));
+        Instantiate(particle, gameObject.transform.position, Quaternion.identity);
+        Destroy(gameObject.GetComponent<CapsuleCollider>(), 0.1f);
+        Destroy(this.gameObject, 0.5f);
     }
 
     private void OnMouseDown()
