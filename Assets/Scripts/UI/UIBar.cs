@@ -5,17 +5,22 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 using UnityEditor;
-using System.Xml.Schema;
 
 public class UIBar : MonoBehaviour
 {
+    [System.Serializable]
+    private class BarGroup
+    {
+        public TextMeshProUGUI hpText;
+        public Image hpBar;
+    }
+
     [Space]
     [Header("ADD UI")]
-    [SerializeField] private TextMeshProUGUI playerHpText;
-    [SerializeField] private Image playerHpBar;
-    [SerializeField] private TextMeshProUGUI ememyHpText;
-    [SerializeField] private Image ememyHpBar;
     [SerializeField] private TextMeshProUGUI point;
+
+    [SerializeField] private BarGroup playerBar;
+    [SerializeField] private BarGroup ememyBar;
 
     private float currentPlayerHp;
     private float maxPlayerHp;
@@ -29,14 +34,18 @@ public class UIBar : MonoBehaviour
         currentEmemyHp = GameManager.instance.EmenyHp;
         maxPlayerHp = GameManager.instance.MaxPlayerHp;
         maxEmemyHp = GameManager.instance.MaxEmemyHp;
+
+        GameManager.instance.playerHealthUpdate += UpdatePlayerUI;
+        GameManager.instance.ememyHealthUpdate += UpdateEmemyUI;
+        GameManager.instance.pointUpdate += UpdatePointUI;
     }
 
     void FixedUpdate()
     {
-        if (GameManager.instance == null) return;
-        UpdatePlayerUI();
-        UpdateEmemyUI();
-        UpdatePoint();
+        // if (GameManager.instance == null) return;
+        // UpdatePlayerUI();
+        // UpdateEmemyUI();
+        // UpdatePointUI();
     }
 
     private void UpdatePlayerUI()
@@ -44,32 +53,25 @@ public class UIBar : MonoBehaviour
         float php = GameManager.instance.PlayerHp;
         float mphp = maxPlayerHp;
 
-
         if (currentPlayerHp != GameManager.instance.PlayerHp)
         {
-
             if (GameManager.instance.PlayerHp < currentPlayerHp)
             {
-                StartCoroutine(HpBerAni(currentPlayerHp, GameManager.instance.PlayerHp, true));
+                StartCoroutine(HpBerAni(playerBar, currentPlayerHp, GameManager.instance.PlayerHp, true));
                 currentPlayerHp = GameManager.instance.PlayerHp;
                 maxPlayerHp = GameManager.instance.MaxPlayerHp;
             }
             if (GameManager.instance.PlayerHp > currentPlayerHp)
             {
-                StartCoroutine(HpBerAni(currentPlayerHp, GameManager.instance.PlayerHp, false));
+                StartCoroutine(HpBerAni(playerBar, currentPlayerHp, GameManager.instance.PlayerHp, false));
                 currentPlayerHp = GameManager.instance.PlayerHp;
                 php = GameManager.instance.PlayerHp;
                 maxPlayerHp = GameManager.instance.MaxPlayerHp;
                 mphp = maxPlayerHp;
             }
-
         }
     }
-    private void ShowUi(float php, float mphp)
-    {
-        playerHpText.text = $"{php} / {mphp}";
-        playerHpBar.fillAmount = php == 0 && mphp == 0 ? 0 : php / mphp;
-    }
+
     public void UpdateEmemyUI()
     {
         var eh = GameManager.instance.EmenyHp;
@@ -79,31 +81,29 @@ public class UIBar : MonoBehaviour
         {
             if (GameManager.instance.EmenyHp < currentEmemyHp)
             {
+                StartCoroutine(HpBerAni(ememyBar, currentEmemyHp, GameManager.instance.EmenyHp, true));
                 currentEmemyHp = GameManager.instance.EmenyHp;
+                maxEmemyHp = GameManager.instance.EmenyHp;
             }
             if (GameManager.instance.EmenyHp > currentEmemyHp)
             {
+                StartCoroutine(HpBerAni(ememyBar, currentEmemyHp, GameManager.instance.EmenyHp, false));
                 currentEmemyHp = GameManager.instance.EmenyHp;
                 eh = GameManager.instance.EmenyHp;
                 maxEmemyHp = GameManager.instance.MaxEmemyHp;
                 meh = maxEmemyHp;
             }
         }
-
-        ememyHpText.text = $"{eh} / {meh}";
-        ememyHpBar.fillAmount = eh == 0 && meh == 0 ? 0 : eh / meh;
     }
-    public void UpdatePoint()
+    public void UpdatePointUI()
     {
         point.text = GameManager.instance.CurrentPoint.ToString();
     }
-    IEnumerator HpBerAni(float curr, float target, bool u)
-    {
-        Debug.Log(curr);
-        Debug.Log(target);
 
+    IEnumerator HpBerAni(BarGroup barGroup, float curr, float target, bool u)
+    {
         float persent = 0;
-        float speed = 100f;
+        float speed = 300f;
         float time = Mathf.Abs(target - curr) / speed;
         float ontime = 0;
 
@@ -113,22 +113,28 @@ public class UIBar : MonoBehaviour
             persent = ontime / time;
             var g = Mathf.Lerp(curr, target, persent);
 
-            var php = (int)Mathf.Floor(g);
+            var hp = (int)Mathf.Floor(g);
 
             if (u)
             {
-                playerHpText.text = $"{(int)Mathf.Floor(g)} / {target}";
+                barGroup.hpText.text = $"{hp} / {target}";
                 if (persent >= 1)
-                    playerHpBar.fillAmount = php == 0 && curr == 0 ? 0 : php / target;
+                    barGroup.hpBar.fillAmount = hp == 0 && curr == 0 ? 0 : hp / target;
                 else
-                    playerHpBar.fillAmount = php == 0 && curr == 0 ? 0 : php / curr;
+                    barGroup.hpBar.fillAmount = hp == 0 && curr == 0 ? 0 : hp / curr;
             }
             else
             {
-                playerHpText.text = $"{(int)Mathf.Floor(g)} / {target}";
-                playerHpBar.fillAmount = php == 0 && target == 0 ? 0 : php / target;
+                barGroup.hpText.text = $"{(int)Mathf.Floor(g)} / {target}";
+                barGroup.hpBar.fillAmount = hp == 0 && target == 0 ? 0 : hp / target;
             }
             yield return new WaitForSeconds(Time.deltaTime);
         }
+    }
+    void OnDestroy()
+    {
+        GameManager.instance.playerHealthUpdate -= UpdatePlayerUI;
+        GameManager.instance.ememyHealthUpdate -= UpdateEmemyUI;
+        GameManager.instance.pointUpdate -= UpdatePointUI;
     }
 }

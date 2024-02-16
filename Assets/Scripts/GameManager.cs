@@ -7,15 +7,19 @@ using System;
 public enum GameState
 {
     Action,
-    GameOver
+    GameOver,
+    Winer
 }
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
     [SerializeField] private GameState state = GameState.Action;
-    [SerializeField] private Canvas actionCanvas;
-    [SerializeField] private Canvas gameOverCanvas;
+    public GameState State { get { return state; } }
+    [Header("Canvas")]
+    [SerializeField] private GameObject actionCanvas;
+    [SerializeField] private GameObject gameOverCanvas;
+    [SerializeField] private GameObject winerCanvas;
     [Space]
     [Header("PlayerHP")]
     [SerializeField] private float maxPlayerHp;
@@ -40,14 +44,16 @@ public class GameManager : MonoBehaviour
     [Space]
     [Header("Collect Animals")]
     [SerializeField] private List<AnimalTest> aliveAnimal = new List<AnimalTest>();
-    public List<AnimalTest> AliveAnimal { get { return aliveAnimal; } }
+    public List<AnimalTest> AliveAnimal { get { return aliveAnimal; } set { aliveAnimal = value; } }
     [SerializeField] private List<EmenTest> aliveEmemy = new List<EmenTest>();
     public List<EmenTest> AliveEmemy { get { return aliveEmemy; } }
 
     [SerializeField] private List<float> deadAnimal = new List<float>(); //Collect dead animals for removing maxHealth while healing.
 
 
-
+    public Action playerHealthUpdate;
+    public Action ememyHealthUpdate;
+    public Action pointUpdate;
 
     void Awake()
     {
@@ -57,8 +63,10 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        UpdateHealth();
         StartState(GameState.Action);
     }
+
 
 
     void Update()
@@ -76,12 +84,19 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.Action:
-                actionCanvas.enabled = true;
-                gameOverCanvas.enabled = false;
+                actionCanvas.SetActive(true);
+                gameOverCanvas.SetActive(false);
+                winerCanvas.SetActive(false);
                 break;
             case GameState.GameOver:
-                actionCanvas.enabled = true;
-                gameOverCanvas.enabled = true;
+                actionCanvas.SetActive(false);
+                gameOverCanvas.SetActive(true);
+                winerCanvas.SetActive(false);
+                break;
+            case GameState.Winer:
+                actionCanvas.SetActive(false);
+                gameOverCanvas.SetActive(false);
+                winerCanvas.SetActive(true);
                 break;
 
         }
@@ -91,10 +106,15 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.Action:
+                if (currentPlayerHp <= 0)
+                    StartState(GameState.GameOver);
+                if (currentEmemyHp <= 0)
+                    StartState(GameState.Winer);
                 break;
             case GameState.GameOver:
                 break;
-
+            case GameState.Winer:
+                break;
         }
     }
     private void EndState()
@@ -105,6 +125,8 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.GameOver:
                 break;
+            case GameState.Winer:
+                break;
 
         }
     }
@@ -113,16 +135,18 @@ public class GameManager : MonoBehaviour
     #region Player
     public void AddAliveAnimal(AnimalTest animal)
     {
-        aliveAnimal.Add(animal);
+        if (aliveAnimal.Contains(animal)) return;
         maxPlayerHp += animal.maxHp;
+        aliveAnimal.Add(animal);
         UpdateHealth();
     }
     public void RemoveAnimal(AnimalTest animal)
     {
         if (aliveAnimal.Count == 0) return;
+        if (!aliveAnimal.Contains(animal)) return;
         maxPlayerHp -= animal.maxHp;
-        aliveAnimal.Remove(animal);
         UpdateHealth();
+        aliveAnimal.Remove(animal);
     }
     public void UpdateHealth()
     {
@@ -132,6 +156,7 @@ public class GameManager : MonoBehaviour
             chp += T.currentHp;
         }
         currentPlayerHp = chp;
+        playerHealthUpdate?.Invoke();
     }
     public void Health()
     {
@@ -145,16 +170,18 @@ public class GameManager : MonoBehaviour
     #region Ememy
     public void AddAliveEmemy(EmenTest ememy)
     {
-        aliveEmemy.Add(ememy);
+        if (aliveEmemy.Contains(ememy)) return;
         maxEmemyHp += ememy.maxHp;
+        aliveEmemy.Add(ememy);
         UpdateEmenyHealth();
     }
     public void RemoveEmemy(EmenTest ememy)
     {
         if (aliveEmemy.Count == 0) return;
+        if (!aliveEmemy.Contains(ememy)) return;
         maxEmemyHp -= ememy.maxHp;
-        aliveEmemy.Remove(ememy);
         UpdateEmenyHealth();
+        aliveEmemy.Remove(ememy);
     }
 
     public void UpdateEmenyHealth()
@@ -165,7 +192,12 @@ public class GameManager : MonoBehaviour
             chp += T.currentHp;
         }
         currentEmemyHp = chp;
+        ememyHealthUpdate?.Invoke();
     }
     #endregion
-
+    public void UpdatePoint(float point)
+    {
+        currenPoint += point;
+        pointUpdate?.Invoke();
+    }
 }

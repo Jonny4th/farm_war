@@ -24,6 +24,7 @@ public class Spawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.instance.State != GameState.Action) return;
         if (Input.GetKeyDown(KeyCode.Q))
         {
             Animal();
@@ -43,12 +44,13 @@ public class Spawn : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.J))
         {
-            GameManager.instance.CurrentPoint += 10;
+            // GameManager.instance.CurrentPoint += 10;
+            GameManager.instance.UpdatePoint(-10);
         }
         if (Input.GetKeyDown(KeyCode.K))
         {
             int r = Random.Range(0, GameManager.instance.AliveAnimal.Count - 1);
-            GameManager.instance.AliveAnimal[r].TakeDamage(50);
+            GameManager.instance.AliveAnimal[r].TakeDamage(20);
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
