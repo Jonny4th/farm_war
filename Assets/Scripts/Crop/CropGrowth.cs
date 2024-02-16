@@ -50,6 +50,7 @@ public class CropGrowth : MonoBehaviour
         {
             OnSoilCheck();
         }
+
     }
 
     private void CropGrowing()
@@ -69,11 +70,22 @@ public class CropGrowth : MonoBehaviour
         Destroy(GetComponent<Rigidbody>());
     }
 
+    private void CropStealing()
+    {
+        Destroy(this.gameObject);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.collider.CompareTag("Plantable"))
         {
             onSoil = true;
         }
+    }
+
+    private void OnMouseDown()
+    {
+        if(cropIsReady && particleIsPlay)
+        CropStealing();
     }
 }
