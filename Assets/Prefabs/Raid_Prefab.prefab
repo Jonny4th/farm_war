@@ -394,6 +394,8 @@ GameObject:
   - component: {fileID: 4269728809995936706}
   - component: {fileID: 7652199998882898156}
   - component: {fileID: 2929478195679899392}
+  - component: {fileID: 9144969446041010941}
+  - component: {fileID: 4271338936594642225}
   m_Layer: 5
   m_Name: LifeTime
   m_TagString: Untagged
@@ -483,10 +485,39 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.822
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &9144969446041010941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5103811557146502516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17c399efec208a34c9095a9e2a34d8e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _NormalisedValue: {fileID: 4271338936594642225}
+--- !u!114 &4271338936594642225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5103811557146502516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a4fa84d7303f647a19ead9686d7f1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Name: Normalized Remaining Life
+  _UseConstant: 1
+  _ConstantValue: 0
+  _Variable: {fileID: 0}
 --- !u!1 &6079988779168750036
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,7 +564,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4629537227431883170}
   - component: {fileID: 3375251610659025633}
-  - component: {fileID: 3368541929343588295}
   - component: {fileID: 7667126799988919116}
   m_Layer: 0
   m_Name: Raid_Prefab
@@ -574,36 +604,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LifeTime: 5
   m_RemainLifeTime: 0
-  m_NormalizedTime: {fileID: 3368541929343588295}
+  m_NormalizedTime: {fileID: 4271338936594642225}
   m_Animator: {fileID: 7667126799988919116}
---- !u!114 &3368541929343588295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8511910834073934962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1609a8b378ee3284299ffaa08b2bb8d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Value: 0
-  OnValueChanged:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2929478195679899392}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Slider, UnityEngine.UI
-        m_MethodName: set_normalizedValue
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!95 &7667126799988919116
 Animator:
   serializedVersion: 5

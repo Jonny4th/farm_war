@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Raid : MonoBehaviour
+public class Raid : MonoBehaviour, IDamageable
 {
-    public event Action<Raid> OnRaidComplete;
+    public event Action<Raid> OnRaidCompleted; // send when raid stops.
+    public event Action<Raid> OnOutAnimationDone; // send when animaiton out had done.
 
     [Tooltip("Life span of the prefab in seconds.")]
     [SerializeField]
@@ -15,14 +16,14 @@ public class Raid : MonoBehaviour
     public float RemainLifeTime => m_RemainLifeTime;
 
     [SerializeField]
-    private FloatMono m_NormalizedTime;
+    private FloatReference m_NormalizedTime;
 
     [SerializeField]
     private Animator m_Animator;
 
     private Raidable currentTarget;
 
-    void Awake()
+    void OnEnable()
     {
         m_RemainLifeTime = m_LifeTime;
         StartCoroutine(UpdateLife());
@@ -33,27 +34,32 @@ public class Raid : MonoBehaviour
         while(m_RemainLifeTime > 0)
         {
             m_RemainLifeTime -= Time.deltaTime;
-            m_NormalizedTime.SetValue(m_RemainLifeTime / m_LifeTime);
+            m_NormalizedTime.Value = (m_RemainLifeTime / m_LifeTime);
             yield return null;
         }
-        OnRaidComplete?.Invoke(this);
+        OnRaidCompleted?.Invoke(this);
         m_Animator.SetTrigger("Done");
     }
 
     public void SetRaidTarget(Raidable target)
     {
-        target.SetOccupied(true);
+        target.AddToRaidList(this);
         currentTarget = target;
     }
 
-    public void OnAnimationOutDone()
+    public void OnAnimationOutDone() // Used by animation event
     {
-        Destroy(gameObject);
+        if(currentTarget != null)
+        {
+            currentTarget.RemoveFromRaidList(this);
+            currentTarget = null;
+        }
+
+        gameObject.SetActive(false);
     }
 
-    void OnDestroy()
+    public void TakeDamage(float damage)
     {
-        if(currentTarget == null) return;
-        currentTarget.SetOccupied(false);
+        m_RemainLifeTime -= damage;
     }
 }
