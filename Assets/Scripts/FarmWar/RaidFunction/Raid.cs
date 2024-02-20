@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Raid : MonoBehaviour, IDamageable
 {
-    public event Action<Raid> OnRaidCompleted; // send when raid stops.
-    public event Action<Raid> OnOutAnimationDone; // send when animaiton out had done.
+    public UnityEvent<Raid> OnRaidStart;
+    public UnityEvent<Raid> OnRaidCompleted; // send when raid stops.
+    public UnityEvent<Raid> OnOutAnimationDone; // send when animaiton out had done.
 
     [Tooltip("Life span of the prefab in seconds.")]
     [SerializeField]
@@ -31,6 +33,7 @@ public class Raid : MonoBehaviour, IDamageable
 
     IEnumerator UpdateLife()
     {
+        OnRaidStart?.Invoke(this);
         while(m_RemainLifeTime > 0)
         {
             m_RemainLifeTime -= Time.deltaTime;
