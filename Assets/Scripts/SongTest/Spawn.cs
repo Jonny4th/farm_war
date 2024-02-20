@@ -8,18 +8,17 @@ public class Spawn : MonoBehaviour
 
     void Start()
     {
-        Animal();
-        Ememy();
+
     }
     private void Animal()
     {
-        GameObject gameObject = new GameObject("Animal");
-        gameObject.AddComponent<AnimalTest>();
+        GameObject Obj = new GameObject("Animal", typeof(AnimalTest));
+        GameManager.instance.PlayerFaction.AliveUnit.Add(Obj.GetComponent<AnimalTest>());
     }
     private void Ememy()
     {
-        GameObject gameObject = new GameObject("Emem");
-        gameObject.AddComponent<EmenTest>();
+        GameObject Obj = new GameObject("Emem", typeof(EmenTest));
+        GameManager.instance.EmemyFaction.AliveUnit.Add(Obj.GetComponent<EmenTest>());
     }
     // Update is called once per frame
     void Update()
@@ -35,27 +34,15 @@ public class Spawn : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.O))
         {
-            int r = Random.Range(0, GameManager.instance.AliveAnimal.Count - 1);
-            GameManager.instance.AliveAnimal[r].Health(50);
+            GameManager.instance.PlayerFaction.TakeDamage(200);
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            GameManager.instance.EmemyFaction.TakeDamage(200);
         }
 
-
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            // GameManager.instance.CurrentPoint += 10;
-            GameManager.instance.UpdatePoint(-10);
-        }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            int r = Random.Range(0, GameManager.instance.AliveAnimal.Count - 1);
-            GameManager.instance.AliveAnimal[r].TakeDamage(20);
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            int r = Random.Range(0, GameManager.instance.AliveEmemy.Count - 1);
-            GameManager.instance.AliveEmemy[0].TakeDamage(50);
-        }
     }
+
 }

@@ -12,7 +12,7 @@ public class EmenTest : MonoBehaviour
 
         if (GameManager.instance != null)
         {
-            GameManager.instance.AddAliveEmemy(this);
+            // GameManager.instance.AddAliveEmemy(this);
         }
     }
 
@@ -26,12 +26,12 @@ public class EmenTest : MonoBehaviour
     {
         if (GameManager.instance != null)
         {
-            GameManager.instance.RemoveEmemy(this);
+            // GameManager.instance.RemoveEmemy(this);
         }
     }
     public void TakeDamage(float damage)
     {
         currentHp -= damage;
-        GameManager.instance.UpdateEmenyHealth();
+        // GameManager.instance.UpdateEmenyHealth();
     }
 }
