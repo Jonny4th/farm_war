@@ -18,7 +18,6 @@ public class PlayerFaction : Faction<AnimalTest>
     {
         currentHp -= damage;
         UIManager.instance.UpdateUi(this);
-
     }
 
     protected override void Start()

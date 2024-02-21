@@ -912,6 +912,7 @@ GameObject:
   - component: {fileID: 534444645}
   - component: {fileID: 534444644}
   - component: {fileID: 534444643}
+  - component: {fileID: 534444647}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1007,6 +1008,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &534444647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534444642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &564811182
 GameObject:
   m_ObjectHideFlags: 0
@@ -1821,7 +1841,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.05
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 3124a865fc8a8ee439ac507e33cdc81f, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: b2fd52d197641364cb3668ed6e41097e, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &921366656
 GameObject:
@@ -1870,7 +1890,6 @@ MonoBehaviour:
   state: 0
   playerFaction: {fileID: 2059391591}
   ememyFaction: {fileID: 984639323}
-  isRatInArea: 0
 --- !u!1 &939834243
 GameObject:
   m_ObjectHideFlags: 0
@@ -3246,6 +3265,7 @@ GameObject:
   - component: {fileID: 1863023545}
   - component: {fileID: 1863023544}
   - component: {fileID: 1863023543}
+  - component: {fileID: 1863023549}
   - component: {fileID: 1863023548}
   m_Layer: 0
   m_Name: Farmer
@@ -3377,7 +3397,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 0
-  state: 0
+  animator: {fileID: 1863023549}
+  nav: {fileID: 1863023543}
+  player: {fileID: 534444646}
+--- !u!95 &1863023549
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863023542}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1924208028
 GameObject:
   m_ObjectHideFlags: 0

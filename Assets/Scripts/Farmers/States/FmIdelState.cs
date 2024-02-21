@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FmIdelState : MonoBehaviour
+public class FmIdelState : StateBase
 {
-    // Start is called before the first frame update
-    void Start()
+    public FmIdelState(Farmer farmer, Animator animator, GameManager gameManager) : base(farmer, animator, gameManager)
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public override void StartState() { }
+    public override void EndState() { }
+    public override void LogiUpdate() { }
+    public override void PhysiUpdate() { }
 }

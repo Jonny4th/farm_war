@@ -2,17 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FmAttackState : MonoBehaviour
+public class FmAttackState : StateBase
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  public FmAttackState(Farmer farmer, Animator animator, GameManager gameManager) : base(farmer, animator, gameManager)
+  {
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  }
+
+  public override void StartState()
+  {
+
+  }
+  public override void EndState()
+  {
+
+  }
+  public override void LogiUpdate()
+  {
+
+  }
+  public override void PhysiUpdate()
+  {
+
+  }
 }

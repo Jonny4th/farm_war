@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateManager : MonoBehaviour
+[System.Serializable]
+public class StateManager
 {
     private StateBase currentState;
-    public StateBase CurrentState { get { return currentState; } set { currentState = value; } }
+    public StateBase CurrentState { get { return currentState; } private set { currentState = value; } }
 
+    public void Init(StateBase startState) => CurrentState = startState;
     public void SwitchState(StateBase nextState)
     {
         CurrentState.EndState();
