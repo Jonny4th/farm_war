@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class StateBase : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    protected Animator animator;
+    protected GameManager manager;
+
+
+    public StateBase(Animator animator, GameManager gameManager)
     {
-        
+        this.animator = animator;
+        this.manager = gameManager;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StartState()
     {
-        
+
+    }
+    public void EndState()
+    {
+
+    }
+    public void LogiUpdate()
+    {
+
+    }
+    public void PhysiUpdate()
+    {
+
     }
 }

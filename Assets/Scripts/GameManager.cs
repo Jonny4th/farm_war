@@ -30,8 +30,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private EmemyFaction ememyFaction;
     public EmemyFaction EmemyFaction { get { if (playerFaction == null) Debug.Log("Set ememyFaction"); return ememyFaction; } }
 
-    [SerializeField] private bool isRatInArea = false;
-    public bool IsRatInArea { get { return isRatInArea; } set { isRatInArea = value; } }
+    // [SerializeField] private bool isRatInArea = false;
+    // public bool IsRatInArea { get { return isRatInArea; } set { isRatInArea = value; } }
 
     void Awake()
     {
