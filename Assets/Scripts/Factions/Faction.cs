@@ -7,7 +7,7 @@ public abstract class Faction<T> : MonoBehaviour
 {
     [SerializeField] protected List<T> aliveUnit = new List<T>();
     public List<T> AliveUnit { get { return aliveUnit; } }
-    [SerializeField] private float maxHp = 100;
+    [SerializeField] protected float maxHp = 100;
     public float MaxHp { get { return maxHp; } }
     [SerializeField] private protected float currentHp;
     public float Hp { get { return (int)currentHp; } }

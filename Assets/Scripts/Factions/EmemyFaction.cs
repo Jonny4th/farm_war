@@ -11,7 +11,6 @@ public class EmemyFaction : Faction<EmenTest>
     }
     protected override void Start()
     {
-
         Delay(() => UIManager.instance.UpdateUi(this), 1f);
     }
 }

@@ -10,7 +10,10 @@ public class PlayerFaction : Faction<AnimalTest>
     [SerializeField] private float point;
     public float Point { get { return point; } }
 
-
+    private List<AnimalTest> unitInGrouind = new List<AnimalTest>();
+    public List<AnimalTest> UnitInGrouind { get { return unitInGrouind; } }
+    [SerializeField] private Transform ratTest;
+    public Vector3 RatTest { get { return ratTest.transform.position; } }
     public override void TakeDamage(float damage)
     {
         currentHp -= damage;
