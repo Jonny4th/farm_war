@@ -6,12 +6,12 @@ public class FmAttackState : StateBase
 {
   public FmAttackState(Farmer farmer, Animator animator, GameManager gameManager) : base(farmer, animator, gameManager)
   {
-
+    stateName = FarmerStrate.Attack;
   }
 
   public override void StartState()
   {
-
+    base.StartState();
   }
   public override void EndState()
   {

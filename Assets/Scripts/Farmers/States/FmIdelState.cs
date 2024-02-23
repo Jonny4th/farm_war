@@ -2,21 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FmIdelState : StateBase
+public class FmIdelState : StateFinder
 {
-    private float time = 5f;
-    private float timer = 0;
-
-
-
     public FmIdelState(Farmer farmer, Animator animator, GameManager gameManager) : base(farmer, animator, gameManager)
     {
-
+        stateName = FarmerStrate.Idel;
     }
 
     public override void StartState()
     {
-
+        base.StartState();
+        farmer.currentState = stateName;
+        timer = 0;
+        nodeIndex = -1;
     }
     public override void EndState()
     {
@@ -27,24 +25,23 @@ public class FmIdelState : StateBase
         if (CheckUnitOnGround())
         {
             UnitNearMe();
-            farmer.StateManager.SwitchState(farmer.Move);
+            farmer.StateManager.SwitchState(farmer.moveState);
         }
         else
         {
 
-            time += Time.deltaTime;
-            
-
-
-
-
-
-
-
+            timer += Time.deltaTime;
+            if (timer >= time)
+            {
+                timer = 0;
+                farmer.targetMoving = RandomNode(out nodeIndex);
+                manager.NodeMana.SetIndexToMove(farmer, nodeIndex);
+                farmer.StateManager.SwitchState(farmer.moveState);
+            }
         }
     }
     public override void PhysiUpdate()
     {
-
+        base.PhysiUpdate();
     }
 }

@@ -24,16 +24,13 @@ public class Farmer : MonoBehaviour
     [SerializeField] private StateManager stateManager;
     public StateManager StateManager { get { return stateManager; } set { stateManager = value; } }
 
-    private FmIdelState idelState;
-    public FmIdelState Idel { get { return idelState; } private set { } }
-    private FmMoveState moveState;
-    public FmMoveState Move { get { return moveState; } private set { } }
-    private FmDigState digState;
-    public FmDigState Dig { get { return digState; } private set { } }
-    private FmAttackState attackState;
-    public FmAttackState Attack { get { return attackState; } private set { } }
-    private FmDieState dieState;
-    public FmDieState Did { get { return dieState; } private set { } }
+    [HideInInspector] public FmIdelState idelState;
+    [HideInInspector] public FmMoveState moveState;
+
+    [HideInInspector] public FmDigState digState;
+    [HideInInspector] public FmAttackState attackState;
+    [HideInInspector] public FmDieState dieState;
+
 
     [SerializeField] private Animator animator;
 
@@ -41,18 +38,15 @@ public class Farmer : MonoBehaviour
     public NavMeshAgent Agent { get { if (nav == null) Debug.Log("NavMesh is Null"); return nav; } set { nav = value; } }
 
 
-    private Vector3 movePosition;
-    public Vector3 MovePosition { get { return player.position; } set { movePosition = value; } }
-    public Transform player;
-
-    private Vector3 targetMoving;
-    public Vector3 TargetMove { get { return targetMoving; } set { targetMoving = value; } }
+    public Vector3 targetMoving;
+    // public Vector3 TargetMove { get { return targetMoving; } set { targetMoving = value; } }
 
 
+    [HideInInspector] public AnimalTest unitTarget;
 
-    private AnimalTest unitTarget;
-    public AnimalTest UnitTarget { get { return unitTarget; } set { unitTarget = value; } }
+     public Node nodetarget;
 
+    public FarmerStrate currentState;
     void Awake()
     {
 
@@ -69,19 +63,20 @@ public class Farmer : MonoBehaviour
         attackState = new FmAttackState(this, animator, GameManager.instance);
         dieState = new FmDieState(this, animator, GameManager.instance);
 
-        stateManager.Init(Idel);
+        stateManager.Init(idelState);
 
     }
 
 
     void Update()
     {
-
+        if (GameManager.instance.State != GameState.Action) return;
         stateManager.CurrentState.LogiUpdate();
     }
 
     void FixedUpdate()
     {
+        if (GameManager.instance.State != GameState.Action) return;
         stateManager.CurrentState.PhysiUpdate();
     }
 

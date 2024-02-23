@@ -26,6 +26,11 @@ public class UIManager : MonoBehaviour
 
 
 
+    [Header("Test")]
+    [SerializeField] private TextMeshProUGUI timeState;
+    [SerializeField] private TextMeshProUGUI nodeTarget;
+    [SerializeField] private TextMeshProUGUI currState;
+    [SerializeField] private Farmer farmer;
 
 
     private GameState state;
@@ -49,7 +54,12 @@ public class UIManager : MonoBehaviour
         GameManager.instance.StateChange += StartState;
     }
 
-
+    private void Update()
+    {
+        UpdateTime();
+        UpdateNode();
+        UpdateCurrentState();
+    }
 
     void Start()
     {
@@ -63,11 +73,7 @@ public class UIManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
     private void HideAllPanel()
     {
         setUpPanel.SetActive(false);
@@ -75,6 +81,7 @@ public class UIManager : MonoBehaviour
         winerPanel.SetActive(false);
         gameOverPanel.SetActive(false);
     }
+    #region  State
     public void StartState(GameState gameState)
     {
         EndState(state);
@@ -120,7 +127,8 @@ public class UIManager : MonoBehaviour
 
         }
     }
-
+    #endregion
+    #region  UI Update
     public void UpdateUi(PlayerFaction player)
     {
         if (playerUI.em != null)
@@ -138,7 +146,8 @@ public class UIManager : MonoBehaviour
 
         StartCoroutine(ememyUI.em);
     }
-
+    #endregion
+    #region  IEnumerator
     private IEnumerator IEHPBarAnima(UIPanel panel, float curr, float target)
     {
         float persent = 0;
@@ -173,5 +182,30 @@ public class UIManager : MonoBehaviour
         }
         callback?.Invoke();
     }
+    #endregion
+    #region Test
+    public void UpdateTime()
+    {
+        if (!farmer) return;
+        var f = farmer.StateManager.CurrentState as StateFinder;
+        if (f is StateFinder)
+            timeState.text = $"StateTime : {(int)f.Timer}";
+        else
+            timeState.text = $"StateTime : xx";
+    }
+    public void UpdateNode()
+    {
+        if (!farmer) return;
+        if (!farmer.nodetarget) return;
+        nodeTarget.text = $"Index : {farmer.nodetarget.Index}";
+    }
+    public void UpdateCurrentState()
+    {
+        if (!farmer) return;
+        StateBase f = farmer.StateManager.CurrentState;
 
+        currState.text = $"CurreSteta : {f.StateNameStr}";
+
+    }
+    #endregion
 }

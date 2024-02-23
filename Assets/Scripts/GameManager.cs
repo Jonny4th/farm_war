@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     public PlayerFaction PlayerFaction { get { if (playerFaction == null) Debug.Log("Set playerFanction"); return playerFaction; } }
     [SerializeField] private EmemyFaction ememyFaction;
     public EmemyFaction EmemyFaction { get { if (playerFaction == null) Debug.Log("Set ememyFaction"); return ememyFaction; } }
+    [SerializeField] private NodeManager nodeManager;
+    public NodeManager NodeMana { get { if (nodeManager == null) Debug.Log("Set NodeManager"); return nodeManager; } set { nodeManager = value; } }
 
     // [SerializeField] private bool isRatInArea = false;
     // public bool IsRatInArea { get { return isRatInArea; } set { isRatInArea = value; } }

@@ -13,5 +13,6 @@ public class StateManager
     {
         CurrentState.EndState();
         CurrentState = nextState;
+        CurrentState.StartState();
     }
 }
