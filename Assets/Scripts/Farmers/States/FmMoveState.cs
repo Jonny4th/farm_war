@@ -13,7 +13,7 @@ public class FmMoveState : StateBase
 
     public override void StartState()
     {
-
+        farmer.Agent.isStopped = true;
     }
     public override void EndState()
     {
@@ -21,10 +21,10 @@ public class FmMoveState : StateBase
     }
     public override void LogiUpdate()
     {
-
+        Debug.Log("Move");
     }
     public override void PhysiUpdate()
     {
-        farmer.Agent.SetDestination(farmer.MovePosition);
+        farmer.Agent.SetDestination(farmer.UnitTarget.transform.position);
     }
 }

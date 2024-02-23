@@ -22,12 +22,18 @@ public class Farmer : MonoBehaviour
     public float Current { get { return currentHp; } }
 
     [SerializeField] private StateManager stateManager;
+    public StateManager StateManager { get { return stateManager; } set { stateManager = value; } }
 
     private FmIdelState idelState;
+    public FmIdelState Idel { get { return idelState; } private set { } }
     private FmMoveState moveState;
+    public FmMoveState Move { get { return moveState; } private set { } }
     private FmDigState digState;
+    public FmDigState Dig { get { return digState; } private set { } }
     private FmAttackState attackState;
+    public FmAttackState Attack { get { return attackState; } private set { } }
     private FmDieState dieState;
+    public FmDieState Did { get { return dieState; } private set { } }
 
     [SerializeField] private Animator animator;
 
@@ -38,6 +44,15 @@ public class Farmer : MonoBehaviour
     private Vector3 movePosition;
     public Vector3 MovePosition { get { return player.position; } set { movePosition = value; } }
     public Transform player;
+
+    private Vector3 targetMoving;
+    public Vector3 TargetMove { get { return targetMoving; } set { targetMoving = value; } }
+
+
+
+    private AnimalTest unitTarget;
+    public AnimalTest UnitTarget { get { return unitTarget; } set { unitTarget = value; } }
+
     void Awake()
     {
 
@@ -54,7 +69,7 @@ public class Farmer : MonoBehaviour
         attackState = new FmAttackState(this, animator, GameManager.instance);
         dieState = new FmDieState(this, animator, GameManager.instance);
 
-        stateManager.Init(moveState);
+        stateManager.Init(Idel);
 
     }
 
