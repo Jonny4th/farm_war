@@ -24,14 +24,14 @@ public class Farmer : MonoBehaviour
     [SerializeField] private StateManager stateManager;
     public StateManager StateManager { get { return stateManager; } set { stateManager = value; } }
 
-    [HideInInspector] public FmIdelState idelState;
-    [HideInInspector] public FmMoveState moveState;
+    [Header("State")]
+    public FmIdelState idelState;
+    public FmMoveState moveState;
+    public FmDigState digState;
+    public FmAttackState attackState;
+    public FmDieState dieState;
 
-    [HideInInspector] public FmDigState digState;
-    [HideInInspector] public FmAttackState attackState;
-    [HideInInspector] public FmDieState dieState;
-
-
+    [Space]
     [SerializeField] private Animator animator;
 
     [SerializeField] private NavMeshAgent nav;
@@ -44,7 +44,7 @@ public class Farmer : MonoBehaviour
 
     [HideInInspector] public AnimalTest unitTarget;
 
-     public Node nodetarget;
+    public Node nodetarget;
 
     public FarmerStrate currentState;
     void Awake()
@@ -57,11 +57,11 @@ public class Farmer : MonoBehaviour
 
         stateManager = new StateManager();
 
-        idelState = new FmIdelState(this, animator, GameManager.instance);
-        moveState = new FmMoveState(this, animator, GameManager.instance);
-        digState = new FmDigState(this, animator, GameManager.instance);
-        attackState = new FmAttackState(this, animator, GameManager.instance);
-        dieState = new FmDieState(this, animator, GameManager.instance);
+        idelState.Init(this, animator, GameManager.instance);
+        moveState.Init(this, animator, GameManager.instance);
+        digState.Init(this, animator, GameManager.instance);
+        attackState.Init(this, animator, GameManager.instance);
+        dieState.Init(this, animator, GameManager.instance);
 
         stateManager.Init(idelState);
 

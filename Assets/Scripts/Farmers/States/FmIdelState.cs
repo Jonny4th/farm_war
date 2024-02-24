@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[System.Serializable]
 public class FmIdelState : StateFinder
 {
-    public FmIdelState(Farmer farmer, Animator animator, GameManager gameManager) : base(farmer, animator, gameManager)
-    {
-        stateName = FarmerStrate.Idel;
-    }
+    // public FmIdelState(Farmer farmer, Animator animator, GameManager gameManager) : base(farmer, animator, gameManager)
+    // {
+    //     stateName = FarmerStrate.Idel;
+    // }
 
     public override void StartState()
     {

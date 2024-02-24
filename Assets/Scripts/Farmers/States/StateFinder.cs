@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class StateFinder : StateBase
 {
+    [SerializeField]
+    [Tooltip("time to change state while onUnitOnGround")]
     protected float time = 2f;
     protected float timer = 0;
     public float Timer { get { return timer; } }
@@ -12,10 +14,10 @@ public class StateFinder : StateBase
     public float MoveNodeIndex { get { return nodeIndex; } }
 
 
-    public StateFinder(Farmer farmer, Animator animator, GameManager gameManager) : base(farmer, animator, gameManager)
-    {
+    // public StateFinder(Farmer farmer, Animator animator, GameManager gameManager) : base(farmer, animator, gameManager)
+    // {
 
-    }
+    // }
     protected Node RandomNode(out int num)
     {
         num = Random.Range(0, manager.NodeMana - 1);

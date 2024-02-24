@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[System.Serializable]
 public class FmDigState : StateFinder
 {
 
-  public FmDigState(Farmer farmer, Animator animator, GameManager gameManager) : base(farmer, animator, gameManager)
-  {
-    stateName = FarmerStrate.Dig;
-  }
+  // public FmDigState(Farmer farmer, Animator animator, GameManager gameManager) : base(farmer, animator, gameManager)
+  // {
+  //   stateName = FarmerStrate.Dig;
+  // }
 
   public override void StartState()
   {

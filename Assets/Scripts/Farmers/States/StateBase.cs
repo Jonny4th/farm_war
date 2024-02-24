@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public abstract class StateBase
+public abstract class StateBase : MonoBehaviour
 {
     protected Animator animator;
     protected GameManager manager;
@@ -12,12 +12,18 @@ public abstract class StateBase
     public string StateNameStr { get { return stateName.ToString(); } }
 
 
-    public StateBase(Farmer farmer, Animator animator, GameManager gameManager)
+    // public StateBase(Farmer farmer, Animator animator, GameManager gameManager)
+    // {
+    //     this.farmer = farmer;
+    //     this.animator = animator;
+    //     this.manager = gameManager;
+
+    // }
+    public void Init(Farmer farmer, Animator animator, GameManager gameManager)
     {
         this.farmer = farmer;
         this.animator = animator;
         this.manager = gameManager;
-
     }
 
     public virtual void StartState()
