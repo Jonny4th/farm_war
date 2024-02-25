@@ -1,23 +1,26 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Slider))]
-public class SliderConnector : MonoBehaviour
+namespace Generic.UI
 {
-    [SerializeField]
-    private FloatReference _NormalisedValue;
-
-    private Slider _Slider;
-    public Slider Slider => _Slider;
-
-    void Awake()
+    [RequireComponent(typeof(Slider))]
+    public class SliderConnector : MonoBehaviour
     {
-        _Slider = GetComponent<Slider>();
-        _NormalisedValue.OnVariableChanged += ValueChangeHandler;
-    }
+        [SerializeField]
+        private FloatReference _NormalisedValue;
 
-    private void ValueChangeHandler(float value)
-    {
-        _Slider.value = value;
+        private Slider _Slider;
+        public Slider Slider => _Slider;
+
+        void Awake()
+        {
+            _Slider = GetComponent<Slider>();
+            _NormalisedValue.OnVariableChanged += ValueChangeHandler;
+        }
+
+        private void ValueChangeHandler(float value)
+        {
+            _Slider.value = value;
+        }
     }
 }
