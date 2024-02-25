@@ -1,5 +1,40 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &40205205163678582
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2145149267747987313}
+  m_Layer: 5
+  m_Name: CommandPanelShowPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2145149267747987313
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40205205163678582}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3885754519098769481}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &251831440920040854
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,6 +626,41 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &2483389217700935523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3588496997076102592}
+  m_Layer: 5
+  m_Name: CommandPanelHidePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3588496997076102592
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2483389217700935523}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3885754519098769481}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3520217297590370742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1392,6 +1462,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8593208043393984023}
+  - {fileID: 3588496997076102592}
+  - {fileID: 2145149267747987313}
   - {fileID: 4450409632043118274}
   - {fileID: 65031361051648297}
   m_Father: {fileID: 0}
@@ -1658,7 +1730,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8084156016043719642}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7871703193415635943}
+        m_TargetAssemblyTypeName: ToasterUI, Assembly-CSharp
+        m_MethodName: Toggle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &6066600697945071607
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1803,10 +1887,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.1000061
       objectReference: {fileID: 0}
+    - target: {fileID: 3711067890304543563, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
+      propertyPath: m_IsShow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711067890304543563, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
+      propertyPath: m_PopPosition
+      value: 
+      objectReference: {fileID: 2145149267747987313}
+    - target: {fileID: 3711067890304543563, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
+      propertyPath: m_RetractPosition
+      value: 
+      objectReference: {fileID: 3588496997076102592}
     - target: {fileID: 4021300947548412356, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
       propertyPath: m_Name
       value: Command_Order
       objectReference: {fileID: 0}
+    - target: {fileID: 4110956776931707920, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
+      propertyPath: m_PopPosition
+      value: 
+      objectReference: {fileID: 2145149267747987313}
+    - target: {fileID: 4110956776931707920, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
+      propertyPath: m_RetractPosition
+      value: 
+      objectReference: {fileID: 3588496997076102592}
     - target: {fileID: 4346478003221546150, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
       propertyPath: m_TargetGraphic
       value: 
@@ -1959,6 +2063,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7871703193415635943 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4110956776931707920, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
+  m_PrefabInstance: {fileID: 6066600697945071607}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4acb0ec019ead9e429127dca91184dc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &8593208043393984023 stripped
