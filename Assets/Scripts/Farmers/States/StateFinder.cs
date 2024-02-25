@@ -20,10 +20,10 @@ public class StateFinder : StateBase
     // }
     protected Node RandomNode(out int num)
     {
-        num = Random.Range(0, manager.NodeMana - 1);
+        num = Random.Range(0, manager.NodeMana);
         if (farmer.nodetarget)
             while (num == farmer.nodetarget.Index)
-                num = Random.Range(0, manager.NodeMana - 1);
+                num = Random.Range(0, manager.NodeMana);
         farmer.nodetarget = manager.NodeMana.FineNode(num);
         return farmer.nodetarget;
     }

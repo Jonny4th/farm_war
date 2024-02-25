@@ -168,7 +168,7 @@ public class UIManager : MonoBehaviour
     private IEnumerator IEPanelAlp(Image image, Action callback)
     {
         float persent = 0;
-        float time = 255 / 300f;
+        float time = 255 / speed * 2;
         float ontime = 0;
 
         while (persent < 1)

@@ -9,6 +9,7 @@ public enum FarmerStrate
     Null,
     Idel,
     Move,
+    MoveToAttack,
     Dig,
     Attack,
     Die

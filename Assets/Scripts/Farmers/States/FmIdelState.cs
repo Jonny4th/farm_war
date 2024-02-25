@@ -31,7 +31,6 @@ public class FmIdelState : StateFinder
         }
         else
         {
-
             timer += Time.deltaTime;
             if (timer >= time)
             {

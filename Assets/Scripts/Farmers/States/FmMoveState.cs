@@ -7,7 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class FmMoveState : StateBase
 {
-    [SerializeField] protected float timeToRotate = 2f;
+    [SerializeField] protected float timeToRotate = 0.4f;
 
 
 
@@ -25,6 +25,7 @@ public class FmMoveState : StateBase
         base.StartState();
         farmer.Agent.isStopped = true;
         enumera = null;
+
     }
     public override void EndState()
     {
@@ -34,16 +35,10 @@ public class FmMoveState : StateBase
     }
     public override void LogiUpdate()
     {
-        if (CheckUnitOnGround())
-        {
+        if (enumera != null) return;
 
-        }
-        else
-        {
-            farmer.Agent.isStopped = false;
-            // if (enumera != null)
-            //     StartCoroutine(RotateTO(farmer.transform.rotation, RotateTarget(farmer.nodetarget.transform.position), timeToRotate));
-        }
+        enumera = RotateTO(farmer.transform.rotation, RotateTarget(farmer.nodetarget.transform.position), timeToRotate);
+        StartCoroutine(enumera);
     }
     public override void PhysiUpdate()
     {
@@ -61,6 +56,7 @@ public class FmMoveState : StateBase
 
         while (timer < duration)
         {
+            timer += Time.deltaTime;
             farmer.transform.rotation = Quaternion.Lerp(start, target, timer / duration);
             yield return null;
         }

@@ -14,6 +14,7 @@ public class PlayerFaction : Faction<AnimalTest>
     public List<AnimalTest> UnitInGrouind { get { return unitInGrouind; } }
     [SerializeField] private Transform ratTest;
     public Vector3 RatTest { get { return ratTest.transform.position; } }
+    [SerializeField] private float damage = 1;
     public override void TakeDamage(float damage)
     {
         currentHp -= damage;
@@ -22,6 +23,7 @@ public class PlayerFaction : Faction<AnimalTest>
 
     protected override void Start()
     {
+        currentHp = maxHp;
         Delay(() => UIManager.instance.UpdateUi(this), 1f);
     }
 
@@ -30,6 +32,18 @@ public class PlayerFaction : Faction<AnimalTest>
         currentHp += hp;
         UIManager.instance.UpdateUi(this);
     }
-
+    [SerializeField] private float attackTime = 0.5f;
+    private float lastTime = 0;
+    private void Update()
+    {
+        if (UnitInGrouind.Count > 0)
+        {
+            if (Time.time - lastTime > attackTime)
+            {
+                lastTime = Time.time;
+                GameManager.instance.EmemyFaction.TakeDamage(damage * UnitInGrouind.Count);
+            }
+        }
+    }
 
 }

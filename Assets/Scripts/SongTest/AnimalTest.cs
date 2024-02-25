@@ -6,6 +6,8 @@ public class AnimalTest : MonoBehaviour
 {
     public float maxHp = 100;
     public float currentHp;
+    [SerializeField] private Node nodeTarget;
+    public Node NodeTarget { get { return nodeTarget; } }
     void Start()
     {
         currentHp = maxHp;

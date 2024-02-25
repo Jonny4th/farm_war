@@ -29,7 +29,8 @@ public class FmDigState : StateFinder
   {
     if (CheckUnitOnGround())
     {
-
+      UnitNearMe();
+      farmer.StateManager.SwitchState(farmer.moveState);
     }
     else
     {

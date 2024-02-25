@@ -43,6 +43,7 @@ public abstract class StateBase : MonoBehaviour
     }
     protected void UnitNearMe()
     {
+        // Node[] unit = new Node[2];
         float dis = float.MaxValue;
         foreach (var u in manager.PlayerFaction.UnitInGrouind)
         {
@@ -50,7 +51,7 @@ public abstract class StateBase : MonoBehaviour
             if (d < dis)
             {
                 dis = d;
-                farmer.unitTarget = u;
+                farmer.nodetarget = u.NodeTarget;
             }
         }
     }

@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     // [SerializeField] private bool isRatInArea = false;
     // public bool IsRatInArea { get { return isRatInArea; } set { isRatInArea = value; } }
-
+    [SerializeField] private float setUpTime = 2f;
     void Awake()
     {
         if (instance != null && instance != this) Destroy(this.gameObject);
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         StartState(GameState.SetUp);
-        StartCoroutine(IEDelay(2f));
+        StartCoroutine(IEDelay(setUpTime));
     }
     private IEnumerator IEDelay(float time)
     {

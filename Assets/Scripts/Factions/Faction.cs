@@ -19,7 +19,7 @@ public abstract class Faction<T> : MonoBehaviour
 
     protected virtual void Awake()
     {
-        currentHp = maxHp;
+        // currentHp = maxHp;
     }
     protected abstract void Start();
 
