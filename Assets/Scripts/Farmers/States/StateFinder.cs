@@ -7,24 +7,77 @@ public class StateFinder : StateBase
 {
     [SerializeField]
     [Tooltip("time to change state while onUnitOnGround")]
-    protected float time = 2f;
-    protected float timer = 0;
-    public float Timer { get { return timer; } }
+
     protected int nodeIndex = -1;
     public float MoveNodeIndex { get { return nodeIndex; } }
 
 
-    // public StateFinder(Farmer farmer, Animator animator, GameManager gameManager) : base(farmer, animator, gameManager)
-    // {
 
-    // }
-    protected Node RandomNode(out int num)
+
+
+
+
+
+
+    protected void RandomMove()
     {
-        num = Random.Range(0, manager.NodeMana);
-        if (farmer.nodetarget)
-            while (num == farmer.nodetarget.Index)
-                num = Random.Range(0, manager.NodeMana);
-        farmer.nodetarget = manager.NodeMana.FineNode(num);
-        return farmer.nodetarget;
+        timer += Time.deltaTime;
+        if (timer >= time)
+        {
+            timer = 0;
+            // farmer.Agent.SetDestination(RandomNode());
+            farmer.Agent.isStopped = false;
+        }
     }
+
+    protected Node RandomNodeNotCurr(Node currNode)
+    {
+        var node = RandomNode();
+        while (node == currNode)
+            node = RandomNode();
+        return node;
+    }
+    protected Node RandomNode()
+    {
+        return manager.NodeMana.nodeCollcetion[Random.Range(0, manager.NodeMana)];
+    }
+
+
+
+    protected AnimalTest UnitNearMe()
+    {
+        AnimalTest[] unit = new AnimalTest[2];
+        float[] dis = new float[2];
+        // float dis = float.MaxValue;
+        foreach (var u in manager.PlayerFaction.UnitInGrouind)
+        {
+            for (int i = 0; i < unit.Length; i++)
+            {
+                if (unit[i] == null)
+                {
+                    unit[i] = u;
+                    dis[i] = CheckDistance(farmer, u.NodeTarget);
+                }
+                else
+                {
+                    var d = CheckDistance(farmer, u.NodeTarget);
+                    if (dis[i] > d)
+                    {
+                        unit[i] = u;
+                        dis[i] = d;
+                    }
+                }
+            }
+        }
+        AnimalTest final;
+        if (unit[0] != null && unit[1] != null) final = unit[Random.Range(0, unit.Length)];
+        else final = unit[0];
+        return final;
+    }
+    protected float CheckDistance(Vector3 origin, Vector3 target) => Vector3.Distance(origin, target);
+
+
+
+
+
 }

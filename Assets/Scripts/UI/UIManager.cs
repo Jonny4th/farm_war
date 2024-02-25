@@ -56,9 +56,9 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        UpdateTime();
-        UpdateNode();
-        UpdateCurrentState();
+        // UpdateTime();
+        // UpdateNode();
+        // UpdateCurrentState();
     }
 
     void Start()
@@ -196,15 +196,15 @@ public class UIManager : MonoBehaviour
     public void UpdateNode()
     {
         if (!farmer) return;
-        if (!farmer.nodetarget) return;
-        nodeTarget.text = $"Index : {farmer.nodetarget.Index}";
+        if (!farmer.nodeToMove) return;
+        nodeTarget.text = $"Index : {farmer.nodeToMove.Index}";
     }
     public void UpdateCurrentState()
     {
         if (!farmer) return;
         StateBase f = farmer.StateManager.CurrentState;
 
-        currState.text = $"CurreSteta : {f.StateNameStr}";
+        // currState.text = $"CurreSteta : {f.StateNameStr}";
 
     }
     #endregion

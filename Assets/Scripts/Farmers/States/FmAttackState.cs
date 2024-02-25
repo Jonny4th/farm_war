@@ -6,13 +6,10 @@ using UnityEngine;
 [System.Serializable]
 public class FmAttackState : StateFinder
 {
-  // public FmAttackState(Farmer farmer, Animator animator, GameManager gameManager) : base(farmer, animator, gameManager)
-  // {
-  //   stateName = FarmerStrate.Attack;
-  // }
+
   [SerializeField] private float attackTime = 0.5f;
   private float lastTime = 0;
-  [SerializeField] private float damage = 5f;
+  [SerializeField] private float damage = 1f;
 
   public override void StartState()
   {
@@ -27,21 +24,20 @@ public class FmAttackState : StateFinder
   {
     if (CheckUnitOnGround())
     {
+      if (farmer.nodeToMove.Animas.Count == 0)
+      {
+        swichState.SwitchState(farmer.moveToAttackState);
+      }
       if (Time.time - lastTime > attackTime)
       {
+        lastTime = Time.time;
         GameManager.instance.PlayerFaction.TakeDamage(damage);
+        farmer.nodeToMove.TakeDamage(damage);
       }
     }
     else
     {
-      timer += Time.deltaTime;
-      if (timer >= time)
-      {
-        timer = 0;
-        farmer.targetMoving = RandomNode(out nodeIndex);
-        manager.NodeMana.SetIndexToMove(farmer, nodeIndex);
-        farmer.StateManager.SwitchState(farmer.moveState);
-      }
+      swichState.SwitchState(farmer.idelState);
     }
 
   }

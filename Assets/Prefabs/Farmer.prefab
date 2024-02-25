@@ -44,6 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f154b0e72b1f62341a0d54e42b80a7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateName: 2
+  time: 2
+  lookAtSpeed: 0.8
+  nodeIndex: -1
 --- !u!1 &1620704579213536508
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,17 +216,67 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 100
+  stateManager:
+    currentState: {fileID: 0}
   idelState: {fileID: 6143775927291671563}
   moveState: {fileID: 1430571014739422786}
   digState: {fileID: 3137623314798329475}
   attackState: {fileID: 4576776768179831605}
   dieState: {fileID: 3380898666628661898}
+  moveToAttackState: {fileID: 2494753993559781298}
   animator: {fileID: 8251735644716040665}
   nav: {fileID: 7251882385919354015}
   targetMoving: {x: 0, y: 0, z: 0}
   unitTarget: {fileID: 0}
   nodetarget: {fileID: 0}
   currentState: 0
+--- !u!1 &1971643701114304569
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6544105518612665670}
+  - component: {fileID: 2494753993559781298}
+  m_Layer: 0
+  m_Name: Motoattack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6544105518612665670
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971643701114304569}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2012900854167792407}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2494753993559781298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971643701114304569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d6985a3cb35bf84cb948d663cb3a12e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateName: 3
+  time: 2
+  lookAtSpeed: 0.8
 --- !u!1 &2295934679875555312
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,8 +307,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4777376701436543692}
-  - {fileID: 7009610057996131470}
   - {fileID: 3038073215281466877}
+  - {fileID: 7009610057996131470}
+  - {fileID: 6544105518612665670}
   - {fileID: 596332285218267564}
   - {fileID: 5651008203926120046}
   m_Father: {fileID: 4835577449269653314}
@@ -303,6 +358,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ead1850246a0761488920159db7a7d4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateName: 1
+  time: 2
+  lookAtSpeed: 0.8
 --- !u!1 &3194114468972729196
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,6 +405,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14b54088d71140e429ebd9bb363d341b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateName: 6
+  time: 2
+  lookAtSpeed: 0.8
 --- !u!1 &4841554227542170013
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,6 +452,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dac118b9045cf6c4eb1f717b643f0225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateName: 4
+  time: 2
+  lookAtSpeed: 0.8
+  nodeIndex: -1
 --- !u!1 &5418160134150606617
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,3 +625,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdb5920d9adab64ba1d7ef397502d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateName: 5
+  time: 2
+  lookAtSpeed: 0.8
+  nodeIndex: -1
+  attackTime: 0.5
+  damage: 5

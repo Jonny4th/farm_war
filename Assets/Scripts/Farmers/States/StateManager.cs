@@ -5,10 +5,14 @@ using UnityEngine;
 [System.Serializable]
 public class StateManager
 {
-   [SerializeField] private StateBase currentState;
+    [SerializeField] private StateBase currentState;
     public StateBase CurrentState { get { return currentState; } private set { currentState = value; } }
 
-    public void Init(StateBase startState) => CurrentState = startState;
+    public void Init(StateBase startState)
+    {
+        CurrentState = startState;
+        CurrentState.StartState();
+    }
     public void SwitchState(StateBase nextState)
     {
         CurrentState.EndState();

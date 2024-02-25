@@ -5,63 +5,56 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class FmMoveState : StateBase
+public class FmMoveState : StateFinder
 {
-    [SerializeField] protected float timeToRotate = 0.4f;
-
-
-
-    protected IEnumerator enumera;
-
-
-
-    // public FmMoveState(Farmer farmer, Animator animator, GameManager gameManager) : base(farmer, animator, gameManager)
-    // {
-    //     stateName = FarmerStrate.Move;
-    // }
-
+    [SerializeField] private Node nodetarget;
+    [SerializeField] private float nodeDistance = 2f;
     public override void StartState()
     {
         base.StartState();
-        farmer.Agent.isStopped = true;
-        enumera = null;
+        agent.isStopped = true;
 
+        if (farmer.nodeToMove == null)
+            farmer.nodeToMove = RandomNode();
+        else
+            farmer.nodeToMove = RandomNodeNotCurr(farmer.nodeToMove);
+
+
+
+        LookAt(farmer.transform.rotation, RotaAngle(farmer.nodeToMove), lookAtSpeed, () =>
+        {
+            agent.SetDestination(farmer.nodeToMove);
+            agent.isStopped = false;
+        });
     }
     public override void EndState()
     {
-        farmer.Agent.isStopped = true;
-        manager.NodeMana.RemoveFarmer(farmer, farmer.nodetarget.Index);
-        if (enumera != null) StopCoroutine(enumera);
+        StopAllCoroutines();
     }
     public override void LogiUpdate()
     {
-        if (enumera != null) return;
-
-        enumera = RotateTO(farmer.transform.rotation, RotateTarget(farmer.nodetarget.transform.position), timeToRotate);
-        StartCoroutine(enumera);
-    }
-    public override void PhysiUpdate()
-    {
-        farmer.Agent.SetDestination(farmer.targetMoving);
-    }
-    private Quaternion RotateTarget(Vector3 pos)
-    {
-        Vector3 dir = (pos - farmer.transform.position).normalized;
-        float angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
-        return Quaternion.Euler(0f, angle, 0f);
-    }
-    private IEnumerator RotateTO(Quaternion start, Quaternion target, float duration)
-    {
-        float timer = 0;
-
-        while (timer < duration)
+        if (CheckUnitOnGround())
         {
-            timer += Time.deltaTime;
-            farmer.transform.rotation = Quaternion.Lerp(start, target, timer / duration);
-            yield return null;
+            swichState.SwitchState(farmer.moveToAttackState);
         }
-        farmer.transform.rotation = target;
-        farmer.Agent.isStopped = false;
-        enumera = null;
+        else
+        {
+            if (!farmer.Agent.isStopped && CheckDistance(farmer, farmer.nodeToMove) <= nodeDistance)
+            {
+                if (farmer.nodeToMove.Animas.Count > 0)
+                    swichState.SwitchState(farmer.attackState);
+                else
+                {
+                    int ran = Random.Range(1, 10);
+                    if (ran % 2 == 0)
+                        swichState.SwitchState(farmer.digState);
+                    else
+                        swichState.SwitchState(farmer.idelState);
+                }
+            }
+
+        }
     }
+
+
 }

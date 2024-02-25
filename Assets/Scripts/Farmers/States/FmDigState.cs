@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class FmDigState : StateFinder
+public class FmDigState : StateBase
 {
 
   // public FmDigState(Farmer farmer, Animator animator, GameManager gameManager) : base(farmer, animator, gameManager)
@@ -15,34 +15,24 @@ public class FmDigState : StateFinder
   public override void StartState()
   {
     base.StartState();
-    timer = 0;
-    nodeIndex = -1;
+    agent.isStopped = true;
+    LookAt(farmer, farmer.nodeToMove, lookAtSpeed);
+
+
   }
   public override void EndState()
   {
-
-
-
-
+    StopAllCoroutines();
   }
   public override void LogiUpdate()
   {
     if (CheckUnitOnGround())
     {
-      UnitNearMe();
-      farmer.StateManager.SwitchState(farmer.moveState);
+      swichState.SwitchState(farmer.moveToAttackState);
     }
     else
     {
-      timer += Time.deltaTime;
-
-      if (timer >= time)
-      {
-        timer = 0;
-        farmer.targetMoving = RandomNode(out nodeIndex);
-        manager.NodeMana.SetIndexToMove(farmer, nodeIndex);
-        farmer.StateManager.SwitchState(farmer.moveState);
-      }
+      CountToSwicthState(time, () => swichState.SwitchState(farmer.moveState));
     }
   }
   public override void PhysiUpdate()

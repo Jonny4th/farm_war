@@ -31,6 +31,7 @@ public class Farmer : MonoBehaviour
     public FmDigState digState;
     public FmAttackState attackState;
     public FmDieState dieState;
+    public FmMoveToAttack moveToAttackState;
 
     [Space]
     [SerializeField] private Animator animator;
@@ -45,7 +46,7 @@ public class Farmer : MonoBehaviour
 
     [HideInInspector] public AnimalTest unitTarget;
 
-    public Node nodetarget;
+    public Node nodeToMove;
 
     public FarmerStrate currentState;
     void Awake()
@@ -63,6 +64,7 @@ public class Farmer : MonoBehaviour
         digState.Init(this, animator, GameManager.instance);
         attackState.Init(this, animator, GameManager.instance);
         dieState.Init(this, animator, GameManager.instance);
+        moveToAttackState.Init(this, animator, GameManager.instance);
 
         stateManager.Init(idelState);
 
@@ -81,6 +83,13 @@ public class Farmer : MonoBehaviour
         stateManager.CurrentState.PhysiUpdate();
     }
 
-
+    public static implicit operator Vector3(Farmer farmer)
+    {
+        return farmer.transform.position;
+    }
+    public static implicit operator Quaternion(Farmer farmer)
+    {
+        return farmer.transform.rotation;
+    }
 
 }

@@ -10,7 +10,8 @@ public enum GameState
     SetUp,
     Action,
     GameOver,
-    Winer
+    Winer,
+    Restart
 }
 public class GameManager : MonoBehaviour
 {
@@ -34,6 +35,13 @@ public class GameManager : MonoBehaviour
 
     // [SerializeField] private bool isRatInArea = false;
     // public bool IsRatInArea { get { return isRatInArea; } set { isRatInArea = value; } }
+    public event Action SetUpEven;
+    public event Action ActionEven;
+    public event Action GameOverEven;
+    public event Action WinerEven;
+
+    public event Action ResetEven;
+
     [SerializeField] private float setUpTime = 2f;
     void Awake()
     {
@@ -52,10 +60,17 @@ public class GameManager : MonoBehaviour
         StartState(GameState.Action);
     }
 
-
+    private void ResetValu()
+    {
+        StartState(GameState.Action);
+    }
     void Update()
     {
         UpdateState();
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            StartState(GameState.Restart);
+        }
     }
 
     #region GameState
@@ -68,15 +83,20 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.SetUp:
+                SetUpEven?.Invoke();
                 break;
             case GameState.Action:
-
+                ActionEven?.Invoke();
                 break;
             case GameState.GameOver:
-
+                GameOverEven?.Invoke();
                 break;
             case GameState.Winer:
-
+                WinerEven?.Invoke();
+                break;
+            case GameState.Restart:
+                ResetEven?.Invoke();
+                StartState(GameState.Action);
                 break;
 
         }
@@ -101,6 +121,9 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Winer:
                 break;
+            case GameState.Restart:
+
+                break;
         }
     }
     private void EndState()
@@ -115,7 +138,9 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Winer:
                 break;
+            case GameState.Restart:
 
+                break;
         }
     }
     #endregion

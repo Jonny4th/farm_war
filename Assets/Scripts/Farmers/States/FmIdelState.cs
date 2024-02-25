@@ -1,48 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 [System.Serializable]
-public class FmIdelState : StateFinder
+public class FmIdelState : StateBase
 {
-    // public FmIdelState(Farmer farmer, Animator animator, GameManager gameManager) : base(farmer, animator, gameManager)
-    // {
-    //     stateName = FarmerStrate.Idel;
-    // }
+
 
     public override void StartState()
     {
         base.StartState();
-        farmer.currentState = stateName;
-        timer = 0;
-        nodeIndex = -1;
+        agent.isStopped = true;
     }
     public override void EndState()
     {
-
+        StopAllCoroutines();
     }
     public override void LogiUpdate()
     {
         if (CheckUnitOnGround())
         {
-            UnitNearMe();
-            farmer.StateManager.SwitchState(farmer.moveState);
+            swichState.SwitchState(farmer.moveToAttackState);
         }
         else
         {
-            timer += Time.deltaTime;
-            if (timer >= time)
-            {
-                timer = 0;
-                farmer.targetMoving = RandomNode(out nodeIndex);
-                manager.NodeMana.SetIndexToMove(farmer, nodeIndex);
-                farmer.StateManager.SwitchState(farmer.moveState);
-            }
+            CountToSwicthState(time, () => swichState.SwitchState(farmer.moveState));
         }
     }
     public override void PhysiUpdate()
     {
-        base.PhysiUpdate();
+
     }
 }
