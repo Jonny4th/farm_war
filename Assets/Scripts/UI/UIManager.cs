@@ -1,16 +1,12 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 
 public class UIManager : MonoBehaviour
 {
-
     [SerializeField] private GameObject setUpPanel;
     [SerializeField] private GameObject actionPanel;
     [SerializeField] private GameObject winerPanel;
@@ -20,36 +16,22 @@ public class UIManager : MonoBehaviour
     [SerializeField] private UIPanel ememyUI;
     [SerializeField] private TextMeshProUGUI point;
 
-
     [Header("Speed of hp bar")]
     [SerializeField] private float speed = 300f;
 
-
-
-
-
     private GameState state;
-
-
-
-
-
-
 
     public static UIManager instance;
 
-
     void Awake()
     {
-        if (instance != null && instance != this)
+        if(instance != null && instance != this)
             Destroy(this);
         else
             instance = this;
 
         GameManager.instance.StateChange += StartState;
     }
-
-
 
     void Start()
     {
@@ -60,7 +42,6 @@ public class UIManager : MonoBehaviour
         playerUI.maxHp = GameManager.instance.PlayerFaction.MaxHp;
 
         state = GameManager.instance.State;
-
     }
 
     // Update is called once per frame
@@ -68,6 +49,7 @@ public class UIManager : MonoBehaviour
     {
 
     }
+
     private void HideAllPanel()
     {
         setUpPanel.SetActive(false);
@@ -79,7 +61,7 @@ public class UIManager : MonoBehaviour
     {
         EndState(state);
         state = gameState;
-        switch (gameState)
+        switch(gameState)
         {
             case GameState.SetUp:
 
@@ -101,9 +83,10 @@ public class UIManager : MonoBehaviour
 
         }
     }
+
     private void EndState(GameState state)
     {
-        switch (state)
+        switch(state)
         {
             case GameState.SetUp:
                 StartCoroutine(IEPanelAlp(setUpPanel.GetComponent<Image>(), () => setUpPanel.SetActive(false)));
@@ -123,16 +106,17 @@ public class UIManager : MonoBehaviour
 
     public void UpdateUi(PlayerFaction player)
     {
-        if (playerUI.em != null)
+        if(playerUI.em != null)
             StopCoroutine(playerUI.em);
         playerUI.em = IEHPBarAnima(playerUI, playerUI.curr, GameManager.instance.PlayerFaction.Hp);
 
         StartCoroutine(playerUI.em);
 
     }
+
     public void UpdateUi(EmemyFaction ememy)
     {
-        if (ememyUI.em != null)
+        if(ememyUI.em != null)
             StopCoroutine(ememyUI.em);
         ememyUI.em = IEHPBarAnima(ememyUI, ememyUI.curr, GameManager.instance.EmemyFaction.Hp);
 
@@ -145,7 +129,7 @@ public class UIManager : MonoBehaviour
         float time = Mathf.Abs(target - curr) / speed;
         float ontime = 0;
 
-        while (persent < 1)
+        while(persent < 1)
         {
             ontime += Time.deltaTime;
             persent = ontime / time;
@@ -156,13 +140,14 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
+
     private IEnumerator IEPanelAlp(Image image, Action callback)
     {
         float persent = 0;
         float time = 255 / 300f;
         float ontime = 0;
 
-        while (persent < 1)
+        while(persent < 1)
         {
             ontime += Time.deltaTime;
             persent = ontime / time;
@@ -173,5 +158,4 @@ public class UIManager : MonoBehaviour
         }
         callback?.Invoke();
     }
-
 }
