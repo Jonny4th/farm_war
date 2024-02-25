@@ -4,7 +4,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject setUpPanel;
@@ -51,6 +50,7 @@ public class UIManager : MonoBehaviour
         winerPanel.SetActive(false);
         gameOverPanel.SetActive(false);
     }
+
     public void StartState(GameState gameState)
     {
         EndState(state);
