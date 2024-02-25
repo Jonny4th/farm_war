@@ -72,7 +72,6 @@ GameObject:
   - component: {fileID: 1017140238758536314}
   - component: {fileID: 4083256863843674455}
   - component: {fileID: 3616927229423226030}
-  - component: {fileID: 7298554163704757120}
   m_Layer: 5
   m_Name: UICanvas
   m_TagString: Untagged
@@ -147,36 +146,6 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
---- !u!114 &7298554163704757120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7535966307939523506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d56c0e6b319b2d04583e2ce05e59fb89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  setUpPanel: {fileID: 0}
-  actionPanel: {fileID: 0}
-  winerPanel: {fileID: 0}
-  gameOverPanel: {fileID: 0}
-  playerUI:
-    hpText: {fileID: 0}
-    hpBar: {fileID: 2520762561444114177}
-    backgroundBar: {fileID: 8962244954936207665}
-    curr: 0
-    maxHp: 0
-  ememyUI:
-    hpText: {fileID: 0}
-    hpBar: {fileID: 1121624897316107930}
-    backgroundBar: {fileID: 6050804855607329416}
-    curr: 0
-    maxHp: 0
-  point: {fileID: 8301892142757884873}
-  speed: 300
 --- !u!1001 &2103178449813168438
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -376,39 +345,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 282661d12eb05064a88ce429eec175f5, type: 3}
---- !u!114 &2520762561444114177 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1059777345213449297, guid: 282661d12eb05064a88ce429eec175f5, type: 3}
-  m_PrefabInstance: {fileID: 3192658307832523600}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8301892142757884873 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6879432306465839257, guid: 282661d12eb05064a88ce429eec175f5, type: 3}
-  m_PrefabInstance: {fileID: 3192658307832523600}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8962244954936207665 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5777788046288929377, guid: 282661d12eb05064a88ce429eec175f5, type: 3}
-  m_PrefabInstance: {fileID: 3192658307832523600}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &8991386961458729519 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5803252184185125247, guid: 282661d12eb05064a88ce429eec175f5, type: 3}
@@ -511,28 +447,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92e9783a0b02324e8da0d9be63d6468, type: 3}
---- !u!114 &1121624897316107930 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6886981929684840200, guid: d92e9783a0b02324e8da0d9be63d6468, type: 3}
-  m_PrefabInstance: {fileID: 5765652562709879186}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6050804855607329416 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 286946698021542682, guid: d92e9783a0b02324e8da0d9be63d6468, type: 3}
-  m_PrefabInstance: {fileID: 5765652562709879186}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &8574636965439319752 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2809274845598398298, guid: d92e9783a0b02324e8da0d9be63d6468, type: 3}
