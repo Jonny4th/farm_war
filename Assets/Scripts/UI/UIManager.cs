@@ -44,12 +44,6 @@ public class UIManager : MonoBehaviour
         state = GameManager.instance.State;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void HideAllPanel()
     {
         setUpPanel.SetActive(false);
@@ -64,23 +58,17 @@ public class UIManager : MonoBehaviour
         switch(gameState)
         {
             case GameState.SetUp:
-
                 setUpPanel.SetActive(true);
                 break;
             case GameState.Action:
-
                 actionPanel.SetActive(true);
-
                 break;
             case GameState.GameOver:
-
                 gameOverPanel.SetActive(true);
                 break;
             case GameState.Winer:
-
                 winerPanel.SetActive(true);
                 break;
-
         }
     }
 
@@ -100,7 +88,6 @@ public class UIManager : MonoBehaviour
             case GameState.Winer:
                 HideAllPanel();
                 break;
-
         }
     }
 
