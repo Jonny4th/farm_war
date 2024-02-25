@@ -5,8 +5,13 @@ using Random = UnityEngine.Random;
 
 public class RaidController : MonoBehaviour
 {
-    public Raidable[] m_TargetList;
-    public List<Raid> m_RaidList = new();
+    [SerializeField]
+    private Raidable[] m_TargetList;
+    public Raidable[] TargetList => m_TargetList;
+
+    [SerializeField]
+    private List<Raid> m_RaidList = new();
+    public List<Raid> RaidList => m_RaidList;
 
     [SerializeField]
     private RaidSpawner m_Spawner;
@@ -16,7 +21,7 @@ public class RaidController : MonoBehaviour
 
     public void RandomSpawnOnGround()
     {
-        var raidables = Array.FindAll(m_TargetList, x => x.IsRaidable && !x.IsFullyOccupied);
+        var raidables = Array.FindAll(TargetList, x => x.IsRaidable && !x.IsFullyOccupied);
         if(raidables.Length == 0) return;
 
         var target = raidables[Random.Range(0, raidables.Length)];
