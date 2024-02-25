@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -34,12 +33,14 @@ public class Raid : MonoBehaviour, IDamageable
     IEnumerator UpdateLife()
     {
         OnRaidStart?.Invoke(this);
+
         while(m_RemainLifeTime > 0)
         {
             m_RemainLifeTime -= Time.deltaTime;
             m_NormalizedTime.Value = (m_RemainLifeTime / m_LifeTime);
             yield return null;
         }
+
         OnRaidCompleted?.Invoke(this);
         m_Animator.SetTrigger("Done");
     }
