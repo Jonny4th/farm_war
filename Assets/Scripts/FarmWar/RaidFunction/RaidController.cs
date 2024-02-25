@@ -13,6 +13,7 @@ public class RaidController : MonoBehaviour
 
     [SerializeField]
     private Transform m_RaidParent;
+
     public void RandomSpawnOnGround()
     {
         var raidables = Array.FindAll(m_TargetList, x => x.IsRaidable && !x.IsFullyOccupied);

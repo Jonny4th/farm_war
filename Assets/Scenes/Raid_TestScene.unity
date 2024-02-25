@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 388831828}
   m_Layer: 0
   m_Name: Plane (4)
-  m_TagString: Untagged
+  m_TagString: FarmPlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -310,6 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6039969aa9eeb74f8268a773f0db2b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_RaidList: []
   m_RaidLimit: 1
   m_IsRaidable: 1
 --- !u!1 &474107681
@@ -419,7 +420,7 @@ GameObject:
   - component: {fileID: 691512484}
   m_Layer: 0
   m_Name: Plane (5)
-  m_TagString: Untagged
+  m_TagString: FarmPlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -523,6 +524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6039969aa9eeb74f8268a773f0db2b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_RaidList: []
   m_RaidLimit: 1
   m_IsRaidable: 1
 --- !u!1 &708411227
@@ -540,7 +542,7 @@ GameObject:
   - component: {fileID: 708411232}
   m_Layer: 0
   m_Name: Plane (2)
-  m_TagString: Untagged
+  m_TagString: FarmPlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -644,6 +646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6039969aa9eeb74f8268a773f0db2b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_RaidList: []
   m_RaidLimit: 1
   m_IsRaidable: 1
 --- !u!1 &741070931
@@ -661,7 +664,7 @@ GameObject:
   - component: {fileID: 741070936}
   m_Layer: 0
   m_Name: Plane (6)
-  m_TagString: Untagged
+  m_TagString: FarmPlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -765,6 +768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6039969aa9eeb74f8268a773f0db2b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_RaidList: []
   m_RaidLimit: 1
   m_IsRaidable: 1
 --- !u!1 &867143155
@@ -782,7 +786,7 @@ GameObject:
   - component: {fileID: 867143160}
   m_Layer: 0
   m_Name: Plane (7)
-  m_TagString: Untagged
+  m_TagString: FarmPlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -886,6 +890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6039969aa9eeb74f8268a773f0db2b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_RaidList: []
   m_RaidLimit: 1
   m_IsRaidable: 1
 --- !u!1 &996127465
@@ -997,7 +1002,7 @@ GameObject:
   - component: {fileID: 1044260324}
   m_Layer: 0
   m_Name: Plane (1)
-  m_TagString: Untagged
+  m_TagString: FarmPlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1101,6 +1106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6039969aa9eeb74f8268a773f0db2b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_RaidList: []
   m_RaidLimit: 1
   m_IsRaidable: 1
 --- !u!1 &1087944761
@@ -1158,7 +1164,7 @@ GameObject:
   - component: {fileID: 1094627130}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: FarmPlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1262,6 +1268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6039969aa9eeb74f8268a773f0db2b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_RaidList: []
   m_RaidLimit: 1
   m_IsRaidable: 1
 --- !u!1 &1142900601
@@ -1279,7 +1286,7 @@ GameObject:
   - component: {fileID: 1142900606}
   m_Layer: 0
   m_Name: Plane (8)
-  m_TagString: Untagged
+  m_TagString: FarmPlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1383,6 +1390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6039969aa9eeb74f8268a773f0db2b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_RaidList: []
   m_RaidLimit: 1
   m_IsRaidable: 1
 --- !u!1 &1221730836
@@ -1444,6 +1452,7 @@ MonoBehaviour:
   m_RaidList: []
   m_Spawner: {fileID: 1221730839}
   m_RaidParent: {fileID: 2097969692}
+  m_Camera: {fileID: 0}
 --- !u!114 &1221730839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1545,6 +1554,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3742526444962647111, guid: a6ea9c2b43498354daa6deaf3a42d649, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742526444962647111, guid: a6ea9c2b43498354daa6deaf3a42d649, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742526444962647111, guid: a6ea9c2b43498354daa6deaf3a42d649, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742526444962647111, guid: a6ea9c2b43498354daa6deaf3a42d649, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7337663200745629578, guid: a6ea9c2b43498354daa6deaf3a42d649, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7337663200745629578, guid: a6ea9c2b43498354daa6deaf3a42d649, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7337663200745629578, guid: a6ea9c2b43498354daa6deaf3a42d649, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7337663200745629578, guid: a6ea9c2b43498354daa6deaf3a42d649, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7535966307939523506, guid: a6ea9c2b43498354daa6deaf3a42d649, type: 3}
       propertyPath: m_Name
       value: UICanvas
@@ -1553,6 +1594,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1221730838}
+    - target: {fileID: 8414133902292535159, guid: a6ea9c2b43498354daa6deaf3a42d649, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8414133902292535159, guid: a6ea9c2b43498354daa6deaf3a42d649, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8414133902292535159, guid: a6ea9c2b43498354daa6deaf3a42d649, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8414133902292535159, guid: a6ea9c2b43498354daa6deaf3a42d649, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1573,7 +1630,7 @@ GameObject:
   - component: {fileID: 1478679889}
   m_Layer: 0
   m_Name: Plane (3)
-  m_TagString: Untagged
+  m_TagString: FarmPlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1677,6 +1734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6039969aa9eeb74f8268a773f0db2b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_RaidList: []
   m_RaidLimit: 1
   m_IsRaidable: 1
 --- !u!1 &2097969691
