@@ -1291,14 +1291,14 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
-  m_OverrideSorting: 0
+  m_OverrideSorting: 1
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &5422389345679062280
 MonoBehaviour:
@@ -1911,6 +1911,10 @@ PrefabInstance:
       propertyPath: m_RetractPosition
       value: 
       objectReference: {fileID: 3588496997076102592}
+    - target: {fileID: 4110956776931707920, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
+      propertyPath: m_AnimationDuration
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4346478003221546150, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
       propertyPath: m_TargetGraphic
       value: 

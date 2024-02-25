@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
+
     [SerializeField] private GameObject setUpPanel;
     [SerializeField] private GameObject actionPanel;
     [SerializeField] private GameObject winerPanel;
@@ -22,25 +24,34 @@ public class UIManager : MonoBehaviour
 
     public static UIManager instance;
 
+
     void Awake()
     {
         if(instance != null && instance != this)
             Destroy(this);
         else
             instance = this;
+    }
 
-        GameManager.instance.StateChange += StartState;
+    void OnEnable()
+    {
+        gameManager.StateChange += StartState;
+    }
+
+    void OnDisable()
+    {
+        gameManager.StateChange -= StartState;
     }
 
     void Start()
     {
-        ememyUI.curr = GameManager.instance.EmemyFaction.Hp;
-        ememyUI.maxHp = GameManager.instance.EmemyFaction.MaxHp;
+        ememyUI.curr = gameManager.EmemyFaction.Hp;
+        ememyUI.maxHp = gameManager.EmemyFaction.MaxHp;
 
-        playerUI.curr = GameManager.instance.PlayerFaction.Hp;
-        playerUI.maxHp = GameManager.instance.PlayerFaction.MaxHp;
+        playerUI.curr = gameManager.PlayerFaction.Hp;
+        playerUI.maxHp = gameManager.PlayerFaction.MaxHp;
 
-        state = GameManager.instance.State;
+        state = gameManager.State;
     }
 
     private void HideAllPanel()
@@ -95,7 +106,7 @@ public class UIManager : MonoBehaviour
     {
         if(playerUI.em != null)
             StopCoroutine(playerUI.em);
-        playerUI.em = IEHPBarAnima(playerUI, playerUI.curr, GameManager.instance.PlayerFaction.Hp);
+        playerUI.em = IEHPBarAnima(playerUI, playerUI.curr, gameManager.PlayerFaction.Hp);
 
         StartCoroutine(playerUI.em);
 
@@ -105,7 +116,7 @@ public class UIManager : MonoBehaviour
     {
         if(ememyUI.em != null)
             StopCoroutine(ememyUI.em);
-        ememyUI.em = IEHPBarAnima(ememyUI, ememyUI.curr, GameManager.instance.EmemyFaction.Hp);
+        ememyUI.em = IEHPBarAnima(ememyUI, ememyUI.curr, gameManager.EmemyFaction.Hp);
 
         StartCoroutine(ememyUI.em);
     }

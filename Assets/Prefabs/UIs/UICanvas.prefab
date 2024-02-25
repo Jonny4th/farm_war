@@ -386,14 +386,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7871703193415635943, guid: 46e051b3b7fd4564aae9c3650121d89b, type: 3}
-      propertyPath: m_IsShow
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7871703193415635943, guid: 46e051b3b7fd4564aae9c3650121d89b, type: 3}
-      propertyPath: m_AnimationDuration
-      value: 0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 8085996705089596121, guid: 46e051b3b7fd4564aae9c3650121d89b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.5
