@@ -3,28 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class RaidTestScript : MonoBehaviour
+public class RaidController : MonoBehaviour
 {
-    public Raidable[] m_targetList;
-    public List<Raid> m_raidList = new();
+    [SerializeField]
+    private Raidable[] m_TargetList;
+    public Raidable[] TargetList => m_TargetList;
 
     [SerializeField]
-    private RaidSpawner raidController;
+    private List<Raid> m_RaidList = new();
+    public List<Raid> RaidList => m_RaidList;
 
     [SerializeField]
-    private Transform raidParent;
+    private RaidSpawner m_Spawner;
 
-    void Update()
-    {
-        if(Input.GetKeyUp(KeyCode.Mouse0))
-        {
-            RandomSpawnOnGround();
-        }
-    }
+    [SerializeField]
+    private Transform m_RaidParent;
 
-    private void RandomSpawnOnGround()
+    public void RandomSpawnOnGround()
     {
-        var raidables = Array.FindAll(m_targetList, x => x.IsRaidable && !x.IsFullyOccupied);
+        var raidables = Array.FindAll(TargetList, x => x.IsRaidable && !x.IsFullyOccupied);
         if(raidables.Length == 0) return;
 
         var target = raidables[Random.Range(0, raidables.Length)];
@@ -37,8 +34,8 @@ public class RaidTestScript : MonoBehaviour
         }
         else
         {
-            raid = raidController.Spawn(pos, raidParent);
-            m_raidList.Add(raid);
+            raid = m_Spawner.Spawn(pos, m_RaidParent);
+            m_RaidList.Add(raid);
         }
 
         raid.OnRaidCompleted.AddListener(RaidCompleteHandler);
@@ -57,8 +54,8 @@ public class RaidTestScript : MonoBehaviour
     public bool CheckRaidPool(out Raid raid)
     {
         raid = null;
-        if(m_raidList.Count == 0) return false;
-        raid = m_raidList.Find(x => !x.gameObject.activeSelf);
+        if(m_RaidList.Count == 0) return false;
+        raid = m_RaidList.Find(x => !x.gameObject.activeSelf);
         return raid != null;
     }
 }

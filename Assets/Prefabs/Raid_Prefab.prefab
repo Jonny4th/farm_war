@@ -567,7 +567,7 @@ GameObject:
   - component: {fileID: 7667126799988919116}
   m_Layer: 0
   m_Name: Raid_Prefab
-  m_TagString: Untagged
+  m_TagString: Raid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

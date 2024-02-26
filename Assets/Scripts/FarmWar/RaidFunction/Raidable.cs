@@ -4,8 +4,8 @@ using UnityEngine;
 public class Raidable : MonoBehaviour
 {
     [SerializeField]
-    private HashSet<Raid> m_RaidList = new();
-    public HashSet<Raid> RaidList => m_RaidList;
+    private List<Raid> m_RaidList = new();
+    public List<Raid> RaidList => m_RaidList;
 
     [SerializeField]
     private int m_RaidLimit;
@@ -25,7 +25,12 @@ public class Raidable : MonoBehaviour
     public void AddToRaidList(Raid raid)
     {
         if(!IsRaidable) return;
-        if(m_RaidList.Contains(raid)) return;
+        if(m_RaidList.Contains(raid))
+        {
+            Debug.Log("Raid already in list"); 
+            return;
+        }
+
         m_RaidList.Add(raid);
     }
 
