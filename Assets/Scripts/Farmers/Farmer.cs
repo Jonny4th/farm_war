@@ -22,7 +22,7 @@ public class Farmer : MonoBehaviour
     private float currentHp;
     public float Current { get { return currentHp; } }
 
-    [SerializeField] private StateManager stateManager;
+    private StateManager stateManager;
     public StateManager StateManager { get { return stateManager; } set { stateManager = value; } }
 
     [Header("State")]
@@ -33,16 +33,18 @@ public class Farmer : MonoBehaviour
     public FmDieState dieState;
     public FmMoveToAttack moveToAttackState;
 
+    public string idelAni = "Idle";
+    public string moveAni = "Walk";
+    public string moveToattackAni = "Run";
+    public string digAni = "Working";
+
+    [SerializeField] private string currentAnimation = "";
+
     [Space]
     [SerializeField] private Animator animator;
 
     [SerializeField] private NavMeshAgent nav;
     public NavMeshAgent Agent { get { if (nav == null) Debug.Log("NavMesh is Null"); return nav; } set { nav = value; } }
-
-
-    public Vector3 targetMoving;
-    // public Vector3 TargetMove { get { return targetMoving; } set { targetMoving = value; } }
-
 
     [HideInInspector] public AnimalTest unitTarget;
 
@@ -66,6 +68,9 @@ public class Farmer : MonoBehaviour
         dieState.Init(this, animator, GameManager.instance);
         moveToAttackState.Init(this, animator, GameManager.instance);
 
+        GameManager.instance.ResetEven += Reset;
+        GameManager.instance.GameOverEven += GameOver;
+
         stateManager.Init(idelState);
 
     }
@@ -83,6 +88,63 @@ public class Farmer : MonoBehaviour
         stateManager.CurrentState.PhysiUpdate();
     }
 
+
+    public void FormOtherColl()
+    {
+        stateManager.CurrentState.FormOtherColl();
+    }
+    public void PlayerAnimation(string aniName)
+    {
+        if (aniName == currentAnimation) return;
+
+        currentAnimation = aniName;
+
+        animator.Play(currentAnimation);
+    }
+
+    private void StopAllAnimation()
+    {
+        animator.SetBool("IsIdel", false);
+        animator.SetBool("IsRun", false);
+        animator.SetBool("IsWalk", false);
+        animator.SetBool("IsDig", false);
+    }
+    public void PlayerAnimation(FarmerStrate state)
+    {
+        StopAllAnimation();
+        switch (state)
+        {
+            case FarmerStrate.Idel:
+                animator.SetBool("IsIdel", true);
+                break;
+            case FarmerStrate.Move:
+                animator.SetBool("IsWalk", true);
+                break;
+            case FarmerStrate.MoveToAttack:
+                animator.SetBool("IsRun", true);
+                break;
+            case FarmerStrate.Attack:
+            case FarmerStrate.Dig:
+                animator.SetBool("IsDig", true);
+                break;
+
+        }
+    }
+    private void Reset()
+    {
+        StopAllAnimation();
+        stateManager.Init(idelState);
+    }
+    private void GameOver()
+    {
+        StopAllAnimation();
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.instance.ResetEven -= Reset;
+        GameManager.instance.GameOverEven -= GameOver;
+    }
     public static implicit operator Vector3(Farmer farmer)
     {
         return farmer.transform.position;
@@ -91,5 +153,4 @@ public class Farmer : MonoBehaviour
     {
         return farmer.transform.rotation;
     }
-
 }

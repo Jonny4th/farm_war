@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 
@@ -7,14 +8,28 @@ using UnityEngine;
 public class FmAttackState : StateFinder
 {
 
-  [SerializeField] private float attackTime = 0.5f;
+
   private float lastTime = 0;
   [SerializeField] private float damage = 1f;
+  [SerializeField] private bool lookAtUnti;
+  [SerializeField] private bool attackWithTime;
+  [SerializeField] private float attackTime = 0.5f;
+
+
+
 
   public override void StartState()
   {
     base.StartState();
-    lastTime = 0;
+    lastTime = (Time.time + attackTime);
+
+    LookAt(farmer, RotaAngle(farmer.nodeToMove), lookAtSpeed, () =>
+    {
+
+      farmer.PlayerAnimation(FarmerStrate.Attack);
+
+
+    });
   }
   public override void EndState()
   {
@@ -26,14 +41,18 @@ public class FmAttackState : StateFinder
     {
       if (farmer.nodeToMove.Animas.Count == 0)
       {
-        swichState.SwitchState(farmer.moveToAttackState);
+        swichState.SwitchState(farmer.idelState);
       }
-      if (Time.time - lastTime > attackTime)
+      if (attackWithTime)
       {
-        lastTime = Time.time;
-        GameManager.instance.PlayerFaction.TakeDamage(damage);
-        farmer.nodeToMove.TakeDamage(damage);
+        if (Time.time >= lastTime)
+        {
+          lastTime = (Time.time + attackTime);
+          Attack();
+        }
       }
+
+
     }
     else
     {
@@ -41,8 +60,17 @@ public class FmAttackState : StateFinder
     }
 
   }
+  private void Attack()
+  {
+    GameManager.instance.PlayerFaction.TakeDamage(damage);
+    farmer.nodeToMove.TakeDamage(damage);
+  }
   public override void PhysiUpdate()
   {
 
+  }
+  public override void FormOtherColl()
+  {
+    Attack();
   }
 }

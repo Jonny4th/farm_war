@@ -23,12 +23,15 @@ public class FmMoveState : StateFinder
         LookAt(farmer.transform.rotation, RotaAngle(farmer.nodeToMove), lookAtSpeed, () =>
         {
             agent.SetDestination(farmer.nodeToMove);
+            farmer.PlayerAnimation(stateName);
             agent.isStopped = false;
         });
+
     }
     public override void EndState()
     {
         StopAllCoroutines();
+        ieRotate = null;
     }
     public override void LogiUpdate()
     {
@@ -45,7 +48,7 @@ public class FmMoveState : StateFinder
                 else
                 {
                     int ran = Random.Range(1, 10);
-                    if (ran % 2 == 0)
+                    if (ran % 2 != 0)
                         swichState.SwitchState(farmer.digState);
                     else
                         swichState.SwitchState(farmer.idelState);

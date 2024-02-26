@@ -41,8 +41,8 @@ public abstract class StateBase : MonoBehaviour
     public virtual void LogiUpdate() { }
     public virtual void PhysiUpdate() { }
 
-    protected virtual void FormOtherColl() { }
-    protected virtual private void OnTriggerEnter(Collider other) { }
+    public virtual void FormOtherColl() { }
+    public virtual void OnTriggerEnter(Collider other) { }
 
     protected bool CheckUnitOnGround()
     {
@@ -59,10 +59,6 @@ public abstract class StateBase : MonoBehaviour
         if (timer >= t)
         {
             timer = 0;
-            // farmer.targetMoving = RandomNode();
-            // manager.NodeMana.SetIndexToMove(farmer, nodeIndex);
-            // farmer.StateManager.SwitchState(farmer.moveState);
-            // farmer.Agent.SetDestination(RandomNode());
             callback?.Invoke();
         }
     }
@@ -99,6 +95,7 @@ public abstract class StateBase : MonoBehaviour
             yield return null;
         }
         farmer.transform.rotation = target;
+        yield return new WaitForSeconds(0.2f);
         callback?.Invoke();
     }
 }

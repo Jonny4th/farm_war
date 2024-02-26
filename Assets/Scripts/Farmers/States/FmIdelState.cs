@@ -7,14 +7,13 @@ using UnityEngine.UIElements;
 [System.Serializable]
 public class FmIdelState : StateBase
 {
-
-
     public override void StartState()
     {
         base.StartState();
         agent.isStopped = true;
         if (farmer.nodeToMove != null)
             LookAt(farmer, RotaAngle(farmer.nodeToMove), lookAtSpeed);
+        farmer.PlayerAnimation(FarmerStrate.Idel);
     }
     public override void EndState()
     {

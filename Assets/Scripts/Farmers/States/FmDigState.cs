@@ -11,18 +11,27 @@ public class FmDigState : StateBase
   // {
   //   stateName = FarmerStrate.Dig;
   // }
-
+  [SerializeField] private bool finishAnimationToSwicthState;
+  private bool onPro;
+  private bool canDig;
   public override void StartState()
   {
     base.StartState();
     agent.isStopped = true;
-    LookAt(farmer, RotaAngle(farmer.nodeToMove), lookAtSpeed);
-
+    farmer.PlayerAnimation(FarmerStrate.Idel);
+    onPro = false;
+    canDig = false;
+    LookAt(farmer, RotaAngle(farmer.nodeToMove), lookAtSpeed, () =>
+    {
+      farmer.PlayerAnimation(FarmerStrate.Dig);
+      canDig = true;
+    });
 
   }
   public override void EndState()
   {
     StopAllCoroutines();
+    farmer.PlayerAnimation(FarmerStrate.Idel);
   }
   public override void LogiUpdate()
   {
@@ -32,7 +41,27 @@ public class FmDigState : StateBase
     }
     else
     {
-      CountToSwicthState(time, () => swichState.SwitchState(farmer.moveState));
+      if (finishAnimationToSwicthState && !onPro && canDig)
+      {
+        onPro = true;
+        CountToSwicthState(time, () => CountToSwicthState(animator.GetCurrentAnimatorStateInfo(0).length, () =>
+        {
+          int ran = Random.Range(1, 10);
+          if (ran % 2 != 0)
+            swichState.SwitchState(farmer.idelState);
+          else
+            swichState.SwitchState(farmer.moveState);
+        }));
+      }
+      else
+        CountToSwicthState(time, () =>
+        {
+          int ran = Random.Range(1, 10);
+          if (ran % 2 != 0)
+            swichState.SwitchState(farmer.idelState);
+          else
+            swichState.SwitchState(farmer.moveState);
+        });
     }
   }
   public override void PhysiUpdate()
