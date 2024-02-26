@@ -20,18 +20,15 @@ namespace Generic.UI
 
         public void Toggle()
         {
-            Debug.Log("1");
             if(m_IsShow) Hide();
             else
             {
-                Debug.Log("2");
                 Show();
             }
         }
 
         public void Show()
         {
-            Debug.Log($"3");
             m_IsShow = true;
             Pop();
         }
@@ -44,7 +41,6 @@ namespace Generic.UI
 
         protected virtual void Pop()
         {
-            Debug.Log($"4 {m_IsShow}");
             transform.DOMove(m_PopPosition.position, m_AnimationDuration);
         }
 
