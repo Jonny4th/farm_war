@@ -18,7 +18,7 @@ public class Spawn : MonoBehaviour
     private void Ememy()
     {
         GameObject Obj = new GameObject("Emem", typeof(EmenTest));
-        GameManager.instance.EmemyFaction.AliveUnit.Add(Obj.GetComponent<EmenTest>());
+        // GameManager.instance.EmemyFaction.AliveUnit.Add(Obj.GetComponent<EmenTest>());
     }
     // Update is called once per frame
     void Update()

@@ -10,7 +10,8 @@ public enum GameState
     SetUp,
     Action,
     GameOver,
-    Winer
+    Winer,
+    Restart
 }
 public class GameManager : MonoBehaviour
 {
@@ -29,10 +30,21 @@ public class GameManager : MonoBehaviour
     public PlayerFaction PlayerFaction { get { if (playerFaction == null) Debug.Log("Set playerFanction"); return playerFaction; } }
     [SerializeField] private EmemyFaction ememyFaction;
     public EmemyFaction EmemyFaction { get { if (playerFaction == null) Debug.Log("Set ememyFaction"); return ememyFaction; } }
+    [SerializeField] private NodeManager nodeManager;
+    public NodeManager NodeMana { get { if (nodeManager == null) Debug.Log("Set NodeManager"); return nodeManager; } set { nodeManager = value; } }
 
     // [SerializeField] private bool isRatInArea = false;
     // public bool IsRatInArea { get { return isRatInArea; } set { isRatInArea = value; } }
+    public event Action<GameManager> SetUpEven;
+    public event Action ActionEven;
+    public event Action GameOverEven;
+    public event Action WinerEven;
+    public event Action ResetEven;
 
+    [SerializeField] private bool immortal;
+    public bool Immortal { get { return immortal; } }
+
+    [SerializeField] private float setUpTime = 2f;
     void Awake()
     {
         if (instance != null && instance != this) Destroy(this.gameObject);
@@ -42,7 +54,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         StartState(GameState.SetUp);
-        StartCoroutine(IEDelay(2f));
+        StartCoroutine(IEDelay(setUpTime));
     }
     private IEnumerator IEDelay(float time)
     {
@@ -50,10 +62,17 @@ public class GameManager : MonoBehaviour
         StartState(GameState.Action);
     }
 
-
+    private void ResetValu()
+    {
+        StartState(GameState.Action);
+    }
     void Update()
     {
         UpdateState();
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            StartState(GameState.Restart);
+        }
     }
 
     #region GameState
@@ -66,15 +85,20 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.SetUp:
+                SetUpEven?.Invoke(this);
                 break;
             case GameState.Action:
-
+                ActionEven?.Invoke();
                 break;
             case GameState.GameOver:
-
+                GameOverEven?.Invoke();
                 break;
             case GameState.Winer:
-
+                WinerEven?.Invoke();
+                break;
+            case GameState.Restart:
+                ResetEven?.Invoke();
+                StartState(GameState.Action);
                 break;
 
         }
@@ -86,11 +110,11 @@ public class GameManager : MonoBehaviour
             case GameState.SetUp:
                 break;
             case GameState.Action:
-                if (playerFaction.Hp <= 0)
+                if (!immortal && playerFaction.Hp <= 0)
                 {
                     StartState(GameState.GameOver);
                 }
-                if (ememyFaction.Hp <= 0)
+                if (!immortal && ememyFaction.Hp <= 0)
                 {
                     StartState(GameState.Winer);
                 }
@@ -98,6 +122,9 @@ public class GameManager : MonoBehaviour
             case GameState.GameOver:
                 break;
             case GameState.Winer:
+                break;
+            case GameState.Restart:
+
                 break;
         }
     }
@@ -113,7 +140,9 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Winer:
                 break;
+            case GameState.Restart:
 
+                break;
         }
     }
     #endregion

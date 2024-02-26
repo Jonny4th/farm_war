@@ -1,16 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
+
+[System.Serializable]
 public class FmIdelState : StateBase
 {
-    public FmIdelState(Farmer farmer, Animator animator, GameManager gameManager) : base(farmer, animator, gameManager)
+    public override void StartState()
     {
-
+        base.StartState();
+        agent.isStopped = true;
+        if (farmer.nodeToMove != null)
+            LookAt(farmer, RotaAngle(farmer.nodeToMove), lookAtSpeed);
+        farmer.PlayerAnimation(FarmerStrate.Idel);
     }
-
-    public override void StartState() { }
-    public override void EndState() { }
-    public override void LogiUpdate() { }
-    public override void PhysiUpdate() { }
+    public override void EndState()
+    {
+        StopAllCoroutines();
+        ieCountDown = null;
+        ieRotate = null;
+    }
+    public override void LogiUpdate()
+    {
+        if (CheckUnitOnGround())
+        {
+            swichState.SwitchState(farmer.moveToAttackState);
+        }
+        else
+        {
+            CountDown(time, () => swichState.SwitchState(farmer.moveState));
+        }
+    }
 }

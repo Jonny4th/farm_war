@@ -20,10 +20,15 @@ public class UIManager : MonoBehaviour
     [Header("Speed of hp bar")]
     [SerializeField] private float speed = 300f;
 
+    [Header("Test")]
+    [SerializeField] private TextMeshProUGUI timeState;
+    [SerializeField] private TextMeshProUGUI nodeTarget;
+    [SerializeField] private TextMeshProUGUI currState;
+    [SerializeField] private Farmer farmer;
+
     private GameState state;
 
     public static UIManager instance;
-
 
     void Awake()
     {
@@ -52,6 +57,9 @@ public class UIManager : MonoBehaviour
         playerUI.maxHp = gameManager.PlayerFaction.MaxHp;
 
         state = gameManager.State;
+        
+        gameManager.PlayerFaction.UpdateHp += UpdateUiPlayer;
+        gameManager.EmemyFaction.UpdateHp += UpdateUiEmemy;
     }
 
     private void HideAllPanel()
@@ -62,6 +70,7 @@ public class UIManager : MonoBehaviour
         gameOverPanel.SetActive(false);
     }
 
+    #region  State
     public void StartState(GameState gameState)
     {
         EndState(state);
@@ -101,26 +110,37 @@ public class UIManager : MonoBehaviour
                 break;
         }
     }
+    #endregion
+    
+    #region  UI Update
+    // public void UpdateUi(PlayerFaction player)
+    // {
+    //     if (playerUI.em != null)
+    //         StopCoroutine(playerUI.em);
+    //     playerUI.em = IEHPBarAnima(playerUI, playerUI.curr, GameManager.instance.PlayerFaction.Hp);
 
-    public void UpdateUi(PlayerFaction player)
+    //     StartCoroutine(playerUI.em);
+    // }
+    public void UpdateUiPlayer(PlayerFaction player)
     {
         if(playerUI.em != null)
             StopCoroutine(playerUI.em);
-        playerUI.em = IEHPBarAnima(playerUI, playerUI.curr, gameManager.PlayerFaction.Hp);
 
+        playerUI.em = IEHPBarAnima(playerUI, playerUI.curr, player.Hp);
         StartCoroutine(playerUI.em);
-
     }
 
-    public void UpdateUi(EmemyFaction ememy)
+    public void UpdateUiEmemy(EmemyFaction ememy)
     {
         if(ememyUI.em != null)
             StopCoroutine(ememyUI.em);
-        ememyUI.em = IEHPBarAnima(ememyUI, ememyUI.curr, gameManager.EmemyFaction.Hp);
 
+        ememyUI.em = IEHPBarAnima(ememyUI, ememyUI.curr, ememy.Hp);
         StartCoroutine(ememyUI.em);
     }
-
+    #endregion
+    
+    #region  IEnumerator
     private IEnumerator IEHPBarAnima(UIPanel panel, float curr, float target)
     {
         float persent = 0;
@@ -142,7 +162,7 @@ public class UIManager : MonoBehaviour
     private IEnumerator IEPanelAlp(Image image, Action callback)
     {
         float persent = 0;
-        float time = 255 / 300f;
+        float time = 255 / speed * 2;
         float ontime = 0;
 
         while(persent < 1)
@@ -156,4 +176,31 @@ public class UIManager : MonoBehaviour
         }
         callback?.Invoke();
     }
+    #endregion
+    
+    #region Test
+    public void UpdateTime()
+    {
+        if (!farmer) return;
+        var f = farmer.StateManager.CurrentState as StateFinder;
+        if (f is StateFinder)
+            timeState.text = $"StateTime : {(int)f.Timer}";
+        else
+            timeState.text = $"StateTime : xx";
+    }
+    public void UpdateNode()
+    {
+        if (!farmer) return;
+        if (!farmer.nodeToMove) return;
+        nodeTarget.text = $"Index : {farmer.nodeToMove.Index}";
+    }
+    public void UpdateCurrentState()
+    {
+        if (!farmer) return;
+        StateBase f = farmer.StateManager.CurrentState;
+
+        // currState.text = $"CurreSteta : {f.StateNameStr}";
+
+    }
+    #endregion
 }
