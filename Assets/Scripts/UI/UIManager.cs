@@ -52,6 +52,7 @@ public class UIManager : MonoBehaviour
             instance = this;
 
         GameManager.instance.StateChange += StartState;
+
     }
 
     private void Update()
@@ -63,6 +64,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
+
         ememyUI.curr = GameManager.instance.EmemyFaction.Hp;
         ememyUI.maxHp = GameManager.instance.EmemyFaction.MaxHp;
 
@@ -70,7 +72,8 @@ public class UIManager : MonoBehaviour
         playerUI.maxHp = GameManager.instance.PlayerFaction.MaxHp;
 
         state = GameManager.instance.State;
-
+        GameManager.instance.PlayerFaction.UpdateHp += UpdateUiPlayer;
+        GameManager.instance.EmemyFaction.UpdateHp += UpdateUiEmemy;
     }
 
 
@@ -129,20 +132,28 @@ public class UIManager : MonoBehaviour
     }
     #endregion
     #region  UI Update
-    public void UpdateUi(PlayerFaction player)
+    // public void UpdateUi(PlayerFaction player)
+    // {
+    //     if (playerUI.em != null)
+    //         StopCoroutine(playerUI.em);
+    //     playerUI.em = IEHPBarAnima(playerUI, playerUI.curr, GameManager.instance.PlayerFaction.Hp);
+
+    //     StartCoroutine(playerUI.em);
+    // }
+    public void UpdateUiPlayer(PlayerFaction player)
     {
         if (playerUI.em != null)
             StopCoroutine(playerUI.em);
-        playerUI.em = IEHPBarAnima(playerUI, playerUI.curr, GameManager.instance.PlayerFaction.Hp);
+        playerUI.em = IEHPBarAnima(playerUI, playerUI.curr, player.Hp);
 
         StartCoroutine(playerUI.em);
 
     }
-    public void UpdateUi(EmemyFaction ememy)
+    public void UpdateUiEmemy(EmemyFaction ememy)
     {
         if (ememyUI.em != null)
             StopCoroutine(ememyUI.em);
-        ememyUI.em = IEHPBarAnima(ememyUI, ememyUI.curr, GameManager.instance.EmemyFaction.Hp);
+        ememyUI.em = IEHPBarAnima(ememyUI, ememyUI.curr, ememy.Hp);
 
         StartCoroutine(ememyUI.em);
     }

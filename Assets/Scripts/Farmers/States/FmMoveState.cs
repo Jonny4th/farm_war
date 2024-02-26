@@ -7,7 +7,6 @@ using UnityEngine;
 [System.Serializable]
 public class FmMoveState : StateFinder
 {
-    [SerializeField] private Node nodetarget;
     [SerializeField] private float nodeDistance = 2f;
     public override void StartState()
     {

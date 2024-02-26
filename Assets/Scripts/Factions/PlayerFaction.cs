@@ -16,10 +16,13 @@ public class PlayerFaction : Faction<AnimalTest>
     public List<AnimalTest> UnitInGrouind { get { return unitInGrouind; } }
     [SerializeField] private Transform groundParent;
     [SerializeField] private float damage = 1;
+    private event Action<PlayerFaction> updateHp;
+    public Action<PlayerFaction> UpdateHp { get { return updateHp; } set { updateHp = value; } }
     public override void TakeDamage(float damage)
     {
         currentHp -= damage;
-        UIManager.instance.UpdateUi(this);
+        // UIManager.instance.UpdateUi(this);
+        updateHp?.Invoke(this);
     }
 
     protected override void Start()
@@ -27,7 +30,8 @@ public class PlayerFaction : Faction<AnimalTest>
 
         currentHp = maxHp;
         GameManager.instance.ResetEven += Reset;
-        Delay(() => UIManager.instance.UpdateUi(this), 1f);
+        // Delay(() => UIManager.instance.UpdateUi(this), 1f);
+        Delay(() => updateHp?.Invoke(this), 1f);
     }
 
     private void Reset()
@@ -39,13 +43,14 @@ public class PlayerFaction : Faction<AnimalTest>
         foreach (var T in unitInGrouind)
             Destroy(T);
         unitInGrouind.Clear();
-        Delay(() => UIManager.instance.UpdateUi(this), 1f);
+        // Delay(() => UIManager.instance.UpdateUi(this), 1f);
+        lastTime = 0;
     }
 
     public void Health(float hp)
     {
         currentHp += hp;
-        UIManager.instance.UpdateUi(this);
+        // UIManager.instance.UpdateUi(this);
     }
     [SerializeField] private float attackTime = 0.5f;
     private float lastTime = 0;

@@ -16,7 +16,7 @@ public class FmDigState : StateBase
   {
     base.StartState();
     agent.isStopped = true;
-    LookAt(farmer, farmer.nodeToMove, lookAtSpeed);
+    LookAt(farmer, RotaAngle(farmer.nodeToMove), lookAtSpeed);
 
 
   }

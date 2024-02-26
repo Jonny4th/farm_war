@@ -46,8 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateName: 2
   time: 2
-  lookAtSpeed: 0.8
+  lookAtSpeed: 0.4
   nodeIndex: -1
+  nodeDistance: 2
 --- !u!1 &1620704579213536508
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +229,7 @@ MonoBehaviour:
   nav: {fileID: 7251882385919354015}
   targetMoving: {x: 0, y: 0, z: 0}
   unitTarget: {fileID: 0}
-  nodetarget: {fileID: 0}
+  nodeToMove: {fileID: 0}
   currentState: 0
 --- !u!1 &1971643701114304569
 GameObject:
@@ -276,7 +277,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateName: 3
   time: 2
-  lookAtSpeed: 0.8
+  lookAtSpeed: 0.4
+  nodeIndex: -1
+  nodeDistance: 2
 --- !u!1 &2295934679875555312
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,7 +363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateName: 1
   time: 2
-  lookAtSpeed: 0.8
+  lookAtSpeed: 0.4
 --- !u!1 &3194114468972729196
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,7 +410,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateName: 6
   time: 2
-  lookAtSpeed: 0.8
+  lookAtSpeed: 0.4
 --- !u!1 &4841554227542170013
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,8 +457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateName: 4
   time: 2
-  lookAtSpeed: 0.8
-  nodeIndex: -1
+  lookAtSpeed: 0.4
 --- !u!1 &5418160134150606617
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,7 +629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateName: 5
   time: 2
-  lookAtSpeed: 0.8
+  lookAtSpeed: 0.4
   nodeIndex: -1
   attackTime: 0.5
   damage: 5

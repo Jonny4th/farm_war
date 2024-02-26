@@ -13,6 +13,8 @@ public class FmIdelState : StateBase
     {
         base.StartState();
         agent.isStopped = true;
+        if (farmer.nodeToMove != null)
+            LookAt(farmer, RotaAngle(farmer.nodeToMove), lookAtSpeed);
     }
     public override void EndState()
     {
