@@ -1,0 +1,16 @@
+{
+    "name": "FarmWar.RaidFunction",
+    "rootNamespace": "",
+    "references": [
+        "GUID:5d9131b1b5a8a31439050ae2e4b89b14"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
