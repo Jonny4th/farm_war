@@ -35,12 +35,14 @@ public class GameManager : MonoBehaviour
 
     // [SerializeField] private bool isRatInArea = false;
     // public bool IsRatInArea { get { return isRatInArea; } set { isRatInArea = value; } }
-    public event Action SetUpEven;
+    public event Action<GameManager> SetUpEven;
     public event Action ActionEven;
     public event Action GameOverEven;
     public event Action WinerEven;
-
     public event Action ResetEven;
+
+    [SerializeField] private bool immortal;
+    public bool Immortal { get { return immortal; } }
 
     [SerializeField] private float setUpTime = 2f;
     void Awake()
@@ -83,7 +85,7 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.SetUp:
-                SetUpEven?.Invoke();
+                SetUpEven?.Invoke(this);
                 break;
             case GameState.Action:
                 ActionEven?.Invoke();
@@ -108,11 +110,11 @@ public class GameManager : MonoBehaviour
             case GameState.SetUp:
                 break;
             case GameState.Action:
-                if (playerFaction.Hp <= 0)
+                if (!immortal && playerFaction.Hp <= 0)
                 {
                     StartState(GameState.GameOver);
                 }
-                if (ememyFaction.Hp <= 0)
+                if (!immortal && ememyFaction.Hp <= 0)
                 {
                     StartState(GameState.Winer);
                 }

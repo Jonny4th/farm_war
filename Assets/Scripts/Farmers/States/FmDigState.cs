@@ -38,7 +38,29 @@ public class FmDigState : StateBase
     }
     else
     {
-      if (finishAnimationToSwicthState && ieCountDown == null && canDig)
+      // if (finishAnimationToSwicthState && ieCountDown == null && canDig)
+      // {
+      //   CountDown(time, () => CountDown(animator.GetCurrentAnimatorStateInfo(0).length, () =>
+      //   {
+      //     int ran = Random.Range(1, 10);
+      //     if (ran % 2 != 0)
+      //       swichState.SwitchState(farmer.idelState);
+      //     else
+      //       swichState.SwitchState(farmer.moveState);
+      //   }));
+      // }
+      // else
+      // {
+      //   CountDown(time, () =>
+      //          {
+      //            int ran = Random.Range(1, 10);
+      //            if (ran % 2 != 0)
+      //              swichState.SwitchState(farmer.idelState);
+      //            else
+      //              swichState.SwitchState(farmer.moveState);
+      //          });
+      // }
+      if (ieCountDown == null && canDig)
       {
         CountDown(time, () => CountDown(animator.GetCurrentAnimatorStateInfo(0).length, () =>
         {
@@ -49,19 +71,6 @@ public class FmDigState : StateBase
             swichState.SwitchState(farmer.moveState);
         }));
       }
-      else
-        CountDown(time, () =>
-        {
-          int ran = Random.Range(1, 10);
-          if (ran % 2 != 0)
-            swichState.SwitchState(farmer.idelState);
-          else
-            swichState.SwitchState(farmer.moveState);
-        });
     }
-  }
-  public override void PhysiUpdate()
-  {
-
   }
 }

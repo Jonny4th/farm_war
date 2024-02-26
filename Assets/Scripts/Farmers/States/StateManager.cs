@@ -10,6 +10,7 @@ public class StateManager
 
     public void Init(StateBase startState)
     {
+        Debug.Log("FFFFFFFFFFFF");
         CurrentState = startState;
         CurrentState.StartState();
     }

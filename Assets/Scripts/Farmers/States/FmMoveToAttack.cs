@@ -53,8 +53,5 @@ public class FmMoveToAttack : StateFinder
         {
             swichState.SwitchState(farmer.idelState);
         }
-
-
     }
-
 }

@@ -18,6 +18,8 @@ public class FmIdelState : StateBase
     public override void EndState()
     {
         StopAllCoroutines();
+        ieCountDown = null;
+        ieRotate = null;
     }
     public override void LogiUpdate()
     {
@@ -29,9 +31,5 @@ public class FmIdelState : StateBase
         {
             CountDown(time, () => swichState.SwitchState(farmer.moveState));
         }
-    }
-    public override void PhysiUpdate()
-    {
-
     }
 }

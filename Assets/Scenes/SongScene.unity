@@ -3198,6 +3198,7 @@ MonoBehaviour:
   playerFaction: {fileID: 2059391591}
   ememyFaction: {fileID: 984639323}
   nodeManager: {fileID: 1030186666}
+  immortal: 1
   setUpTime: 2
 --- !u!1001 &926024010
 PrefabInstance:

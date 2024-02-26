@@ -56,12 +56,6 @@ public abstract class StateBase : MonoBehaviour
 
     protected void CountDown(float t, Action callback)
     {
-        // timer += Time.deltaTime;
-        // if (timer >= t)
-        // {
-        //     timer = 0;
-        //     callback?.Invoke();
-        // }
         if (ieCountDown != null)
             StopCoroutine(ieCountDown);
         ieCountDown = CountToSwicthState(t, callback);

@@ -25,15 +25,8 @@ public class FmAttackState : StateFinder
 
     LookAt(farmer, RotaAngle(farmer.nodeToMove), lookAtSpeed, () =>
     {
-
       farmer.PlayerAnimation(FarmerStrate.Attack);
-
-
     });
-  }
-  public override void EndState()
-  {
-
   }
   public override void LogiUpdate()
   {
@@ -51,23 +44,16 @@ public class FmAttackState : StateFinder
           Attack();
         }
       }
-
-
     }
     else
     {
       swichState.SwitchState(farmer.idelState);
     }
-
   }
   private void Attack()
   {
     GameManager.instance.PlayerFaction.TakeDamage(damage);
     farmer.nodeToMove.TakeDamage(damage);
-  }
-  public override void PhysiUpdate()
-  {
-
   }
   public override void FormOtherColl()
   {

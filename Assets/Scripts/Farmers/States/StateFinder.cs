@@ -13,12 +13,6 @@ public class StateFinder : StateBase
 
 
 
-
-
-
-
-
-
     protected void RandomMove()
     {
         timer += Time.deltaTime;
@@ -46,9 +40,8 @@ public class StateFinder : StateBase
 
     protected AnimalTest UnitNearMe()
     {
-        AnimalTest[] unit = new AnimalTest[2];
-        float[] dis = new float[2];
-        // float dis = float.MaxValue;
+        AnimalTest[] unit = new AnimalTest[3];
+        float[] dis = new float[3];
         foreach (var u in manager.PlayerFaction.UnitInGrouind)
         {
             for (int i = 0; i < unit.Length; i++)
@@ -72,7 +65,7 @@ public class StateFinder : StateBase
         AnimalTest final;
         if (unit[0] != null && unit[1] != null) final = unit[Random.Range(0, unit.Length)];
         else final = unit[0];
-        return final;
+        return final == null ? unit[0] : final;
     }
     protected float CheckDistance(Vector3 origin, Vector3 target) => Vector3.Distance(origin, target);
 
