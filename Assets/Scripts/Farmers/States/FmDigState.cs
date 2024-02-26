@@ -7,19 +7,14 @@ using UnityEngine;
 public class FmDigState : StateBase
 {
 
-  // public FmDigState(Farmer farmer, Animator animator, GameManager gameManager) : base(farmer, animator, gameManager)
-  // {
-  //   stateName = FarmerStrate.Dig;
-  // }
   [SerializeField] private bool finishAnimationToSwicthState;
-  private bool onPro;
+
   private bool canDig;
   public override void StartState()
   {
     base.StartState();
     agent.isStopped = true;
     farmer.PlayerAnimation(FarmerStrate.Idel);
-    onPro = false;
     canDig = false;
     LookAt(farmer, RotaAngle(farmer.nodeToMove), lookAtSpeed, () =>
     {
@@ -31,6 +26,8 @@ public class FmDigState : StateBase
   public override void EndState()
   {
     StopAllCoroutines();
+    ieCountDown = null;
+    ieRotate = null;
     farmer.PlayerAnimation(FarmerStrate.Idel);
   }
   public override void LogiUpdate()
@@ -41,10 +38,9 @@ public class FmDigState : StateBase
     }
     else
     {
-      if (finishAnimationToSwicthState && !onPro && canDig)
+      if (finishAnimationToSwicthState && ieCountDown == null && canDig)
       {
-        onPro = true;
-        CountToSwicthState(time, () => CountToSwicthState(animator.GetCurrentAnimatorStateInfo(0).length, () =>
+        CountDown(time, () => CountDown(animator.GetCurrentAnimatorStateInfo(0).length, () =>
         {
           int ran = Random.Range(1, 10);
           if (ran % 2 != 0)
@@ -54,7 +50,7 @@ public class FmDigState : StateBase
         }));
       }
       else
-        CountToSwicthState(time, () =>
+        CountDown(time, () =>
         {
           int ran = Random.Range(1, 10);
           if (ran % 2 != 0)

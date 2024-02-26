@@ -23,6 +23,7 @@ public abstract class StateBase : MonoBehaviour
     protected StateManager swichState;
     protected NavMeshAgent agent;
     protected IEnumerator ieRotate;
+    protected IEnumerator ieCountDown;
     public void Init(Farmer farmer, Animator animator, GameManager gameManager)
     {
         this.farmer = farmer;
@@ -53,16 +54,25 @@ public abstract class StateBase : MonoBehaviour
     }
 
 
-    protected void CountToSwicthState(float t, Action callback)
+    protected void CountDown(float t, Action callback)
     {
-        timer += Time.deltaTime;
-        if (timer >= t)
-        {
-            timer = 0;
-            callback?.Invoke();
-        }
+        // timer += Time.deltaTime;
+        // if (timer >= t)
+        // {
+        //     timer = 0;
+        //     callback?.Invoke();
+        // }
+        if (ieCountDown != null)
+            StopCoroutine(ieCountDown);
+        ieCountDown = CountToSwicthState(t, callback);
+        StartCoroutine(ieCountDown);
     }
-
+    private IEnumerator CountToSwicthState(float t, Action callback)
+    {
+        yield return new WaitForSeconds(t);
+        callback?.Invoke();
+        ieCountDown = null;
+    }
     protected void LookAt(Quaternion start, Quaternion targt, float ratateTime, Action callback)
     {
         if (ieRotate != null)
@@ -84,12 +94,11 @@ public abstract class StateBase : MonoBehaviour
         float angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
         return Quaternion.Euler(0f, angle, 0f);
     }
-    protected IEnumerator RotateTO(Quaternion start, Quaternion target, float duration, Action callback)
+    private IEnumerator RotateTO(Quaternion start, Quaternion target, float duration, Action callback)
     {
         float timer = 0;
         while (timer < duration)
         {
-
             timer += Time.deltaTime;
             farmer.transform.rotation = Quaternion.Lerp(start, target, timer / duration);
             yield return null;
@@ -97,5 +106,6 @@ public abstract class StateBase : MonoBehaviour
         farmer.transform.rotation = target;
         yield return new WaitForSeconds(0.2f);
         callback?.Invoke();
+        ieRotate = null;
     }
 }

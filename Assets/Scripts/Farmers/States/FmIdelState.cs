@@ -27,7 +27,7 @@ public class FmIdelState : StateBase
         }
         else
         {
-            CountToSwicthState(time, () => swichState.SwitchState(farmer.moveState));
+            CountDown(time, () => swichState.SwitchState(farmer.moveState));
         }
     }
     public override void PhysiUpdate()
