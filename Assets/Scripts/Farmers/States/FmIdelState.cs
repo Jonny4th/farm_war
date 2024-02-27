@@ -14,6 +14,7 @@ public class FmIdelState : StateBase
         if (farmer.nodeToMove != null)
             LookAt(farmer, RotaAngle(farmer.nodeToMove), lookAtSpeed);
         farmer.PlayerAnimation(FarmerStrate.Idel);
+        CountDown(time, () => swichState.SwitchState(farmer.moveState));
     }
     public override void EndState()
     {
@@ -29,7 +30,7 @@ public class FmIdelState : StateBase
         }
         else
         {
-            CountDown(time, () => swichState.SwitchState(farmer.moveState));
+                Debug.Log("FFFFF");
         }
     }
 }

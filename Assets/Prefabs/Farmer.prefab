@@ -394,8 +394,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 100
-  stateManager:
-    currentState: {fileID: 0}
   idelState: {fileID: 3071198041871890867}
   moveState: {fileID: 333076684761498311}
   digState: {fileID: 7092383710086196635}
@@ -409,10 +407,10 @@ MonoBehaviour:
   currentAnimation: 
   animator: {fileID: 9576412}
   nav: {fileID: 7859814989632522324}
-  targetMoving: {x: 0, y: 0, z: 0}
   unitTarget: {fileID: 0}
   nodeToMove: {fileID: 0}
   currentState: 0
+  gameManager: {fileID: 0}
 --- !u!1 &106418
 GameObject:
   m_ObjectHideFlags: 0
@@ -6342,9 +6340,6 @@ MonoBehaviour:
   lookAtUnti: 0
   attackWithTime: 0
   attackTime: 0.8
-  subState: 0
-  beginAttack: 0.3
-  endAttack: 1
 --- !u!1 &4954530506420473836
 GameObject:
   m_ObjectHideFlags: 0

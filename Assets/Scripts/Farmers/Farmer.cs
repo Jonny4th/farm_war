@@ -51,6 +51,7 @@ public class Farmer : MonoBehaviour
     public Node nodeToMove;
 
     public FarmerStrate currentState;
+    public GameManager gameManager;
     void Awake()
     {
 
@@ -67,7 +68,7 @@ public class Farmer : MonoBehaviour
         attackState.Init(this, animator, GameManager.instance);
         dieState.Init(this, animator, GameManager.instance);
         moveToAttackState.Init(this, animator, GameManager.instance);
-
+        // gameManager = GameManager.instance;
         GameManager.instance.ResetEven += Reset;
         GameManager.instance.GameOverEven += GameOver;
 

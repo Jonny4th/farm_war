@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     public event Action GameOverEven;
     public event Action WinerEven;
     public event Action ResetEven;
+    
 
     [SerializeField] private bool immortal;
     public bool Immortal { get { return immortal; } }
