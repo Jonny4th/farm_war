@@ -400,17 +400,11 @@ MonoBehaviour:
   attackState: {fileID: 1550767516066716084}
   dieState: {fileID: 683907916782092887}
   moveToAttackState: {fileID: 1925600426155746619}
-  idelAni: Idle
-  moveAni: Walk
-  moveToattackAni: Run
-  digAni: Working
   currentAnimation: 
   animator: {fileID: 9576412}
   nav: {fileID: 7859814989632522324}
-  unitTarget: {fileID: 0}
-  nodeToMove: {fileID: 0}
+  nodetarget: {fileID: 0}
   currentState: 0
-  gameManager: {fileID: 0}
 --- !u!1 &106418
 GameObject:
   m_ObjectHideFlags: 0
@@ -6285,8 +6279,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateName: 4
-  time: 6
-  lookAtSpeed: 0.4
+  time: 5
+  lookAtSpeed: 0.2
   finishAnimationToSwicthState: 1
 --- !u!1 &3502847864379500052
 GameObject:
@@ -6334,12 +6328,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateName: 5
   time: 2
-  lookAtSpeed: 0.4
-  nodeIndex: -1
+  lookAtSpeed: 0.2
   damage: 1
   lookAtUnti: 0
   attackWithTime: 0
   attackTime: 0.8
+  lookAtNode: 0
 --- !u!1 &4954530506420473836
 GameObject:
   m_ObjectHideFlags: 0
@@ -6470,9 +6464,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateName: 2
   time: 2
-  lookAtSpeed: 0.4
-  nodeIndex: -1
-  nodeDistance: 2
+  lookAtSpeed: 0.2
+  nodeDistance: 3
 --- !u!1 &7127469815611949182
 GameObject:
   m_ObjectHideFlags: 0
@@ -6519,11 +6512,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateName: 3
   time: 2
-  lookAtSpeed: 0.4
-  nodeIndex: -1
-  nodeDistance: 2
-  hhh: {fileID: 0}
-  jjj: {fileID: 0}
+  lookAtSpeed: 0.2
+  nodeDistance: 3
 --- !u!1 &7415909606879711585
 GameObject:
   m_ObjectHideFlags: 0
@@ -6570,7 +6560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateName: 1
   time: 2
-  lookAtSpeed: 0.4
+  lookAtSpeed: 0.2
 --- !u!1 &8193221799985269083
 GameObject:
   m_ObjectHideFlags: 0

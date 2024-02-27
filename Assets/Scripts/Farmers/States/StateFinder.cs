@@ -1,18 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Random = UnityEngine.Random;
 
 public class StateFinder : StateBase
 {
-    [SerializeField]
-    [Tooltip("time to change state while onUnitOnGround")]
-
-    protected int nodeIndex = -1;
-    public float MoveNodeIndex { get { return nodeIndex; } }
 
 
-
+   
     protected void RandomMove()
     {
         timer += Time.deltaTime;
@@ -63,6 +59,63 @@ public class StateFinder : StateBase
             }
         }
         AnimalTest final;
+        if (unit[0] != null && unit[1] != null) final = unit[Random.Range(0, unit.Length)];
+        else final = unit[0];
+        return final == null ? unit[0] : final;
+    }
+    protected Node RaidNodeNearMe()
+    {
+        Node[] unit = new Node[2];
+        float[] dis = new float[2];
+        Node[] raidables = manager.NodeMana.nodeCollcetion.FindAll(x => x.Raids.Count > 0).ToArray();
+        foreach (var u in raidables)
+        {
+            for (int i = 0; i < unit.Length; i++)
+            {
+                if (unit[i] == null)
+                {
+                    unit[i] = u;
+                    dis[i] = CheckDistance(farmer, u.transform.position);
+                }
+                else
+                {
+                    var d = CheckDistance(farmer, u.transform.position);
+                    if (dis[i] > d)
+                    {
+                        unit[i] = u;
+                        dis[i] = d;
+                    }
+                }
+            }
+        }
+        Node r = unit[Random.Range(0, unit.Length)];
+        return r == null ? unit[0] : r;
+    }
+    protected Raid UnitNearMe1(Raidable raidable)
+    {
+        Raid[] unit = new Raid[3];
+        float[] dis = new float[3];
+        foreach (var u in raidable.RaidList)
+        {
+            for (int i = 0; i < unit.Length; i++)
+            {
+                if (unit[i] == null)
+                {
+                    unit[i] = u;
+                    dis[i] = CheckDistance(farmer, u.transform.position);
+                }
+                else
+                {
+                    var d = CheckDistance(farmer, u.transform.position);
+                    if (dis[i] > d)
+                    {
+                        unit[i] = u;
+                        dis[i] = d;
+                    }
+                }
+            }
+        }
+        Raid final;
         if (unit[0] != null && unit[1] != null) final = unit[Random.Range(0, unit.Length)];
         else final = unit[0];
         return final == null ? unit[0] : final;

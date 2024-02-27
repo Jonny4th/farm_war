@@ -191,8 +191,8 @@ public class UIManager : MonoBehaviour
     public void UpdateNode()
     {
         if (!farmer) return;
-        if (!farmer.nodeToMove) return;
-        nodeTarget.text = $"Index : {farmer.nodeToMove.Index}";
+        if (!farmer.nodetarget) return;
+        nodeTarget.text = $"Index : {farmer.nodetarget.Index}";
     }
     public void UpdateCurrentState()
     {

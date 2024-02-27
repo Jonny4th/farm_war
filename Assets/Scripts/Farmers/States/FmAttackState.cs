@@ -16,6 +16,9 @@ public class FmAttackState : StateFinder
   [SerializeField] private float attackTime = 0.5f;
 
 
+  [SerializeField]
+  [Tooltip("T => farmer will look at node,F => farmer will look at raid 0")]
+  private bool lookAtNode;
 
 
   public override void StartState()
@@ -23,7 +26,7 @@ public class FmAttackState : StateFinder
     base.StartState();
     lastTime = (Time.time + attackTime);
 
-    LookAt(farmer, RotaAngle(farmer.nodeToMove), lookAtSpeed, () =>
+    LookAt(farmer, lookAtNode ? RotaAngle(farmer.nodetarget) : RotaAngle(farmer.nodetarget.Raids[0].transform.position), lookAtSpeed, () =>
     {
       farmer.PlayerAnimation(FarmerStrate.Attack);
     });
@@ -32,10 +35,12 @@ public class FmAttackState : StateFinder
   {
     if (CheckUnitOnGround())
     {
-      if (farmer.nodeToMove.Animas.Count == 0)
+      if (farmer.nodetarget.Raids.Count == 0)
       {
-        swichState.SwitchState(farmer.idelState);
+        swichState.SwitchState(farmer.moveToAttackState);
       }
+
+
       if (attackWithTime)
       {
         if (Time.time >= lastTime)
@@ -47,13 +52,13 @@ public class FmAttackState : StateFinder
     }
     else
     {
-      swichState.SwitchState(farmer.idelState);
+      swichState.SwitchState(farmer.moveToAttackState);
     }
   }
   private void Attack()
   {
     GameManager.instance.PlayerFaction.TakeDamage(damage);
-    farmer.nodeToMove.TakeDamage(damage);
+    // farmer.raidable..TakeDamage(damage);
   }
   public override void FormOtherColl()
   {

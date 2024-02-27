@@ -11,8 +11,8 @@ public class FmIdelState : StateBase
     {
         base.StartState();
         agent.isStopped = true;
-        if (farmer.nodeToMove != null)
-            LookAt(farmer, RotaAngle(farmer.nodeToMove), lookAtSpeed);
+        if (farmer.nodetarget != null)
+            LookAt(farmer, RotaAngle(farmer.nodetarget), lookAtSpeed);
         farmer.PlayerAnimation(FarmerStrate.Idel);
         CountDown(time, () => swichState.SwitchState(farmer.moveState));
     }
@@ -28,9 +28,6 @@ public class FmIdelState : StateBase
         {
             swichState.SwitchState(farmer.moveToAttackState);
         }
-        else
-        {
-                Debug.Log("FFFFF");
-        }
+
     }
 }
