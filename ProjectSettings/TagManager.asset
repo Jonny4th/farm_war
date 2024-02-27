@@ -4,6 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Plantable
+  - Crop
   - Raid
   - FarmPlot
   layers:
