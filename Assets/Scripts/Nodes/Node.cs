@@ -16,10 +16,10 @@ public class Node : MonoBehaviour
     public List<Farmer> Farmers { get { return farmers; } }
     [SerializeField] private bool isTakeMutiUnit;
     public bool IsTakeMutiUnit { get { return isTakeMutiUnit; } set { isTakeMutiUnit = value; } }
-    public void RemoveAnimal(AnimalTest animalTest)
+    public void RemoveAnimal(AnimalTest Raid)
     {
-        animas.Remove(animalTest);
-        animalTest.Des();
+        animas.Remove(Raid);
+        Raid.Des();
     }
 
     private void OnTriggerEnter(Collider other)

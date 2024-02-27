@@ -65,19 +65,19 @@ public class PlayerFaction : Faction<AnimalTest>
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            GameObject Obj = new GameObject("Animal", typeof(AnimalTest));
-            aliveUnit.Add(Obj.GetComponent<AnimalTest>());
-            Obj.transform.parent = UnitParent;
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            foreach (var T in aliveUnit.ToArray())
-            {
-                SentUnitOnGround();
-            }
-        }
+        // if (Input.GetKeyDown(KeyCode.Q))
+        // {
+        //     GameObject Obj = new GameObject("Animal", typeof(AnimalTest));
+        //     aliveUnit.Add(Obj.GetComponent<AnimalTest>());
+        //     Obj.transform.parent = UnitParent;
+        // }
+        // if (Input.GetKeyDown(KeyCode.W))
+        // {
+        //     foreach (var T in aliveUnit.ToArray())
+        //     {
+        //         SentUnitOnGround();
+        //     }
+        // }
     }
 
     public void SentUnitOnGround()

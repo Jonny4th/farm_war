@@ -72,7 +72,8 @@ public class GameManager : MonoBehaviour
         UpdateState();
         if (Input.GetKeyDown(KeyCode.L))
         {
-            StartState(GameState.Restart);
+            // StartState(GameState.Restart);
+            
         }
     }
 

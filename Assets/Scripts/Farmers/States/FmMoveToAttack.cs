@@ -6,8 +6,7 @@ public class FmMoveToAttack : StateFinder
 {
 
     [SerializeField] private float nodeDistance = 2f;
-    public AnimalTest hhh;
-    public Node jjj;
+
     public override void StartState()
     {
         base.StartState();
@@ -17,8 +16,7 @@ public class FmMoveToAttack : StateFinder
         if (CheckUnitOnGround())
         {
             AnimalTest unitTarget = UnitNearMe();
-            hhh = unitTarget;
-            jjj = unitTarget.NodeTarget;
+           
             LookAt(farmer, RotaAngle(unitTarget.NodeTarget), lookAtSpeed, () =>
             {
                 farmer.nodeToMove = unitTarget.NodeTarget;
