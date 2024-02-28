@@ -2280,6 +2280,14 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1320037968}
+    - target: {fileID: 8412552599348179458, guid: 458447718231bfe42a19448f26311170, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1691072578}
+    - target: {fileID: 8412552599348179458, guid: 458447718231bfe42a19448f26311170, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RandomSpawnOnGround
+      objectReference: {fileID: 0}
     - target: {fileID: 8414133902292535159, guid: 458447718231bfe42a19448f26311170, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7385,7 +7393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b9eec4bf3d616c4f842256dc5bcf8f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RaidPrefab: {fileID: 3375251610659025633, guid: 79a5867836a20c948a9e1b4c3d0fd76a, type: 3}
+  m_RaidPrefab: {fileID: 9015682565970532490, guid: 3d01612f86ecaff42a1437bf04408b94, type: 3}
 --- !u!1 &1758386225 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3510482873678970791, guid: 791e79ea8698fd741abc485284e851c0, type: 3}
