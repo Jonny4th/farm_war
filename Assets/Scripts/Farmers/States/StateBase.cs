@@ -36,7 +36,7 @@ public abstract class StateBase : MonoBehaviour
     public virtual void StartState()
     {
         farmer.currentState = stateName;
-        Debug.Log(stateName);
+        // Debug.Log(stateName);
     }
     public virtual void EndState() { }
     public virtual void LogiUpdate() { }
@@ -47,10 +47,7 @@ public abstract class StateBase : MonoBehaviour
 
     protected bool CheckUnitOnGround()
     {
-        if (manager.PlayerFaction.UnitInGrouind.Count > 0)
-            return true;
-        else
-            return false;
+        return manager.PlayerFaction.UnitOnGround;
     }
 
 

@@ -14,15 +14,24 @@ public class PlayerFaction : Faction<AnimalTest>
 
     [SerializeField] private List<AnimalTest> unitInGrouind = new List<AnimalTest>();
     public List<AnimalTest> UnitInGrouind { get { return unitInGrouind; } }
+    [SerializeField] private RaidController raidCon;
+    public RaidController RaidCon { get { return raidCon; } }
     [SerializeField] private Transform groundParent;
     [SerializeField] private float damage = 1;
     private event Action<PlayerFaction> updateHp;
     public Action<PlayerFaction> UpdateHp { get { return updateHp; } set { updateHp = value; } }
+
+    public bool UnitOnGround { get { return CheckUnitOnGround(); } }
     public override void TakeDamage(float damage)
     {
         currentHp -= damage;
         // UIManager.instance.UpdateUi(this);
         updateHp?.Invoke(this);
+    }
+
+    private bool CheckUnitOnGround()
+    {
+        return raidCon.RaidList.Find(x => x.gameObject.activeSelf);
     }
 
     protected override void Start()
@@ -56,42 +65,42 @@ public class PlayerFaction : Faction<AnimalTest>
     private float lastTime = 0;
     private void Update()
     {
-        if (UnitInGrouind.Count > 0)
-        {
-            if (Time.time - lastTime > attackTime)
-            {
-                lastTime = Time.time;
-                GameManager.instance.EmemyFaction.TakeDamage(damage * UnitInGrouind.Count);
-            }
-        }
+        // if (UnitInGrouind.Count > 0)
+        // {
+        //     if (Time.time - lastTime > attackTime)
+        //     {
+        //         lastTime = Time.time;
+        //         GameManager.instance.EmemyFaction.TakeDamage(damage * UnitInGrouind.Count);
+        //     }
+        // }
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            GameObject Obj = new GameObject("Animal", typeof(AnimalTest));
-            aliveUnit.Add(Obj.GetComponent<AnimalTest>());
-            Obj.transform.parent = UnitParent;
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            foreach (var T in aliveUnit.ToArray())
-            {
-                SentUnitOnGround();
-            }
-        }
+        // if (Input.GetKeyDown(KeyCode.Q))
+        // {
+        //     GameObject Obj = new GameObject("Animal", typeof(AnimalTest));
+        //     aliveUnit.Add(Obj.GetComponent<AnimalTest>());
+        //     Obj.transform.parent = UnitParent;
+        // }
+        // if (Input.GetKeyDown(KeyCode.W))
+        // {
+        //     foreach (var T in aliveUnit.ToArray())
+        //     {
+        //         SentUnitOnGround();
+        //     }
+        // }
     }
 
     public void SentUnitOnGround()
     {
-        if (aliveUnit.Count <= 0) return;
-        Node node = RandomNode();
-        AnimalTest animalTest = aliveUnit[0];
-        unitInGrouind.Add(animalTest);
-        aliveUnit.Remove(animalTest);
+        // if (aliveUnit.Count <= 0) return;
+        // Node node = RandomNode();
+        // AnimalTest animalTest = aliveUnit[0];
+        // unitInGrouind.Add(animalTest);
+        // aliveUnit.Remove(animalTest);
 
-        animalTest.transform.parent = groundParent;
+        // animalTest.transform.parent = groundParent;
 
-        animalTest.NodeTarget = node;
-        node.Animas.Add(animalTest);
+        // animalTest.NodeTarget = node;
+        // node.Animas.Add(animalTest);
     }
 
     public void AnimalDie(AnimalTest animalTest)

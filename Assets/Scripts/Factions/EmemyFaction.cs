@@ -11,8 +11,6 @@ public class EmemyFaction : Faction<Farmer>
     public Action<EmemyFaction> UpdateHp { get { return updateHp; } set { updateHp = value; } }
 
 
-
-
     public override void TakeDamage(float damage)
     {
         currentHp -= damage;

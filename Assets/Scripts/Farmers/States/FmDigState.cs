@@ -16,7 +16,7 @@ public class FmDigState : StateBase
     agent.isStopped = true;
     farmer.PlayerAnimation(FarmerStrate.Idel);
     canDig = false;
-    LookAt(farmer, RotaAngle(farmer.nodeToMove), lookAtSpeed, () =>
+    LookAt(farmer, RotaAngle(farmer.nodetarget), lookAtSpeed, () =>
     {
       farmer.PlayerAnimation(FarmerStrate.Dig);
       canDig = true;

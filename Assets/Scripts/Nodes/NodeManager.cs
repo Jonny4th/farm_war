@@ -37,12 +37,12 @@ public class NodeManager : MonoBehaviour
     }
     private void Reset()
     {
-        foreach (var T in nodeCollcetion)
-        {
-            T.Animas.Clear();
-            T.Farmers.Clear();
-        }
-        SetNode();
+        // foreach (var T in nodeCollcetion)
+        // {
+        //     T.Animas.Clear();
+        //     T.Farmers.Clear();
+        // }
+        // SetNode();
     }
 
 

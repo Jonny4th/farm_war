@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     public event Action WinerEven;
     public event Action ResetEven;
 
+    public RaidController raidController;
     [SerializeField] private bool immortal;
     public bool Immortal { get { return immortal; } }
 
@@ -71,7 +72,8 @@ public class GameManager : MonoBehaviour
         UpdateState();
         if (Input.GetKeyDown(KeyCode.L))
         {
-            StartState(GameState.Restart);
+            // StartState(GameState.Restart);
+            raidController.RandomSpawnOnGround();
         }
     }
 

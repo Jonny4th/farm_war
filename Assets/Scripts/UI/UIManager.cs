@@ -32,7 +32,7 @@ public class UIManager : MonoBehaviour
 
     void Awake()
     {
-        if(instance != null && instance != this)
+        if (instance != null && instance != this)
             Destroy(this);
         else
             instance = this;
@@ -57,7 +57,7 @@ public class UIManager : MonoBehaviour
         playerUI.maxHp = gameManager.PlayerFaction.MaxHp;
 
         state = gameManager.State;
-        
+
         gameManager.PlayerFaction.UpdateHp += UpdateUiPlayer;
         gameManager.EmemyFaction.UpdateHp += UpdateUiEmemy;
     }
@@ -75,7 +75,7 @@ public class UIManager : MonoBehaviour
     {
         EndState(state);
         state = gameState;
-        switch(gameState)
+        switch (gameState)
         {
             case GameState.SetUp:
                 setUpPanel.SetActive(true);
@@ -94,7 +94,7 @@ public class UIManager : MonoBehaviour
 
     private void EndState(GameState state)
     {
-        switch(state)
+        switch (state)
         {
             case GameState.SetUp:
                 StartCoroutine(IEPanelAlp(setUpPanel.GetComponent<Image>(), () => setUpPanel.SetActive(false)));
@@ -111,7 +111,7 @@ public class UIManager : MonoBehaviour
         }
     }
     #endregion
-    
+
     #region  UI Update
     // public void UpdateUi(PlayerFaction player)
     // {
@@ -123,7 +123,7 @@ public class UIManager : MonoBehaviour
     // }
     public void UpdateUiPlayer(PlayerFaction player)
     {
-        if(playerUI.em != null)
+        if (playerUI.em != null)
             StopCoroutine(playerUI.em);
 
         playerUI.em = IEHPBarAnima(playerUI, playerUI.curr, player.Hp);
@@ -132,14 +132,14 @@ public class UIManager : MonoBehaviour
 
     public void UpdateUiEmemy(EmemyFaction ememy)
     {
-        if(ememyUI.em != null)
+        if (ememyUI.em != null)
             StopCoroutine(ememyUI.em);
 
         ememyUI.em = IEHPBarAnima(ememyUI, ememyUI.curr, ememy.Hp);
         StartCoroutine(ememyUI.em);
     }
     #endregion
-    
+
     #region  IEnumerator
     private IEnumerator IEHPBarAnima(UIPanel panel, float curr, float target)
     {
@@ -147,14 +147,14 @@ public class UIManager : MonoBehaviour
         float time = Mathf.Abs(target - curr) / speed;
         float ontime = 0;
 
-        while(persent < 1)
+        while (persent < 1)
         {
             ontime += Time.deltaTime;
             persent = ontime / time;
             panel.curr = Mathf.Lerp(curr, target, persent);
 
-            panel.hpText.text = panel.HpString;
-            panel.hpBar.fillAmount = panel.persentHp;
+            if (panel.hpText != null) panel.hpText.text = panel.HpString;
+            if (panel.hpBar != null) panel.hpBar.fillAmount = panel.persentHp;
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
@@ -165,7 +165,7 @@ public class UIManager : MonoBehaviour
         float time = 255 / speed * 2;
         float ontime = 0;
 
-        while(persent < 1)
+        while (persent < 1)
         {
             ontime += Time.deltaTime;
             persent = ontime / time;
@@ -177,7 +177,7 @@ public class UIManager : MonoBehaviour
         callback?.Invoke();
     }
     #endregion
-    
+
     #region Test
     public void UpdateTime()
     {
@@ -191,8 +191,8 @@ public class UIManager : MonoBehaviour
     public void UpdateNode()
     {
         if (!farmer) return;
-        if (!farmer.nodeToMove) return;
-        nodeTarget.text = $"Index : {farmer.nodeToMove.Index}";
+        if (!farmer.nodetarget) return;
+        nodeTarget.text = $"Index : {farmer.nodetarget.Index}";
     }
     public void UpdateCurrentState()
     {

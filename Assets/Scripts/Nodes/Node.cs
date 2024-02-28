@@ -10,17 +10,49 @@ public class Node : MonoBehaviour
     [SerializeField] private int index;
     public int Index { get { return index; } }
 
+    [SerializeField] private Raidable raidable;
+    public Raidable raidablee { get { return raidable; } }
     [SerializeField] private List<AnimalTest> animas;
-    public List<AnimalTest> Animas { get { return animas; } }
+    public List<Raid> Raids { get { return raidablee.RaidList; } }
     [SerializeField] private List<Farmer> farmers;
     public List<Farmer> Farmers { get { return farmers; } }
     [SerializeField] private bool isTakeMutiUnit;
     public bool IsTakeMutiUnit { get { return isTakeMutiUnit; } set { isTakeMutiUnit = value; } }
-    public void RemoveAnimal(AnimalTest animalTest)
+
+
+
+
+
+    private void Awake()
     {
-        animas.Remove(animalTest);
-        animalTest.Des();
+        if (raidable == null) raidable = GetComponent<Raidable>();
     }
+
+    public void RemoveAnimal(AnimalTest Raid)
+    {
+        animas.Remove(Raid);
+        Raid.Des();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -44,10 +76,10 @@ public class Node : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        foreach (var T in animas.ToArray())
-        {
-            T.TakeDamage(damage);
-        }
+        // foreach (var T in animas.ToArray())
+        // {
+        //     T.TakeDamage(damage);
+        // }
         // animas[0].TakeDamage(damage);
     }
 

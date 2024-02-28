@@ -6,29 +6,55 @@ public class FmMoveToAttack : StateFinder
 {
 
     [SerializeField] private float nodeDistance = 2f;
-    public AnimalTest hhh;
-    public Node jjj;
+
+    //  public override void StartState()
+    //     {
+    //         base.StartState();
+    //         farmer.PlayerAnimation(FarmerStrate.Idel);
+    //         agent.isStopped = true;
+    //         ieRotate = null;
+    //         if (CheckUnitOnGround())
+    //         {
+    //             Raid unitTarget = UnitNearMe1();
+
+    //             LookAt(farmer, RotaAngle(unitTarget.transform.position), lookAtSpeed, () =>
+    //             {
+    //                 farmer.nodeToMove = unitTarget.transform;
+    //                 agent.SetDestination(farmer.nodeToMove);
+    //                 farmer.PlayerAnimation(stateName);
+    //                 agent.isStopped = false;
+    //             });
+    //         }
+    //         else
+    //             swichState.SwitchState(farmer.idelState);
+
+
+    //     }
     public override void StartState()
     {
         base.StartState();
         farmer.PlayerAnimation(FarmerStrate.Idel);
         agent.isStopped = true;
         ieRotate = null;
-        if (CheckUnitOnGround())
+        CountDown(0.2f, () =>
         {
-            AnimalTest unitTarget = UnitNearMe();
-            hhh = unitTarget;
-            jjj = unitTarget.NodeTarget;
-            LookAt(farmer, RotaAngle(unitTarget.NodeTarget), lookAtSpeed, () =>
+            if (CheckUnitOnGround())
             {
-                farmer.nodeToMove = unitTarget.NodeTarget;
-                agent.SetDestination(farmer.nodeToMove);
-                farmer.PlayerAnimation(stateName);
-                agent.isStopped = false;
-            });
-        }
-        else
-            swichState.SwitchState(farmer.idelState);
+                var unitTargets = FindNodeObj(manager.NodeMana.nodeCollcetion.FindAll(x => x.Raids.Count > 0));
+                Node unitTarget = unitTargets[Random.Range(0, unitTargets.Count)];
+                if (unitTarget == null) unitTarget = unitTargets[0];
+                LookAt(farmer, RotaAngle(unitTarget), lookAtSpeed, () =>
+                {
+                    farmer.nodetarget = unitTarget;
+                    agent.SetDestination(unitTarget);
+                    farmer.PlayerAnimation(FarmerStrate.MoveToAttack);
+                    agent.isStopped = false;
+                });
+            }
+            else
+                swichState.SwitchState(farmer.idelState);
+        });
+
 
 
     }
@@ -41,9 +67,10 @@ public class FmMoveToAttack : StateFinder
     {
         if (CheckUnitOnGround())
         {
-            if (!farmer.Agent.isStopped && CheckDistance(farmer, farmer.nodeToMove) <= nodeDistance)
+            if (!farmer.Agent.isStopped && CheckDistance(farmer, farmer.nodetarget) <= nodeDistance)
             {
-                if (farmer.nodeToMove.Animas.Count > 0)
+                agent.isStopped = true;
+                if (farmer.nodetarget.Raids.Count > 0)
                     swichState.SwitchState(farmer.attackState);
                 else
                     swichState.SwitchState(farmer.idelState);

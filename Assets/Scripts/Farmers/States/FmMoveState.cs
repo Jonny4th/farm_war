@@ -13,16 +13,16 @@ public class FmMoveState : StateFinder
         base.StartState();
         agent.isStopped = true;
 
-        if (farmer.nodeToMove == null)
-            farmer.nodeToMove = RandomNode();
+        if (farmer.nodetarget == null)
+            farmer.nodetarget = RandomNode();
         else
-            farmer.nodeToMove = RandomNodeNotCurr(farmer.nodeToMove);
+            farmer.nodetarget = RandomNodeNotCurr(farmer.nodetarget);
 
 
 
-        LookAt(farmer.transform.rotation, RotaAngle(farmer.nodeToMove), lookAtSpeed, () =>
+        LookAt(farmer.transform.rotation, RotaAngle(farmer.nodetarget), lookAtSpeed, () =>
         {
-            agent.SetDestination(farmer.nodeToMove);
+            agent.SetDestination(farmer.nodetarget);
             farmer.PlayerAnimation(stateName);
             agent.isStopped = false;
         });
@@ -41,9 +41,9 @@ public class FmMoveState : StateFinder
         }
         else
         {
-            if (!farmer.Agent.isStopped && CheckDistance(farmer, farmer.nodeToMove) <= nodeDistance)
+            if (!farmer.Agent.isStopped && CheckDistance(farmer, farmer.nodetarget) <= nodeDistance)
             {
-                if (farmer.nodeToMove.Animas.Count > 0)
+                if (farmer.nodetarget.Raids.Count > 0)
                     swichState.SwitchState(farmer.attackState);
                 else
                 {

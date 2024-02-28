@@ -33,10 +33,6 @@ public class Farmer : MonoBehaviour
     public FmDieState dieState;
     public FmMoveToAttack moveToAttackState;
 
-    public string idelAni = "Idle";
-    public string moveAni = "Walk";
-    public string moveToattackAni = "Run";
-    public string digAni = "Working";
 
     [SerializeField] private string currentAnimation = "";
 
@@ -46,11 +42,13 @@ public class Farmer : MonoBehaviour
     [SerializeField] private NavMeshAgent nav;
     public NavMeshAgent Agent { get { if (nav == null) Debug.Log("NavMesh is Null"); return nav; } set { nav = value; } }
 
-    [HideInInspector] public AnimalTest unitTarget;
 
-    public Node nodeToMove;
+    public Node nodetarget;
+
+    // public Raidable raidable;
 
     public FarmerStrate currentState;
+
     void Awake()
     {
 
@@ -67,7 +65,7 @@ public class Farmer : MonoBehaviour
         attackState.Init(this, animator, GameManager.instance);
         dieState.Init(this, animator, GameManager.instance);
         moveToAttackState.Init(this, animator, GameManager.instance);
-
+        // gameManager = GameManager.instance;
         GameManager.instance.ResetEven += Reset;
         GameManager.instance.GameOverEven += GameOver;
 
@@ -93,15 +91,7 @@ public class Farmer : MonoBehaviour
     {
         stateManager.CurrentState.FormOtherColl();
     }
-    public void PlayerAnimation(string aniName)
-    {
-        if (aniName == currentAnimation) return;
-
-        currentAnimation = aniName;
-
-        animator.Play(currentAnimation);
-    }
-
+    
     private void StopAllAnimation()
     {
         animator.SetBool("IsIdel", false);
