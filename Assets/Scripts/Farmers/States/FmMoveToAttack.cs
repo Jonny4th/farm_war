@@ -36,20 +36,27 @@ public class FmMoveToAttack : StateFinder
         farmer.PlayerAnimation(FarmerStrate.Idel);
         agent.isStopped = true;
         ieRotate = null;
-        if (CheckUnitOnGround())
+        CountDown(0.2f, () =>
         {
-            Node unitTarget = RaidNodeNearMe();
-
-            LookAt(farmer, RotaAngle(unitTarget), lookAtSpeed, () =>
+            if (CheckUnitOnGround())
             {
-                farmer.nodetarget = unitTarget;
-                agent.SetDestination(unitTarget);
-                farmer.PlayerAnimation(FarmerStrate.MoveToAttack);
-                agent.isStopped = false;
-            });
-        }
-        else
-            swichState.SwitchState(farmer.idelState);
+                var unitTargets = FindNodeObj(manager.NodeMana.nodeCollcetion.FindAll(x => x.Raids.Count > 0));
+
+                Node unitTarget = unitTargets[Random.Range(0, unitTargets.Count)];
+                if (unitTarget == null) unitTarget = unitTargets[0];
+                LookAt(farmer, RotaAngle(unitTarget), lookAtSpeed, () =>
+                {
+                    farmer.nodetarget = unitTarget;
+                    agent.SetDestination(unitTarget);
+                    farmer.PlayerAnimation(FarmerStrate.MoveToAttack);
+                    agent.isStopped = false;
+                });
+            }
+            else
+                swichState.SwitchState(farmer.idelState);
+        });
+
+
 
     }
     public override void EndState()

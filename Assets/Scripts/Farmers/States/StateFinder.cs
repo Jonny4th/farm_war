@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,7 +9,7 @@ public class StateFinder : StateBase
 {
 
 
-   
+
     protected void RandomMove()
     {
         timer += Time.deltaTime;
@@ -34,96 +35,44 @@ public class StateFinder : StateBase
 
 
 
-    protected AnimalTest UnitNearMe()
+    protected List<Node> FindNodeObj(List<Node> noodeList, int count = 2)
     {
-        AnimalTest[] unit = new AnimalTest[3];
-        float[] dis = new float[3];
-        foreach (var u in manager.PlayerFaction.UnitInGrouind)
+        List<Node> nodeTarget = new List<Node>();
+        List<float> closeNode = new List<float>();
+
+        foreach (var T in nodeTarget)
         {
-            for (int i = 0; i < unit.Length; i++)
+            float dis = CheckDistance(T, farmer);
+
+
+            for (int i = 0; i < nodeTarget.Count; i++)
             {
-                if (unit[i] == null)
+                if (dis < closeNode[i])
                 {
-                    unit[i] = u;
-                    dis[i] = CheckDistance(farmer, u.NodeTarget);
+                    closeNode.Insert(i, dis);
+                    nodeTarget.Insert(i, T);
                 }
-                else
+
+                if (nodeTarget.Count > count)
                 {
-                    var d = CheckDistance(farmer, u.NodeTarget);
-                    if (dis[i] > d)
-                    {
-                        unit[i] = u;
-                        dis[i] = d;
-                    }
+                    closeNode.RemoveAt(count);
+                    nodeTarget.RemoveAt(count);
                 }
+                break;
+            }
+            if (nodeTarget.Count < count)
+            {
+                nodeTarget.Add(T);
+                closeNode.Add(dis);
             }
         }
-        AnimalTest final;
-        if (unit[0] != null && unit[1] != null) final = unit[Random.Range(0, unit.Length)];
-        else final = unit[0];
-        return final == null ? unit[0] : final;
+        return nodeTarget;
     }
-    protected Node RaidNodeNearMe()
+    protected Raid FindRaidInNode(Node node)
     {
-        Node[] unit = new Node[2];
-        float[] dis = new float[2];
-        Node[] raidables = manager.NodeMana.nodeCollcetion.FindAll(x => x.Raids.Count > 0).ToArray();
-        foreach (var u in raidables)
-        {
-            for (int i = 0; i < unit.Length; i++)
-            {
-                if (unit[i] == null)
-                {
-                    unit[i] = u;
-                    dis[i] = CheckDistance(farmer, u.transform.position);
-                }
-                else
-                {
-                    var d = CheckDistance(farmer, u.transform.position);
-                    if (dis[i] > d)
-                    {
-                        unit[i] = u;
-                        dis[i] = d;
-                    }
-                }
-            }
-        }
-        Node r = unit[Random.Range(0, unit.Length)];
-        return r == null ? unit[0] : r;
+        return node.Raids[Random.Range(0, node.Raids.Count)];
     }
-    protected Raid UnitNearMe1(Raidable raidable)
-    {
-        Raid[] unit = new Raid[3];
-        float[] dis = new float[3];
-        foreach (var u in raidable.RaidList)
-        {
-            for (int i = 0; i < unit.Length; i++)
-            {
-                if (unit[i] == null)
-                {
-                    unit[i] = u;
-                    dis[i] = CheckDistance(farmer, u.transform.position);
-                }
-                else
-                {
-                    var d = CheckDistance(farmer, u.transform.position);
-                    if (dis[i] > d)
-                    {
-                        unit[i] = u;
-                        dis[i] = d;
-                    }
-                }
-            }
-        }
-        Raid final;
-        if (unit[0] != null && unit[1] != null) final = unit[Random.Range(0, unit.Length)];
-        else final = unit[0];
-        return final == null ? unit[0] : final;
-    }
+
     protected float CheckDistance(Vector3 origin, Vector3 target) => Vector3.Distance(origin, target);
-
-
-
-
 
 }

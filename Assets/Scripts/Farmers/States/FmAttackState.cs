@@ -11,6 +11,7 @@ public class FmAttackState : StateFinder
 
   private float lastTime = 0;
   [SerializeField] private float damage = 1f;
+  [SerializeField] private float lifeTimeReduce = 1f;
   [SerializeField] private bool lookAtUnti;
   [SerializeField] private bool attackWithTime;
   [SerializeField] private float attackTime = 0.5f;
@@ -21,12 +22,15 @@ public class FmAttackState : StateFinder
   private bool lookAtNode;
 
 
+  protected Raid raidTarget;
+
   public override void StartState()
   {
     base.StartState();
     lastTime = (Time.time + attackTime);
-
-    LookAt(farmer, lookAtNode ? RotaAngle(farmer.nodetarget) : RotaAngle(farmer.nodetarget.Raids[0].transform.position), lookAtSpeed, () =>
+    raidTarget = FindRaidInNode(farmer.nodetarget);
+    var targetRotate = lookAtNode ? RotaAngle(farmer.nodetarget) : RotaAngle(raidTarget.transform.position);
+    LookAt(farmer, targetRotate, lookAtSpeed, () =>
     {
       farmer.PlayerAnimation(FarmerStrate.Attack);
     });
@@ -58,7 +62,7 @@ public class FmAttackState : StateFinder
   private void Attack()
   {
     GameManager.instance.PlayerFaction.TakeDamage(damage);
-    // farmer.raidable..TakeDamage(damage);
+    raidTarget.TakeDamage(lifeTimeReduce);
   }
   public override void FormOtherColl()
   {
