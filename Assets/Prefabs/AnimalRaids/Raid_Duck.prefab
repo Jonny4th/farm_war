@@ -1440,7 +1440,7 @@ MonoBehaviour:
   OnOutAnimationDone:
     m_PersistentCalls:
       m_Calls: []
-  m_LifeTime: 5
+  m_LifeTime: 60
   m_RemainLifeTime: 0
   m_NormalizedTime: {fileID: 8707295834041114249}
   m_Animator: {fileID: 9565948}

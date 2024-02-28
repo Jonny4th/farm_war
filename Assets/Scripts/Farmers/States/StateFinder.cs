@@ -40,7 +40,7 @@ public class StateFinder : StateBase
         List<Node> nodeTarget = new List<Node>();
         List<float> closeNode = new List<float>();
 
-        foreach (var T in nodeTarget)
+        foreach (var T in noodeList)
         {
             float dis = CheckDistance(T, farmer);
 

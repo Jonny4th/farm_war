@@ -41,7 +41,6 @@ public class FmMoveToAttack : StateFinder
             if (CheckUnitOnGround())
             {
                 var unitTargets = FindNodeObj(manager.NodeMana.nodeCollcetion.FindAll(x => x.Raids.Count > 0));
-
                 Node unitTarget = unitTargets[Random.Range(0, unitTargets.Count)];
                 if (unitTarget == null) unitTarget = unitTargets[0];
                 LookAt(farmer, RotaAngle(unitTarget), lookAtSpeed, () =>
