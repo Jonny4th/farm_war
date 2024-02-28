@@ -9,8 +9,8 @@ using UnityEngine.UIElements;
 public class PlayerFaction : Faction<AnimalTest>
 {
 
-    [SerializeField] private float point;
-    public float Point { get { return point; } }
+    [SerializeField] private float coin;
+    public float Coin { get { return coin; } }
 
     [SerializeField] private List<AnimalTest> unitInGrouind = new List<AnimalTest>();
     public List<AnimalTest> UnitInGrouind { get { return unitInGrouind; } }
@@ -61,6 +61,30 @@ public class PlayerFaction : Faction<AnimalTest>
         currentHp += hp;
         // UIManager.instance.UpdateUi(this);
     }
+
+    public bool HaveCoin(int coin)
+    {
+        if (this.coin - coin <= 0)
+            return false;
+        else
+            return true;
+    }
+    public void AddCoin(int coin)
+    {
+        this.coin += coin;
+    }
+    public void ReducCoin(int coid)
+    {
+        this.coin -= coin;
+    }
+
+
+
+
+
+
+
+
     [SerializeField] private float attackTime = 0.5f;
     private float lastTime = 0;
     private void Update()

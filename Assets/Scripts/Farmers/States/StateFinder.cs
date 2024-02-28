@@ -8,19 +8,6 @@ using Random = UnityEngine.Random;
 public class StateFinder : StateBase
 {
 
-
-
-    protected void RandomMove()
-    {
-        timer += Time.deltaTime;
-        if (timer >= time)
-        {
-            timer = 0;
-            // farmer.Agent.SetDestination(RandomNode());
-            farmer.Agent.isStopped = false;
-        }
-    }
-
     protected Node RandomNodeNotCurr(Node currNode)
     {
         var node = RandomNode();
@@ -33,8 +20,6 @@ public class StateFinder : StateBase
         return manager.NodeMana.nodeCollcetion[Random.Range(0, manager.NodeMana)];
     }
 
-
-
     protected List<Node> FindNodeObj(List<Node> noodeList, int count = 2)
     {
         List<Node> nodeTarget = new List<Node>();
@@ -43,7 +28,6 @@ public class StateFinder : StateBase
         foreach (var T in noodeList)
         {
             float dis = CheckDistance(T, farmer);
-
 
             for (int i = 0; i < nodeTarget.Count; i++)
             {
