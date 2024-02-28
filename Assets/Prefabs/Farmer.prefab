@@ -293,7 +293,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.2, y: 2.2, z: 2.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 444796}
@@ -6330,6 +6330,7 @@ MonoBehaviour:
   time: 2
   lookAtSpeed: 0.2
   damage: 1
+  lifeTimeReduce: 5
   lookAtUnti: 0
   attackWithTime: 0
   attackTime: 0.8

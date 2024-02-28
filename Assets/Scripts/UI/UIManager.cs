@@ -192,7 +192,7 @@ public class UIManager : MonoBehaviour
     {
         if (!farmer) return;
         if (!farmer.nodetarget) return;
-        nodeTarget.text = $"Index : {farmer.nodetarget.Index}";
+        // nodeTarget.text = $"Index : {farmer.nodetarget.Index}";
     }
     public void UpdateCurrentState()
     {
