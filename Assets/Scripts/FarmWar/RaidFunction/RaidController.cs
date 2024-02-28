@@ -34,7 +34,7 @@ public class RaidController : MonoBehaviour
         }
         else
         {
-            raid = m_Spawner.Spawn(pos, m_RaidParent);
+            raid = m_Spawner.Spawn(pos, m_RaidParent.rotation, m_RaidParent);
             m_RaidList.Add(raid);
         }
 
@@ -51,7 +51,7 @@ public class RaidController : MonoBehaviour
     /// </summary>
     /// <param name="raid"></param>
     /// <returns></returns>
-    public bool CheckRaidPool(out Raid raid)
+    private bool CheckRaidPool(out Raid raid)
     {
         raid = null;
         if(m_RaidList.Count == 0) return false;
