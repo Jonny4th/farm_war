@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Speed of hp bar")]
     [SerializeField] private float speed = 300f;
+    [SerializeField] private float speedPanel = 300f;
 
     [Header("Test")]
     [SerializeField] private TextMeshProUGUI timeState;
@@ -162,7 +163,7 @@ public class UIManager : MonoBehaviour
     private IEnumerator IEPanelAlp(Image image, Action callback)
     {
         float persent = 0;
-        float time = 255 / speed * 2;
+        float time = 255 / speedPanel;
         float ontime = 0;
 
         while (persent < 1)
