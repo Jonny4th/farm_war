@@ -22,19 +22,31 @@ public class Raid : MonoBehaviour, IDamageable
     [SerializeField]
     private Animator m_Animator;
 
+
     private Raidable currentTarget;
+
+    private RaidController raidController;
+    public RaidController RaidControll { get { return raidController; } set { raidController = value; } }
 
     void OnEnable()
     {
         m_RemainLifeTime = m_LifeTime;
+        if (raidController != null) raidController.RaidActive++;
         StartCoroutine(UpdateLife());
     }
-
+    private void OnDisable()
+    {
+        if (raidController != null) raidController.RaidActive--;
+    }
+    public void StartSpaw()
+    {
+        raidController.RaidActive++;
+    }
     IEnumerator UpdateLife()
     {
         OnRaidStart?.Invoke(this);
 
-        while(m_RemainLifeTime > 0)
+        while (m_RemainLifeTime > 0)
         {
             m_RemainLifeTime -= Time.deltaTime;
             m_NormalizedTime.Value = (m_RemainLifeTime / m_LifeTime);
@@ -49,11 +61,12 @@ public class Raid : MonoBehaviour, IDamageable
     {
         target.AddToRaidList(this);
         currentTarget = target;
+        
     }
 
     public void OnAnimationOutDone() // Used by animation event
     {
-        if(currentTarget != null)
+        if (currentTarget != null)
         {
             currentTarget.RemoveFromRaidList(this);
             currentTarget = null;

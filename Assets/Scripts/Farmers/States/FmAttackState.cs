@@ -45,14 +45,14 @@ public class FmAttackState : StateFinder
       }
 
 
-      if (attackWithTime)
-      {
-        if (Time.time >= lastTime)
-        {
-          lastTime = (Time.time + attackTime);
-          Attack();
-        }
-      }
+      // if (attackWithTime)
+      // {
+      //   if (Time.time >= lastTime)
+      //   {
+      //     lastTime = (Time.time + attackTime);
+      //     Attack();
+      //   }
+      // }
     }
     else
     {

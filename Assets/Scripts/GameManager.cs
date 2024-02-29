@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     [Header("Game State")]
     [SerializeField] private GameState state = GameState.Action;
     public GameState State { get { return state; } }
-
+    
 
     [Space]
     [Header("Faction")]
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     public event Action WinerEven;
     public event Action ResetEven;
 
-    public RaidController raidController;
+    // public RaidController raidController;
     [SerializeField] private bool immortal;
     public bool Immortal { get { return immortal; } }
 
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             // StartState(GameState.Restart);
-            raidController.RandomSpawnOnGround();
+            // raidController.RandomSpawnOnGround();
         }
     }
 

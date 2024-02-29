@@ -1118,7 +1118,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -11.073395}
+  m_AnchoredPosition: {x: 0, y: -11.073425}
   m_SizeDelta: {x: 0, y: 18.863007}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6965628034795538906
@@ -1539,7 +1539,7 @@ Canvas:
   m_GameObject: {fileID: 7535966307939523506}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -1599,14 +1599,25 @@ MonoBehaviour:
     backgroundBar: {fileID: 0}
     curr: 0
     maxHp: 0
+    minSpeed: 0
+    speed: 400
   ememyUI:
     hpText: {fileID: 0}
     hpBar: {fileID: 1121624897316107930}
     backgroundBar: {fileID: 0}
     curr: 0
     maxHp: 0
-  point: {fileID: 8301892142757884873}
-  speed: 400
+    minSpeed: 0
+    speed: 400
+  coinUI:
+    hpText: {fileID: 8301892142757884873}
+    hpBar: {fileID: 0}
+    backgroundBar: {fileID: 0}
+    curr: 0
+    maxHp: 0
+    minSpeed: 10
+    speed: 300
+  speedPanelFace: 300
   timeState: {fileID: 0}
   nodeTarget: {fileID: 0}
   currState: {fileID: 0}
@@ -1651,7 +1662,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.2505625}
-  m_AnchoredPosition: {x: 0.005004883, y: 0.010009766}
+  m_AnchoredPosition: {x: 0.0048828125, y: 0.010253906}
   m_SizeDelta: {x: -0.01, y: -0.019897}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6126512018445264309
@@ -1832,7 +1843,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0.004760742, y: -12.887909}
+  m_AnchoredPosition: {x: 0.0048828125, y: -12.887878}
   m_SizeDelta: {x: -0.0094, y: -174.1803}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &4190944829445518673
@@ -2211,7 +2222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5391861551006668171, guid: b730078163fc192408f1ce7651b891a1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.010131836
+      value: 0.010253906
       objectReference: {fileID: 0}
     - target: {fileID: 5391861551006668171, guid: b730078163fc192408f1ce7651b891a1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2664,7 +2675,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4440686246357241027, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4440686246357241027, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -2672,11 +2683,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4440686246357241027, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RandomSpawnOnGround
+      value: AttackCommand
       objectReference: {fileID: 0}
     - target: {fileID: 4440686246357241027, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: RaidController, FarmWar.RaidFunction
+      value: PlayerFaction, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4440686246357241027, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4440686246357241027, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

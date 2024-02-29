@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 [System.Serializable]
 public class FmIdelState : StateBase
 {
+    
     public override void StartState()
     {
         base.StartState();

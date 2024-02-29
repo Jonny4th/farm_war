@@ -15,13 +15,19 @@ public class EmemyFaction : Faction<Farmer>
     {
         currentHp -= damage;
         // UIManager.instance.UpdateUi(this);
+        // Debug.Log("Hit");
         updateHp?.Invoke(this);
     }
     protected override void Start()
     {
         GameManager.instance.ResetEven += Reset;
-        foreach (var T in aliveUnit)
-            maxHp += T.MaxHp;
+        if (aliveUnit.Count == 0)
+        {
+            MaxHp = 0;
+            foreach (var T in aliveUnit)
+                maxHp += T.MaxHp;
+        }
+
         currentHp = maxHp;
         // Delay(() => UIManager.instance.UpdateUi(this), 1f);
         Delay(() => updateHp?.Invoke(this), 1f);

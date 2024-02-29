@@ -15,11 +15,11 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private UIPanel playerUI;
     [SerializeField] private UIPanel ememyUI;
-    [SerializeField] private TextMeshProUGUI point;
+    [SerializeField] private UIPanel coinUI;
 
     [Header("Speed of hp bar")]
-    [SerializeField] private float speed = 300f;
-    [SerializeField] private float speedPanel = 300f;
+    // [SerializeField] private float speed = 300f;
+    [SerializeField] private float speedPanelFace = 300f;
 
     [Header("Test")]
     [SerializeField] private TextMeshProUGUI timeState;
@@ -60,6 +60,7 @@ public class UIManager : MonoBehaviour
         state = gameManager.State;
 
         gameManager.PlayerFaction.UpdateHp += UpdateUiPlayer;
+        gameManager.PlayerFaction.UpdateCoin += UpdateCoin;
         gameManager.EmemyFaction.UpdateHp += UpdateUiEmemy;
     }
 
@@ -126,23 +127,38 @@ public class UIManager : MonoBehaviour
     {
         if (playerUI.em != null)
             StopCoroutine(playerUI.em);
-
-        playerUI.em = IEHPBarAnima(playerUI, playerUI.curr, player.Hp);
+        if (Mathf.Abs(playerUI.curr - player.Hp) >= 50)
+            playerUI.em = IEHPBarAnima(playerUI, playerUI.curr, player.Hp, playerUI.speed);
+        else
+            playerUI.em = IEHPBarAnima(playerUI, playerUI.curr, player.Hp, playerUI.minSpeed);
         StartCoroutine(playerUI.em);
+    }
+    public void UpdateCoin(PlayerFaction player)
+    {
+        if (coinUI.em != null)
+            StopCoroutine(coinUI.em);
+        if (Mathf.Abs(coinUI.curr - player.Coin) >= 50)
+            coinUI.em = IEHPBarAnima(coinUI, coinUI.curr, player.Coin, coinUI.speed);
+        else
+            coinUI.em = IEHPBarAnima(coinUI, coinUI.curr, player.Coin, coinUI.minSpeed);
+
+        StartCoroutine(coinUI.em);
     }
 
     public void UpdateUiEmemy(EmemyFaction ememy)
     {
         if (ememyUI.em != null)
             StopCoroutine(ememyUI.em);
-
-        ememyUI.em = IEHPBarAnima(ememyUI, ememyUI.curr, ememy.Hp);
+        if (Mathf.Abs(coinUI.curr - ememy.Hp) >= 50)
+            ememyUI.em = IEHPBarAnima(ememyUI, ememyUI.curr, ememy.Hp, ememyUI.speed);
+        else
+            ememyUI.em = IEHPBarAnima(ememyUI, ememyUI.curr, ememy.Hp, ememyUI.minSpeed);
         StartCoroutine(ememyUI.em);
     }
     #endregion
 
     #region  IEnumerator
-    private IEnumerator IEHPBarAnima(UIPanel panel, float curr, float target)
+    private IEnumerator IEHPBarAnima(UIPanel panel, float curr, float target, float speed)
     {
         float persent = 0;
         float time = Mathf.Abs(target - curr) / speed;
@@ -163,7 +179,7 @@ public class UIManager : MonoBehaviour
     private IEnumerator IEPanelAlp(Image image, Action callback)
     {
         float persent = 0;
-        float time = 255 / speedPanel;
+        float time = 255 / speedPanelFace;
         float ontime = 0;
 
         while (persent < 1)
