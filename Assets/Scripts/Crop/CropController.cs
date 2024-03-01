@@ -41,6 +41,7 @@ public class CropController : MonoBehaviour
             plant.transform.position = targetPlot.transform.position;
         }
 
+        plant.currentPlot = targetPlot;
         targetPlot.Crop = plant;
     }
 }

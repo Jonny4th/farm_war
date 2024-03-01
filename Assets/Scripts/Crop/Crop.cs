@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Crop : MonoBehaviour
 {
-    public bool CropIsReady { get; private set; }
+    public bool CropIsReady;
 
     [SerializeField]
     private GameObject cropContainer;
@@ -90,5 +90,8 @@ public class Crop : MonoBehaviour
         cropTimer = 0;
         particleIsPlay = false;
         CropIsReady = false;
+        foreach(var item in CropStateGameObjects)
+        { item.SetActive(false); }
+        CropStateGameObjects[0].SetActive(true);
     }
 }
