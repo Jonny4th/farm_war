@@ -35,6 +35,7 @@ public class FmAttackState : StateFinder
       farmer.PlayerAnimation(FarmerStrate.Attack);
     });
   }
+ 
   public override void LogiUpdate()
   {
     if (CheckUnitOnGround())

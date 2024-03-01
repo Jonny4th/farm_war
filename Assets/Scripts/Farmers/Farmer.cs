@@ -33,7 +33,8 @@ public class Farmer : MonoBehaviour
     public FmDieState dieState;
     public FmMoveToAttack moveToAttackState;
 
-
+    private Vector3 startPosition;
+    private Quaternion startRotation;
     [SerializeField] private string currentAnimation = "";
 
     [Space]
@@ -66,13 +67,21 @@ public class Farmer : MonoBehaviour
         dieState.Init(this, animator, GameManager.instance);
         moveToAttackState.Init(this, animator, GameManager.instance);
         // gameManager = GameManager.instance;
-        GameManager.instance.ResetEven += Reset;
+        GameManager.instance.ResetEven += ResetGame;
         GameManager.instance.GameOverEven += GameOver;
 
-        stateManager.Init(idelState);
+        SetSpawnPosition(transform);
 
+        stateManager.Init(idelState);
     }
 
+
+
+    public void SetSpawnPosition(Transform tranform)
+    {
+        startPosition = tranform.position;
+        startRotation = tranform.rotation;
+    }
 
     void Update()
     {
@@ -91,7 +100,7 @@ public class Farmer : MonoBehaviour
     {
         stateManager.CurrentState.FormOtherColl();
     }
-    
+
     private void StopAllAnimation()
     {
         animator.SetBool("IsIdel", false);
@@ -120,19 +129,27 @@ public class Farmer : MonoBehaviour
 
         }
     }
-    private void Reset()
+    private void SetUpGame()
     {
-        StopAllAnimation();
         stateManager.Init(idelState);
     }
-    private void GameOver()
+    private void ResetGame(GameManager gameManager)
+    {
+        StopAllAnimation();
+        currentHp = maxHp;
+        stateManager.Init(idelState);
+        nodetarget = null;
+        transform.position = startPosition;
+        transform.rotation = startRotation;
+    }
+    private void GameOver(GameManager gameManager)
     {
         StopAllAnimation();
     }
 
     private void OnDestroy()
     {
-        GameManager.instance.ResetEven -= Reset;
+        GameManager.instance.ResetEven -= ResetGame;
         GameManager.instance.GameOverEven -= GameOver;
     }
     public static implicit operator Vector3(Farmer farmer)

@@ -30,7 +30,7 @@ public class UIManager : MonoBehaviour
     private GameState state;
 
     public static UIManager instance;
-
+    private Color panelColor;
     void Awake()
     {
         if (instance != null && instance != this)
@@ -62,6 +62,9 @@ public class UIManager : MonoBehaviour
         gameManager.PlayerFaction.UpdateHp += UpdateUiPlayer;
         gameManager.PlayerFaction.UpdateCoin += UpdateCoin;
         gameManager.EmemyFaction.UpdateHp += UpdateUiEmemy;
+        gameManager.ResetEven += ResetGame;
+
+        panelColor = setUpPanel.GetComponent<Image>().color;
     }
 
     private void HideAllPanel()
@@ -70,6 +73,14 @@ public class UIManager : MonoBehaviour
         actionPanel.SetActive(false);
         winerPanel.SetActive(false);
         gameOverPanel.SetActive(false);
+    }
+    private void SetUpGame()
+    {
+
+    }
+    private void ResetGame(GameManager gameManager)
+    {
+
     }
 
     #region  State
@@ -91,6 +102,11 @@ public class UIManager : MonoBehaviour
             case GameState.Winer:
                 winerPanel.SetActive(true);
                 break;
+            case GameState.Restart:
+                setUpPanel.GetComponent<Image>().color = panelColor;
+
+                setUpPanel.SetActive(true);
+                break;
         }
     }
 
@@ -99,6 +115,7 @@ public class UIManager : MonoBehaviour
         switch (state)
         {
             case GameState.SetUp:
+
                 StartCoroutine(IEPanelAlp(setUpPanel.GetComponent<Image>(), () => setUpPanel.SetActive(false)));
                 break;
             case GameState.Action:

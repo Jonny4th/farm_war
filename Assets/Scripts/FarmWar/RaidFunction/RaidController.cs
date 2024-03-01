@@ -25,9 +25,6 @@ public class RaidController : MonoBehaviour
 
     public void RandomSpawnOnGround()
     {
-
-
-
         var raidables = Array.FindAll(TargetList, x => x.IsRaidable && !x.IsFullyOccupied);
         if (raidables.Length == 0) return;
 
@@ -67,5 +64,13 @@ public class RaidController : MonoBehaviour
         if (m_RaidList.Count == 0) return false;
         raid = m_RaidList.Find(x => !x.gameObject.activeSelf);
         return raid != null;
+    }
+    public void ClearAllRaidList()
+    {
+        foreach (var T in m_RaidList)
+        {
+            Destroy(T.gameObject);
+        }
+        m_RaidList.Clear();
     }
 }

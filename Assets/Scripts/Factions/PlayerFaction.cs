@@ -40,6 +40,7 @@ public class PlayerFaction : Faction<AnimalTest>
     public bool UnitOnGround { get { return CheckUnitOnGround(); } }
     public override void TakeDamage(float damage)
     {
+        if (GameManager.instance.State != GameState.Action) return;
         currentHp -= damage;
         // UIManager.instance.UpdateUi(this);
         updateHp?.Invoke(this);
@@ -52,12 +53,15 @@ public class PlayerFaction : Faction<AnimalTest>
         return raidCon.RaidActive > 0;
     }
 
+
+
+
     protected override void Start()
     {
 
         currentHp = maxHp;
         coin = startCoin;
-        GameManager.instance.ResetEven += Reset;
+        GameManager.instance.ResetEven += ResetGame;
         // Delay(() => UIManager.instance.UpdateUi(this), 1f);
         Delay(() =>
         {
@@ -78,8 +82,19 @@ public class PlayerFaction : Faction<AnimalTest>
             timerAttack = 0;
         }
     }
-    private void Reset()
+    private void ResetGame(GameManager gameManager)
     {
+        timerAttack = 0;
+        currentHp = maxHp;
+        coin = startCoin;
+        Delay(() =>
+      {
+          updateHp?.Invoke(this);
+          updateCoin?.Invoke(this);
+      }, 0.1f);
+
+        raidCon.ClearAllRaidList();
+        
         // currentHp = maxHp;
         // foreach (var T in aliveUnit)
         //     Destroy(T);
@@ -234,7 +249,7 @@ public class PlayerFaction : Faction<AnimalTest>
     }
     private void OnDestroy()
     {
-        GameManager.instance.ResetEven -= Reset;
+        GameManager.instance.ResetEven -= ResetGame;
     }
 
 }
