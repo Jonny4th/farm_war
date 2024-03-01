@@ -13,7 +13,7 @@ public class NodeManager : MonoBehaviour
 
     private void Start()
     {
-        GameManager.instance.ResetEven += Reset;
+        GameManager.instance.ResetEven += ResetGame;
         // SetNode();
     }
     // private void SetNode()
@@ -23,7 +23,7 @@ public class NodeManager : MonoBehaviour
     //         T.IsTakeMutiUnit = takeMutiUnit;
     //     }
     // }
-    private void Reset()
+    private void ResetGame(GameManager gameManager)
     {
         // foreach (var T in nodeCollcetion)
         // {
@@ -36,7 +36,7 @@ public class NodeManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameManager.instance.ResetEven -= Reset;
+        GameManager.instance.ResetEven -= ResetGame;
     }
 
 

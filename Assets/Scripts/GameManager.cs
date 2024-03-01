@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -36,12 +36,12 @@ public class GameManager : MonoBehaviour
     // [SerializeField] private bool isRatInArea = false;
     // public bool IsRatInArea { get { return isRatInArea; } set { isRatInArea = value; } }
     public event Action<GameManager> SetUpEven;
-    public event Action ActionEven;
-    public event Action GameOverEven;
-    public event Action WinerEven;
-    public event Action ResetEven;
+    public event Action<GameManager> ActionEven;
+    public event Action<GameManager> GameOverEven;
+    public event Action<GameManager> WinerEven;
+    public event Action<GameManager> ResetEven;
 
-    public RaidController raidController;
+    // public RaidController raidController;
     [SerializeField] private bool immortal;
     public bool Immortal { get { return immortal; } }
 
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         StartState(GameState.SetUp);
-        StartCoroutine(IEDelay(setUpTime));
+
     }
     private IEnumerator IEDelay(float time)
     {
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             // StartState(GameState.Restart);
-            raidController.RandomSpawnOnGround();
+            // raidController.RandomSpawnOnGround();
         }
     }
 
@@ -88,19 +88,21 @@ public class GameManager : MonoBehaviour
         {
             case GameState.SetUp:
                 SetUpEven?.Invoke(this);
+                StartCoroutine(IEDelay(setUpTime));
                 break;
             case GameState.Action:
-                ActionEven?.Invoke();
+                ActionEven?.Invoke(this);
                 break;
             case GameState.GameOver:
-                GameOverEven?.Invoke();
+                GameOverEven?.Invoke(this);
                 break;
             case GameState.Winer:
-                WinerEven?.Invoke();
+                WinerEven?.Invoke(this);
                 break;
             case GameState.Restart:
-                ResetEven?.Invoke();
-                StartState(GameState.Action);
+                ResetEven?.Invoke(this);
+                StartState(GameState.SetUp);
+                Debug.Log("Reset");
                 break;
 
         }
@@ -149,8 +151,21 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-
-
+    //use by ui btn
+    public void PlayAgainBTN()
+    {
+        // StartState(GameState.Restart);
+        SceneManager.LoadScene(0);
+    }
+    public void TryAgainBTN()
+    {
+        // StartState(GameState.Restart);
+        SceneManager.LoadScene(0);
+    }
+    public void QuaitAgain()
+    {
+        Application.Quit();
+    }
 
 
 

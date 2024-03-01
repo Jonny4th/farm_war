@@ -9,51 +9,101 @@ using UnityEngine.UIElements;
 public class PlayerFaction : Faction<AnimalTest>
 {
 
-    [SerializeField] private float coin;
+    [SerializeField] private float maxCoin;
+    public float MaxCoin { get { return maxCoin; } }
+    private float coin;
     public float Coin { get { return coin; } }
+    [SerializeField] private float startCoin = 1000;
 
-    [SerializeField] private List<AnimalTest> unitInGrouind = new List<AnimalTest>();
-    public List<AnimalTest> UnitInGrouind { get { return unitInGrouind; } }
+    // [SerializeField] private List<AnimalTest> unitInGrouind = new List<AnimalTest>();
+    // public List<AnimalTest> UnitInGrouind { get { return unitInGrouind; } }
+
     [SerializeField] private RaidController raidCon;
     public RaidController RaidCon { get { return raidCon; } }
     [SerializeField] private Transform groundParent;
+
+
+    [SerializeField] private float attackTime = 1;
     [SerializeField] private float damage = 1;
+    private float timerAttack = 0;
+
+    [SerializeField] private float timeSteal = 1;
+    [SerializeField] private float quantityCoin = 10;
+    private float timerSteal;
+
+
     private event Action<PlayerFaction> updateHp;
     public Action<PlayerFaction> UpdateHp { get { return updateHp; } set { updateHp = value; } }
+    private event Action<PlayerFaction> updateCoin;
+    public Action<PlayerFaction> UpdateCoin { get { return updateCoin; } set { updateCoin = value; } }
 
     public bool UnitOnGround { get { return CheckUnitOnGround(); } }
     public override void TakeDamage(float damage)
     {
+        if (GameManager.instance.State != GameState.Action) return;
         currentHp -= damage;
         // UIManager.instance.UpdateUi(this);
         updateHp?.Invoke(this);
+        // Debug.Log("FFFF");
     }
 
     private bool CheckUnitOnGround()
     {
-        return raidCon.RaidList.Find(x => x.gameObject.activeSelf);
+        // return raidCon.RaidList.Find(x => x.gameObject.activeSelf);
+        return raidCon.RaidActive > 0;
     }
+
+
+
 
     protected override void Start()
     {
 
         currentHp = maxHp;
-        GameManager.instance.ResetEven += Reset;
+        coin = startCoin;
+        GameManager.instance.ResetEven += ResetGame;
         // Delay(() => UIManager.instance.UpdateUi(this), 1f);
-        Delay(() => updateHp?.Invoke(this), 1f);
+        Delay(() =>
+        {
+            updateHp?.Invoke(this);
+            updateCoin?.Invoke(this);
+        }, 0.2f);
     }
-
-    private void Reset()
+    private void FixedUpdate()
     {
+        if (raidCon.RaidActive > 0)
+        {
+            AttackPlayer();
+            Steal();
+
+        }
+        else if (raidCon.RaidActive == 0 && timerAttack > 0)
+        {
+            timerAttack = 0;
+        }
+    }
+    private void ResetGame(GameManager gameManager)
+    {
+        timerAttack = 0;
         currentHp = maxHp;
-        foreach (var T in aliveUnit)
-            Destroy(T);
-        aliveUnit.Clear();
-        foreach (var T in unitInGrouind)
-            Destroy(T);
-        unitInGrouind.Clear();
-        // Delay(() => UIManager.instance.UpdateUi(this), 1f);
-        lastTime = 0;
+        coin = startCoin;
+        Delay(() =>
+      {
+          updateHp?.Invoke(this);
+          updateCoin?.Invoke(this);
+      }, 0.1f);
+
+        raidCon.ClearAllRaidList();
+        
+        // currentHp = maxHp;
+        // foreach (var T in aliveUnit)
+        //     Destroy(T);
+        // aliveUnit.Clear();
+        // foreach (var T in unitInGrouind)
+        //     Destroy(T);
+        // unitInGrouind.Clear();
+        // // Delay(() => UIManager.instance.UpdateUi(this), 1f);
+        // lastTime = 0;
     }
 
     public void Health(float hp)
@@ -62,56 +112,85 @@ public class PlayerFaction : Faction<AnimalTest>
         // UIManager.instance.UpdateUi(this);
     }
 
-    public bool HaveCoin(int coin)
+
+    private void AttackPlayer()
+    {
+        timerAttack += Time.fixedDeltaTime;
+        if (timerAttack >= attackTime)
+        {
+            timerAttack = 0;
+            GameManager.instance.EmemyFaction.TakeDamage(damage * raidCon.RaidActive);
+        }
+
+    }
+    private void Steal()
+    {
+        timerSteal += Time.deltaTime;
+        if (timerSteal >= timeSteal)
+        {
+            timerSteal = 0;
+            AddCoin(quantityCoin * raidCon.RaidActive);
+        }
+    }
+
+    public bool HaveCoin(float coin)
     {
         if (this.coin - coin <= 0)
             return false;
         else
             return true;
     }
-    public void AddCoin(int coin)
+    public void AddCoin(float coin)
     {
         this.coin += coin;
+        if (this.coin > maxCoin)
+            this.coin = maxCoin;
+        updateCoin?.Invoke(this);
     }
-    public void ReducCoin(int coid)
+    public void ReducCoin(float coin)
     {
         this.coin -= coin;
+        updateCoin?.Invoke(this);
     }
 
 
+    // private void Update()
+    // {
+    //     if (CheckUnitOnGround())
+    //     {
+
+    //     }
 
 
 
 
 
 
-    [SerializeField] private float attackTime = 0.5f;
-    private float lastTime = 0;
-    private void Update()
-    {
-        // if (UnitInGrouind.Count > 0)
-        // {
-        //     if (Time.time - lastTime > attackTime)
-        //     {
-        //         lastTime = Time.time;
-        //         GameManager.instance.EmemyFaction.TakeDamage(damage * UnitInGrouind.Count);
-        //     }
-        // }
 
-        // if (Input.GetKeyDown(KeyCode.Q))
-        // {
-        //     GameObject Obj = new GameObject("Animal", typeof(AnimalTest));
-        //     aliveUnit.Add(Obj.GetComponent<AnimalTest>());
-        //     Obj.transform.parent = UnitParent;
-        // }
-        // if (Input.GetKeyDown(KeyCode.W))
-        // {
-        //     foreach (var T in aliveUnit.ToArray())
-        //     {
-        //         SentUnitOnGround();
-        //     }
-        // }
-    }
+
+    // if (UnitInGrouind.Count > 0)
+    // {
+    //     if (Time.time - lastTime > attackTime)
+    //     {
+    //         lastTime = Time.time;
+    //         GameManager.instance.EmemyFaction.TakeDamage(damage * UnitInGrouind.Count);
+    //     }
+    // }
+
+    // if (Input.GetKeyDown(KeyCode.Q))
+    // {
+    //     GameObject Obj = new GameObject("Animal", typeof(AnimalTest));
+    //     aliveUnit.Add(Obj.GetComponent<AnimalTest>());
+    //     Obj.transform.parent = UnitParent;
+    // }
+    // if (Input.GetKeyDown(KeyCode.W))
+    // {
+    //     foreach (var T in aliveUnit.ToArray())
+    //     {
+    //         SentUnitOnGround();
+    //     }
+    // }
+    // }
 
     public void SentUnitOnGround()
     {
@@ -127,10 +206,41 @@ public class PlayerFaction : Faction<AnimalTest>
         // node.Animas.Add(animalTest);
     }
 
+
+    public void AttackCommand(float coin) // use by ui btn
+    {
+        if (!HaveCoin(coin)) return;
+        raidCon.RandomSpawnOnGround();
+        ReducCoin(coin);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public void AnimalDie(AnimalTest animalTest)
     {
-        unitInGrouind.Remove(animalTest);
-        animalTest.NodeTarget.RemoveAnimal(animalTest);
+        // unitInGrouind.Remove(animalTest);
+        // animalTest.NodeTarget.RemoveAnimal(animalTest);
     }
 
     public Node RandomNode()
@@ -139,7 +249,7 @@ public class PlayerFaction : Faction<AnimalTest>
     }
     private void OnDestroy()
     {
-        GameManager.instance.ResetEven -= Reset;
+        GameManager.instance.ResetEven -= ResetGame;
     }
 
 }

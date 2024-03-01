@@ -10,7 +10,9 @@ public class UIPanel
     public Image backgroundBar;
     public float curr = 0;
     public float maxHp = 0;
-    public string HpString { get { return $"{(int)curr}/{(int)maxHp}"; } }
+    public string HpString { get { return $"{(int)curr}"; } }
     public float persentHp { get { return curr / maxHp; } }
+    public float minSpeed;
+    public float speed;
     public IEnumerator em;
 }

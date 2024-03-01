@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class Faction<T> : MonoBehaviour
@@ -8,7 +9,7 @@ public abstract class Faction<T> : MonoBehaviour
     [SerializeField] protected List<T> aliveUnit = new List<T>();
     public List<T> AliveUnit { get { return aliveUnit; } }
     [SerializeField] protected float maxHp = 100;
-    public float MaxHp { get { return maxHp; } }
+    public float MaxHp { get { return maxHp; } set { maxHp = value; } }
     [SerializeField] private protected float currentHp;
     public float Hp { get { return (int)currentHp; } }
 

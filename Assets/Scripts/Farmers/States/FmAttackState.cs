@@ -35,6 +35,7 @@ public class FmAttackState : StateFinder
       farmer.PlayerAnimation(FarmerStrate.Attack);
     });
   }
+ 
   public override void LogiUpdate()
   {
     if (CheckUnitOnGround())
@@ -45,14 +46,14 @@ public class FmAttackState : StateFinder
       }
 
 
-      if (attackWithTime)
-      {
-        if (Time.time >= lastTime)
-        {
-          lastTime = (Time.time + attackTime);
-          Attack();
-        }
-      }
+      // if (attackWithTime)
+      // {
+      //   if (Time.time >= lastTime)
+      //   {
+      //     lastTime = (Time.time + attackTime);
+      //     Attack();
+      //   }
+      // }
     }
     else
     {

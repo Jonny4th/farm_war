@@ -8,7 +8,7 @@ public class FmDigState : StateBase
 {
 
   [SerializeField] private bool finishAnimationToSwicthState;
-
+  
   private bool canDig;
   public override void StartState()
   {

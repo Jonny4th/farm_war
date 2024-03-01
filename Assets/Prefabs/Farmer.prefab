@@ -393,7 +393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf95bae79b53f024abcf072fcd2dc874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
+  maxHp: 200
   idelState: {fileID: 3071198041871890867}
   moveState: {fileID: 333076684761498311}
   digState: {fileID: 7092383710086196635}
