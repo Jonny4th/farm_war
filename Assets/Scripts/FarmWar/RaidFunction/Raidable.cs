@@ -13,9 +13,20 @@ public class Raidable : MonoBehaviour
 
     [SerializeField]
     private bool m_IsRaidable;
-    public bool IsRaidable => m_IsRaidable; 
+    public bool IsRaidable => plantable.Crop == null ? false : plantable.Crop.CropIsReady;
 
     public bool IsFullyOccupied => m_RaidList.Count >= m_RaidLimit;
+
+    public Plantable plantable;
+
+
+
+
+    private void Awake()
+    {
+        plantable = GetComponent<Plantable>();
+    }
+
 
     public void SetRaidable(bool isRaidable)
     {
@@ -24,10 +35,10 @@ public class Raidable : MonoBehaviour
 
     public void AddToRaidList(Raid raid)
     {
-        if(!IsRaidable) return;
-        if(m_RaidList.Contains(raid))
+        if (!IsRaidable) return;
+        if (m_RaidList.Contains(raid))
         {
-            Debug.Log("Raid already in list"); 
+            Debug.Log("Raid already in list");
             return;
         }
 
@@ -36,6 +47,6 @@ public class Raidable : MonoBehaviour
 
     public void RemoveFromRaidList(Raid raid)
     {
-        if(m_RaidList.Contains(raid)) m_RaidList.Remove(raid);
+        if (m_RaidList.Contains(raid)) m_RaidList.Remove(raid);
     }
 }

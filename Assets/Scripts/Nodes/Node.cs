@@ -14,6 +14,8 @@ public class Node : MonoBehaviour
     [SerializeField] private List<Farmer> farmers;
     public List<Farmer> Farmers { get { return farmers; } }
 
+    public Plantable plantable;
+
 
 
 
@@ -22,6 +24,7 @@ public class Node : MonoBehaviour
     private void Awake()
     {
         if (raidable == null) raidable = GetComponent<Raidable>();
+        plantable = GetComponent<Plantable>();
     }
 
     public void RemoveAnimal(AnimalTest Raid)

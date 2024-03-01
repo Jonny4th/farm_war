@@ -78,9 +78,10 @@ public class Crop : MonoBehaviour
         var move = transform.DOMove(transform.position + cropJump * Vector3.up, cropJumpDuration);
         move.onComplete += () =>
         {
-            Reset();
-            gameObject.SetActive(false);
+            // Reset();
+            // gameObject.SetActive(false);
             currentPlot.Crop = null;
+            Destroy(this.gameObject);
         };
         Instantiate(particle, gameObject.transform.position, Quaternion.identity);
     }
@@ -90,7 +91,7 @@ public class Crop : MonoBehaviour
         cropTimer = 0;
         particleIsPlay = false;
         CropIsReady = false;
-        foreach(var item in CropStateGameObjects)
+        foreach (var item in CropStateGameObjects)
         { item.SetActive(false); }
         CropStateGameObjects[0].SetActive(true);
     }
