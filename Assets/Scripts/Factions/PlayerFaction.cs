@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
-using UnityEngine.UIElements;
+using UnityEngine;
 
 
 
-public class PlayerFaction : Faction<AnimalTest>
+public class PlayerFaction : Faction<Raid>
 {
 
     [SerializeField] private float maxCoin;
@@ -94,7 +91,7 @@ public class PlayerFaction : Faction<AnimalTest>
       }, 0.1f);
 
         raidCon.ClearAllRaidList();
-        
+
         // currentHp = maxHp;
         // foreach (var T in aliveUnit)
         //     Destroy(T);
@@ -206,36 +203,14 @@ public class PlayerFaction : Faction<AnimalTest>
         // node.Animas.Add(animalTest);
     }
 
-
     public void AttackCommand(float coin) // use by ui btn
     {
-        if (!HaveCoin(coin)) return;
-        raidCon.RandomSpawnOnGround();
+        if (!HaveCoin(coin)) return; // not enough coin.
+        if (!raidCon.RandomSpawnOnGround(out var raid)) return; // no fully grown veggies.
+        aliveUnit.Add(raid);
+        raid.OnRaidCompleted.AddListener((r) => aliveUnit.Remove(r));
         ReducCoin(coin);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public void AnimalDie(AnimalTest animalTest)
     {
@@ -247,6 +222,7 @@ public class PlayerFaction : Faction<AnimalTest>
     {
         return GameManager.instance.NodeMana.nodeCollcetion[UnityEngine.Random.Range(0, GameManager.instance.NodeMana)];
     }
+
     private void OnDestroy()
     {
         GameManager.instance.ResetEven -= ResetGame;

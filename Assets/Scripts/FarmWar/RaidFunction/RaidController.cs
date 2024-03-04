@@ -19,18 +19,21 @@ public class RaidController : MonoBehaviour
     [SerializeField]
     private Transform m_RaidParent;
     private int raidActive;
+
     public int RaidActive { get { return raidActive; } set { raidActive = value; } }
 
+    public event Action<Raid> OnRaidCompleted;
 
-    public void RandomSpawnOnGround()
+    public bool RandomSpawnOnGround(out Raid raid)
     {
+        raid = null;
         var raidables = Array.FindAll(TargetList, x => x.IsRaidable && !x.IsFullyOccupied);
-        if (raidables.Length == 0) return;
+        if (raidables.Length == 0) return false;
 
         var target = raidables[Random.Range(0, raidables.Length)];
         var pos = target.transform.position;
 
-        if (CheckRaidPool(out var raid))
+        if (CheckRaidPool(out raid))
         {
             raid.transform.position = pos;
             raid.gameObject.SetActive(true);
@@ -46,10 +49,13 @@ public class RaidController : MonoBehaviour
 
         raid.OnRaidCompleted.AddListener(RaidCompleteHandler);
         raid.SetRaidTarget(target);
+
+        return true;
     }
 
     private void RaidCompleteHandler(Raid raid)
     {
+        OnRaidCompleted?.Invoke(raid);
     }
 
     /// <summary>
