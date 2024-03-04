@@ -70,7 +70,7 @@ public class Crop : MonoBehaviour
 
     private void CropPartical()
     {
-        Instantiate(particle, gameObject.transform.position, Quaternion.identity);
+        Instantiate(particle, gameObject.transform.position, Quaternion.Euler(-90f, 0f, 0f));
     }
 
     public void CropStealing()
