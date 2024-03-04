@@ -45,6 +45,7 @@ public class Farmer : MonoBehaviour
 
 
     public Node nodetarget;
+    public CropController cropController;
 
     // public Raidable raidable;
 

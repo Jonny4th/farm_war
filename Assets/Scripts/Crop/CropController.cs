@@ -28,19 +28,24 @@ public class CropController : MonoBehaviour
 
     public void Spawn(Plantable targetPlot)
     {
-        var plant = m_Pool.Find(x => !x.gameObject.activeSelf);
+        // var plant = m_Pool.Find(x => !x.gameObject.activeSelf);
 
-        if (plant == null)
-        {
-            plant = Instantiate(CropPrefab, targetPlot.transform.position, targetPlot.transform.rotation, m_Container);
-            m_Pool.Add(plant);
-        }
-        else
-        {
-            plant.gameObject.SetActive(true);
-            plant.transform.position = targetPlot.transform.position;
-        }
+        // if (plant == null)
+        // {
+        //     plant = Instantiate(CropPrefab, targetPlot.transform.position, targetPlot.transform.rotation, m_Container);
+        //     m_Pool.Add(plant);
+        // }
+        // else
+        // {
+        //     plant.gameObject.SetActive(true);
+        //     plant.transform.position = targetPlot.transform.position;
+        // }
 
+        // plant.currentPlot = targetPlot;
+        // targetPlot.Crop = plant;
+
+        var plant = Instantiate(CropPrefab, targetPlot.transform.position, targetPlot.transform.rotation, m_Container);
+        plant.currentPlot = targetPlot;
         targetPlot.Crop = plant;
     }
 }

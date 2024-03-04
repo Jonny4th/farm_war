@@ -47,11 +47,11 @@ public class FmMoveState : StateFinder
                     swichState.SwitchState(farmer.attackState);
                 else
                 {
-                    int ran = Random.Range(1, 10);
-                    if (ran % 2 != 0)
-                        swichState.SwitchState(farmer.digState);
-                    else
-                        swichState.SwitchState(farmer.idelState);
+                    // int ran = Random.Range(1, 10);
+                    // if (ran % 2 != 0)
+                    swichState.SwitchState(farmer.digState);
+                    // else
+                    //     swichState.SwitchState(farmer.idelState);
                 }
             }
 

@@ -8,7 +8,7 @@ public class FmDigState : StateBase
 {
 
   [SerializeField] private bool finishAnimationToSwicthState;
-  
+
   private bool canDig;
   public override void StartState()
   {
@@ -19,6 +19,7 @@ public class FmDigState : StateBase
     LookAt(farmer, RotaAngle(farmer.nodetarget), lookAtSpeed, () =>
     {
       farmer.PlayerAnimation(FarmerStrate.Dig);
+      farmer.cropController.Spawn(farmer.nodetarget.plantable);
       canDig = true;
     });
 

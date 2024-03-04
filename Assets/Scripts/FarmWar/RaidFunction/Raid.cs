@@ -56,12 +56,16 @@ public class Raid : MonoBehaviour, IDamageable
         OnRaidCompleted?.Invoke(this);
         m_Animator.SetTrigger("Done");
     }
+    public void StealCrop()
+    {
+        currentTarget.plantable.Crop.CropStealing();
+    }
 
     public void SetRaidTarget(Raidable target)
     {
         target.AddToRaidList(this);
         currentTarget = target;
-        
+
     }
 
     public void OnAnimationOutDone() // Used by animation event

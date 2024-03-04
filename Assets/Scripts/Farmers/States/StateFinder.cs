@@ -17,7 +17,9 @@ public class StateFinder : StateBase
     }
     protected Node RandomNode()
     {
-        return manager.NodeMana.nodeCollcetion[Random.Range(0, manager.NodeMana)];
+        var n = manager.NodeMana.nodeCollcetion.FindAll(x => x.plantable.Crop == null);
+        return n[Random.Range(0, n.Count)];
+        // return manager.NodeMana.nodeCollcetion[Random.Range(0, manager.NodeMana)];
     }
 
     protected List<Node> FindNodeObj(List<Node> noodeList, int count = 2)
