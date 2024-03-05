@@ -178,6 +178,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 119.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2145149267747987313, guid: 46e051b3b7fd4564aae9c3650121d89b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2145149267747987313, guid: 46e051b3b7fd4564aae9c3650121d89b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3588496997076102592, guid: 46e051b3b7fd4564aae9c3650121d89b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -248,7 +256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3885754519098769481, guid: 46e051b3b7fd4564aae9c3650121d89b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 24.862
       objectReference: {fileID: 0}
     - target: {fileID: 3885754519098769481, guid: 46e051b3b7fd4564aae9c3650121d89b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -284,7 +292,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3885754519098769481, guid: 46e051b3b7fd4564aae9c3650121d89b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 12.43103
       objectReference: {fileID: 0}
     - target: {fileID: 3885754519098769481, guid: 46e051b3b7fd4564aae9c3650121d89b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -365,6 +373,14 @@ PrefabInstance:
     - target: {fileID: 8405055778575626528, guid: 46e051b3b7fd4564aae9c3650121d89b, type: 3}
       propertyPath: m_Name
       value: Footer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8593208043393984023, guid: 46e051b3b7fd4564aae9c3650121d89b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8593208043393984023, guid: 46e051b3b7fd4564aae9c3650121d89b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8961002515780759382, guid: 46e051b3b7fd4564aae9c3650121d89b, type: 3}
       propertyPath: m_IgnoreReversedGraphics
