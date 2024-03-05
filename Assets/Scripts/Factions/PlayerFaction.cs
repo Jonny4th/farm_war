@@ -124,7 +124,6 @@ public class PlayerFaction : Faction<Raid>
 
     public bool HaveCoin(float coin)
     {
-        Debug.Log($"{m_coin}/{coin}");
         return m_coin >= coin;
     }
     
