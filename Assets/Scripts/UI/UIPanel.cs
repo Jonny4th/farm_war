@@ -1,11 +1,13 @@
 using System.Collections;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 
 [System.Serializable]
 public class UIPanel
 {
     public TextMeshProUGUI hpText;
+
     public Image hpBar;
     public Image backgroundBar;
     public float curr = 0;
@@ -16,3 +18,4 @@ public class UIPanel
     public float speed;
     public IEnumerator em;
 }
+
