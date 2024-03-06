@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4234212276187227455}
   - component: {fileID: 4036427689845253846}
   m_Layer: 0
-  m_Name: PlantReadyParitcle_Test
+  m_Name: ReadyParitcle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
