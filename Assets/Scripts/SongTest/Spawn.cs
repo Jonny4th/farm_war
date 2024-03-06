@@ -13,7 +13,7 @@ public class Spawn : MonoBehaviour
     private void Animal()
     {
         GameObject Obj = new GameObject("Animal", typeof(AnimalTest));
-        GameManager.instance.PlayerFaction.AliveUnit.Add(Obj.GetComponent<AnimalTest>());
+        //GameManager.instance.PlayerFaction.AliveUnit.Add(Obj.GetComponent<AnimalTest>());
     }
     private void Ememy()
     {
