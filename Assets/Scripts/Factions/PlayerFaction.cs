@@ -36,6 +36,10 @@ public class PlayerFaction : Faction<AnimalTest>
     public Action<PlayerFaction> UpdateHp { get { return updateHp; } set { updateHp = value; } }
     private event Action<PlayerFaction> updateCoin;
     public Action<PlayerFaction> UpdateCoin { get { return updateCoin; } set { updateCoin = value; } }
+    private Action attackEven;
+    public Action AttackEven { get { return attackEven; } set { attackEven = value; } }
+    private Action healingEven;
+    public Action HealingEven { get { return healingEven; } set { healingEven = value; } }
 
     public bool UnitOnGround { get { return CheckUnitOnGround(); } }
     public override void TakeDamage(float damage)
@@ -44,6 +48,7 @@ public class PlayerFaction : Faction<AnimalTest>
         currentHp -= damage;
         // UIManager.instance.UpdateUi(this);
         updateHp?.Invoke(this);
+        attackEven?.Invoke();
         // Debug.Log("FFFF");
     }
 
@@ -108,8 +113,13 @@ public class PlayerFaction : Faction<AnimalTest>
 
     public void Health(float hp)
     {
-        currentHp += hp;
+        if (currentHp + hp > maxHp)
+            currentHp = maxHp;
+        else
+            currentHp += hp;
+        healingEven?.Invoke();
         // UIManager.instance.UpdateUi(this);
+
     }
 
 
