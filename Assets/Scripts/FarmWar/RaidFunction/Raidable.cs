@@ -47,6 +47,7 @@ public class Raidable : MonoBehaviour
 
     public void RemoveFromRaidList(Raid raid)
     {
+        raid.OnRaidCompleted.RemoveListener(CurrentRaidCompleteHandler);
         if (m_RaidList.Contains(raid)) m_RaidList.Remove(raid);
     }
 }

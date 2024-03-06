@@ -24,7 +24,7 @@ public class Node : MonoBehaviour
         if (raidable == null) raidable = GetComponent<Raidable>();
         Shield.OnShieldBreak += ShieldBreakHandler;
         plantable.OnCropReady += CropReadyHandler;
-        plantable.OnCropGone += CropGoneHandler;
+        plantable.OnCropStolen += CropGoneHandler;
         raidable.OnRaidEnd += RaidEndHandler;
     }
 

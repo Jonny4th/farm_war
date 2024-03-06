@@ -28,8 +28,6 @@ public class Crop : MonoBehaviour
     [SerializeField]
     private Vector3 scale;
 
-    public Plantable currentPlot;
-
     private int cropCurrentState;
     private int totalState;
     private float cropTimer;
@@ -37,7 +35,7 @@ public class Crop : MonoBehaviour
 
  
     public event Action<Crop> OnCropReady;
-    public event Action<Crop> OnCropGone;
+    public event Action<Crop> OnCropStolen;
 
     private void Awake()
     {
@@ -103,7 +101,7 @@ public class Crop : MonoBehaviour
         {
             // Reset();
             // gameObject.SetActive(false);
-            OnCropGone?.Invoke(this);
+            OnCropStolen?.Invoke(this);
             Destroy(gameObject);
         };
 

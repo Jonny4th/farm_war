@@ -9,18 +9,18 @@ public class Plantable : MonoBehaviour
     public bool IsCropReady => Crop != null && Crop.IsReady;
 
     public event Action<Crop, Plantable> OnCropReady;
-    public event Action<Plantable> OnCropGone;
+    public event Action<Plantable> OnCropStolen;
 
     public void AssignCrop(Crop crop)
     {
         Crop = crop;
         Crop.OnCropReady += CropReadyHandler;
-        Crop.OnCropGone += CropGoneHandler;
+        Crop.OnCropStolen += CropStolenHandler;
     }
 
-    private void CropGoneHandler(Crop crop)
+    private void CropStolenHandler(Crop crop)
     {
-        OnCropGone?.Invoke(this);
+        OnCropStolen?.Invoke(this);
         Crop = null;
     }
 
