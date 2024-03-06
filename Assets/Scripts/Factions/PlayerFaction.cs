@@ -94,7 +94,7 @@ public class PlayerFaction : Faction<AnimalTest>
       }, 0.1f);
 
         raidCon.ClearAllRaidList();
-        
+
         // currentHp = maxHp;
         // foreach (var T in aliveUnit)
         //     Destroy(T);
@@ -210,8 +210,10 @@ public class PlayerFaction : Faction<AnimalTest>
     public void AttackCommand(float coin) // use by ui btn
     {
         if (!HaveCoin(coin)) return;
-        raidCon.RandomSpawnOnGround();
-        ReducCoin(coin);
+
+        // raidCon.RandomSpawnOnGround();
+        if (raidCon.RandomSpawnOnGround())
+            ReducCoin(coin);
     }
 
 

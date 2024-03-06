@@ -22,10 +22,35 @@ public class RaidController : MonoBehaviour
     public int RaidActive { get { return raidActive; } set { raidActive = value; } }
 
 
-    public void RandomSpawnOnGround()
+    // public void RandomSpawnOnGround()
+    // {
+    //     var raidables = Array.FindAll(TargetList, x => x.IsRaidable && !x.IsFullyOccupied);
+    //     if (raidables.Length == 0) return;
+
+    //     var target = raidables[Random.Range(0, raidables.Length)];
+    //     var pos = target.transform.position;
+
+    //     if (CheckRaidPool(out var raid))
+    //     {
+    //         raid.transform.position = pos;
+    //         raid.gameObject.SetActive(true);
+    //     }
+    //     else
+    //     {
+    //         // raid = m_Spawner.Spawn(pos, m_RaidParent.rotation, m_RaidParent);
+    //         raid = m_Spawner.Spawn(pos, Quaternion.Euler(0, 180, 0), m_RaidParent);
+    //         raid.RaidControll = this;
+    //         raid.StartSpaw();
+    //         m_RaidList.Add(raid);
+    //     }
+
+    //     raid.OnRaidCompleted.AddListener(RaidCompleteHandler);
+    //     raid.SetRaidTarget(target);
+    // }
+    public bool RandomSpawnOnGround()
     {
         var raidables = Array.FindAll(TargetList, x => x.IsRaidable && !x.IsFullyOccupied);
-        if (raidables.Length == 0) return;
+        if (raidables.Length == 0) return false;
 
         var target = raidables[Random.Range(0, raidables.Length)];
         var pos = target.transform.position;
@@ -46,6 +71,7 @@ public class RaidController : MonoBehaviour
 
         raid.OnRaidCompleted.AddListener(RaidCompleteHandler);
         raid.SetRaidTarget(target);
+        return true;
     }
 
     private void RaidCompleteHandler(Raid raid)

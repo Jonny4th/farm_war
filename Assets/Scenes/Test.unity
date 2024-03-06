@@ -2323,8 +2323,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1320037968}
     - target: {fileID: 7924741603645910942, guid: 458447718231bfe42a19448f26311170, type: 3}
+      propertyPath: coinUI.speed
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924741603645910942, guid: 458447718231bfe42a19448f26311170, type: 3}
       propertyPath: coinUI.minSpeed
-      value: 100
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 7924741603645910942, guid: 458447718231bfe42a19448f26311170, type: 3}
       propertyPath: ememyUI.minSpeed
