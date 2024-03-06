@@ -1,19 +1,14 @@
 using System;
 using UnityEngine;
 
-
-
 public class PlayerFaction : Faction<Raid>
 {
 
     [SerializeField] private float maxCoin;
     public float MaxCoin { get { return maxCoin; } }
-    private float coin;
-    public float Coin { get { return coin; } }
+    private float m_coin;
+    public float Coin { get { return m_coin; } }
     [SerializeField] private float startCoin = 1000;
-
-    // [SerializeField] private List<AnimalTest> unitInGrouind = new List<AnimalTest>();
-    // public List<AnimalTest> UnitInGrouind { get { return unitInGrouind; } }
 
     [SerializeField] private RaidController raidCon;
     public RaidController RaidCon { get { return raidCon; } }
@@ -50,14 +45,11 @@ public class PlayerFaction : Faction<Raid>
         return raidCon.RaidActive > 0;
     }
 
-
-
-
     protected override void Start()
     {
 
         currentHp = maxHp;
-        coin = startCoin;
+        m_coin = startCoin;
         GameManager.instance.ResetEven += ResetGame;
         // Delay(() => UIManager.instance.UpdateUi(this), 1f);
         Delay(() =>
@@ -83,7 +75,7 @@ public class PlayerFaction : Faction<Raid>
     {
         timerAttack = 0;
         currentHp = maxHp;
-        coin = startCoin;
+        m_coin = startCoin;
         Delay(() =>
       {
           updateHp?.Invoke(this);
@@ -132,95 +124,36 @@ public class PlayerFaction : Faction<Raid>
 
     public bool HaveCoin(float coin)
     {
-        if (this.coin - coin <= 0)
-            return false;
-        else
-            return true;
+        return m_coin >= coin;
     }
+    
     public void AddCoin(float coin)
     {
-        this.coin += coin;
-        if (this.coin > maxCoin)
-            this.coin = maxCoin;
-        updateCoin?.Invoke(this);
-    }
-    public void ReducCoin(float coin)
-    {
-        this.coin -= coin;
+        m_coin += coin;
+        if (m_coin > maxCoin)
+            m_coin = maxCoin;
         updateCoin?.Invoke(this);
     }
 
-
-    // private void Update()
-    // {
-    //     if (CheckUnitOnGround())
-    //     {
-
-    //     }
-
-
-
-
-
-
-
-
-    // if (UnitInGrouind.Count > 0)
-    // {
-    //     if (Time.time - lastTime > attackTime)
-    //     {
-    //         lastTime = Time.time;
-    //         GameManager.instance.EmemyFaction.TakeDamage(damage * UnitInGrouind.Count);
-    //     }
-    // }
-
-    // if (Input.GetKeyDown(KeyCode.Q))
-    // {
-    //     GameObject Obj = new GameObject("Animal", typeof(AnimalTest));
-    //     aliveUnit.Add(Obj.GetComponent<AnimalTest>());
-    //     Obj.transform.parent = UnitParent;
-    // }
-    // if (Input.GetKeyDown(KeyCode.W))
-    // {
-    //     foreach (var T in aliveUnit.ToArray())
-    //     {
-    //         SentUnitOnGround();
-    //     }
-    // }
-    // }
-
-    public void SentUnitOnGround()
+    public void ReduceCoin(float coin)
     {
-        // if (aliveUnit.Count <= 0) return;
-        // Node node = RandomNode();
-        // AnimalTest animalTest = aliveUnit[0];
-        // unitInGrouind.Add(animalTest);
-        // aliveUnit.Remove(animalTest);
-
-        // animalTest.transform.parent = groundParent;
-
-        // animalTest.NodeTarget = node;
-        // node.Animas.Add(animalTest);
+        m_coin -= coin;
+        updateCoin?.Invoke(this);
     }
 
-    public void AttackCommand(float coin) // use by ui btn
+    public void AttackCommand() // use by ui btn
     {
-        if (!HaveCoin(coin)) return; // not enough coin.
-        if (!raidCon.RandomSpawnOnGround(out var raid)) return; // no fully grown veggies.
+        if (!HaveCoin(raidCon.Cost)) return; // not enough coin.
+        if (!raidCon.IsReady) return; // no fully grown veggies.
+        ReduceCoin(raidCon.Cost);
+
+        var raid = raidCon.RandomSpawnOnGround();
         aliveUnit.Add(raid);
         raid.OnRaidCompleted.AddListener((r) => aliveUnit.Remove(r));
-        ReducCoin(coin);
     }
 
     public void AnimalDie(AnimalTest animalTest)
     {
-        // unitInGrouind.Remove(animalTest);
-        // animalTest.NodeTarget.RemoveAnimal(animalTest);
-    }
-
-    public Node RandomNode()
-    {
-        return GameManager.instance.NodeMana.nodeCollcetion[UnityEngine.Random.Range(0, GameManager.instance.NodeMana)];
     }
 
     private void OnDestroy()

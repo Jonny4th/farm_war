@@ -2,8 +2,9 @@
     "name": "FarmWar.RaidFunction",
     "rootNamespace": "",
     "references": [
-        "GUID:5d9131b1b5a8a31439050ae2e4b89b14",
-        "GUID:90830f735b6b062478363d7502991897"
+        "GUID:ee304daa643ba8d46aa0e52c98c0aa4a",
+        "GUID:90830f735b6b062478363d7502991897",
+        "GUID:5d9131b1b5a8a31439050ae2e4b89b14"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

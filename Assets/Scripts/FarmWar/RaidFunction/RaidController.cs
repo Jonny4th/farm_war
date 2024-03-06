@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class RaidController : MonoBehaviour
+public class RaidController : MonoBehaviour, IAbility
 {
     [SerializeField]
     private Raidable[] m_TargetList;
@@ -22,26 +22,30 @@ public class RaidController : MonoBehaviour
 
     public int RaidActive { get { return raidActive; } set { raidActive = value; } }
 
+    [SerializeField]
+    private FloatReference m_Cost;
+    public int Cost { get => (int)m_Cost; }
+
+    public bool IsReady { get => Array.Exists(TargetList, x => x.IsRaidable && !x.IsFullyOccupied); }
+
     public event Action<Raid> OnRaidCompleted;
 
-    public bool RandomSpawnOnGround(out Raid raid)
+    public Raid RandomSpawnOnGround()
     {
-        raid = null;
         var raidables = Array.FindAll(TargetList, x => x.IsRaidable && !x.IsFullyOccupied);
-        if (raidables.Length == 0) return false;
 
         var target = raidables[Random.Range(0, raidables.Length)];
         var pos = target.transform.position;
 
-        if (CheckRaidPool(out raid))
+        if (CheckRaidPool(out var raid))
         {
             raid.transform.position = pos;
             raid.gameObject.SetActive(true);
         }
         else
         {
-            // raid = m_Spawner.Spawn(pos, m_RaidParent.rotation, m_RaidParent);
-            raid = m_Spawner.Spawn(pos, Quaternion.Euler(0, 180, 0), m_RaidParent);
+            raid = m_Spawner.Spawn(pos, m_RaidParent.rotation, m_RaidParent);
+            //raid = m_Spawner.Spawn(pos, Quaternion.Euler(0, 180, 0), m_RaidParent);
             raid.RaidControll = this;
             raid.StartSpaw();
             m_RaidList.Add(raid);
@@ -50,7 +54,7 @@ public class RaidController : MonoBehaviour
         raid.OnRaidCompleted.AddListener(RaidCompleteHandler);
         raid.SetRaidTarget(target);
 
-        return true;
+        return raid;
     }
 
     private void RaidCompleteHandler(Raid raid)
@@ -77,5 +81,10 @@ public class RaidController : MonoBehaviour
             Destroy(T.gameObject);
         }
         m_RaidList.Clear();
+    }
+
+    public void Execute()
+    {
+        throw new NotImplementedException();
     }
 }

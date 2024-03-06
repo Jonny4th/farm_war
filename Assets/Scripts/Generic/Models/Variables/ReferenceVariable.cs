@@ -35,5 +35,10 @@ public abstract class ReferenceVariable<T> : MonoBehaviour
         }
     }
 
+    public override string ToString()
+    {
+        return base.ToString();
+    }
+
     public static implicit operator T(ReferenceVariable<T> variable) => variable.Value;
 }
