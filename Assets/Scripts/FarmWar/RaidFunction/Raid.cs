@@ -22,7 +22,6 @@ public class Raid : MonoBehaviour, IDamageable
     [SerializeField]
     private Animator m_Animator;
 
-
     private Raidable currentTarget;
 
     private RaidController raidController;
@@ -34,14 +33,17 @@ public class Raid : MonoBehaviour, IDamageable
         if (raidController != null) raidController.RaidActive++;
         StartCoroutine(UpdateLife());
     }
+
     private void OnDisable()
     {
         if (raidController != null) raidController.RaidActive--;
     }
+    
     public void StartSpaw()
     {
         raidController.RaidActive++;
     }
+    
     IEnumerator UpdateLife()
     {
         OnRaidStart?.Invoke(this);
@@ -56,16 +58,11 @@ public class Raid : MonoBehaviour, IDamageable
         OnRaidCompleted?.Invoke(this);
         m_Animator.SetTrigger("Done");
     }
-    public void StealCrop()
-    {
-        currentTarget.plantable.Crop.CropStealing();
-    }
 
     public void SetRaidTarget(Raidable target)
     {
         target.AddToRaidList(this);
         currentTarget = target;
-
     }
 
     public void OnAnimationOutDone() // Used by animation event

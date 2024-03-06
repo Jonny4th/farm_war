@@ -6,23 +6,12 @@ public class NodeManager : MonoBehaviour
 {
     [SerializeField] public List<Node> nodeCollcetion;
 
-
-
-
-
-
     private void Start()
     {
         GameManager.instance.ResetEven += ResetGame;
         // SetNode();
     }
-    // private void SetNode()
-    // {
-    //     foreach (Node T in nodeCollcetion)
-    //     {
-    //         T.IsTakeMutiUnit = takeMutiUnit;
-    //     }
-    // }
+
     private void ResetGame(GameManager gameManager)
     {
         // foreach (var T in nodeCollcetion)
@@ -33,19 +22,13 @@ public class NodeManager : MonoBehaviour
 
     }
 
-
     private void OnDestroy()
     {
         GameManager.instance.ResetEven -= ResetGame;
     }
 
-
-
-
-
     public static implicit operator int(NodeManager nodeManager)
     {
         return nodeManager.nodeCollcetion.Count;
     }
-
 }

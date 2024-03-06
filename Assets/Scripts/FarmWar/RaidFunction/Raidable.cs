@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Raidable : MonoBehaviour
 {
@@ -13,20 +15,12 @@ public class Raidable : MonoBehaviour
 
     [SerializeField]
     private bool m_IsRaidable;
-    public bool IsRaidable => plantable.Crop == null ? false : plantable.Crop.CropIsReady;
+    public bool IsRaidable => m_IsRaidable;
 
     public bool IsFullyOccupied => m_RaidList.Count >= m_RaidLimit;
 
-    public Plantable plantable;
-
-
-
-
-    private void Awake()
-    {
-        plantable = GetComponent<Plantable>();
-    }
-
+    public event Action<Raid, Raidable> OnRaidStart;
+    public event Action<Raidable> OnRaidEnd;
 
     public void SetRaidable(bool isRaidable)
     {
@@ -42,7 +36,13 @@ public class Raidable : MonoBehaviour
             return;
         }
 
+        raid.OnRaidCompleted.AddListener(CurrentRaidCompleteHandler);
         m_RaidList.Add(raid);
+    }
+
+    private void CurrentRaidCompleteHandler(Raid raid)
+    {
+        OnRaidEnd?.Invoke(this);
     }
 
     public void RemoveFromRaidList(Raid raid)

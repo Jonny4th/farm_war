@@ -45,7 +45,6 @@ public class CropController : MonoBehaviour
         // targetPlot.Crop = plant;
 
         var plant = Instantiate(CropPrefab, targetPlot.transform.position, targetPlot.transform.rotation, m_Container);
-        plant.currentPlot = targetPlot;
-        targetPlot.Crop = plant;
+        targetPlot.AssignCrop(plant);
     }
 }

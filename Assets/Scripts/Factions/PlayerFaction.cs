@@ -3,15 +3,19 @@ using UnityEngine;
 
 public class PlayerFaction : Faction<Raid>
 {
-
     [SerializeField] private float maxCoin;
     public float MaxCoin { get { return maxCoin; } }
+
     private float m_coin;
     public float Coin { get { return m_coin; } }
+
     [SerializeField] private float startCoin = 1000;
 
     [SerializeField] private RaidController raidCon;
     public RaidController RaidCon { get { return raidCon; } }
+
+
+
     [SerializeField] private Transform groundParent;
 
 
@@ -23,13 +27,13 @@ public class PlayerFaction : Faction<Raid>
     [SerializeField] private float quantityCoin = 10;
     private float timerSteal;
 
-
     private event Action<PlayerFaction> updateHp;
     public Action<PlayerFaction> UpdateHp { get { return updateHp; } set { updateHp = value; } }
     private event Action<PlayerFaction> updateCoin;
     public Action<PlayerFaction> UpdateCoin { get { return updateCoin; } set { updateCoin = value; } }
 
     public bool UnitOnGround { get { return CheckUnitOnGround(); } }
+
     public override void TakeDamage(float damage)
     {
         if (GameManager.instance.State != GameState.Action) return;

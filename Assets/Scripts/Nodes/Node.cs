@@ -1,40 +1,55 @@
-using System.Collections;
+using FarmWar.ShieldFunction;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Node : MonoBehaviour
 {
-
     [SerializeField] private Raidable raidable;
-    public Raidable raidablee { get { return raidable; } }
-    [SerializeField] private List<AnimalTest> animas;
-    public List<Raid> Raids { get { return raidablee.RaidList; } }
+    public Raidable Raidable { get { return raidable; } }
+
+    public List<Raid> Raids { get { return raidable.RaidList; } }
+
+
+
     [SerializeField] private List<Farmer> farmers;
     public List<Farmer> Farmers { get { return farmers; } }
 
     public Plantable plantable;
 
-
-
-
-
-
     private void Awake()
     {
         if (raidable == null) raidable = GetComponent<Raidable>();
-        plantable = GetComponent<Plantable>();
+        Shield.OnShieldBreak += ShieldBreakHandler;
+        plantable.OnCropReady += CropReadyHandler;
+        plantable.OnCropGone += CropGoneHandler;
+        raidable.OnRaidEnd += RaidEndHandler;
     }
 
-    public void RemoveAnimal(AnimalTest Raid)
+    private void RaidEndHandler(Raidable raidable)
     {
-        animas.Remove(Raid);
-        Raid.Des();
+        plantable.Crop.CropStealing();
     }
 
+    private void CropGoneHandler(Plantable plantable)
+    {
+        raidable.SetRaidable(false);
+    }
 
+    private void CropReadyHandler(Crop crop, Plantable plantable)
+    {
+        raidable.SetRaidable(true);
+    }
 
+    private void ShieldBreakHandler()
+    {
+        Shield.gameObject.SetActive(false);
+    }
+
+    public void ActivateShield(int maxHit)
+    {
+        Shield.SetMaxHit(maxHit);
+        Shield.gameObject.SetActive(true);
+    }
 
     public static implicit operator Vector3(Node node)
     {

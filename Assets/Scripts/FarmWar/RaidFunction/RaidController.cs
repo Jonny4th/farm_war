@@ -45,7 +45,6 @@ public class RaidController : MonoBehaviour, IAbility
         else
         {
             raid = m_Spawner.Spawn(pos, m_RaidParent.rotation, m_RaidParent);
-            //raid = m_Spawner.Spawn(pos, Quaternion.Euler(0, 180, 0), m_RaidParent);
             raid.RaidControll = this;
             raid.StartSpaw();
             m_RaidList.Add(raid);
