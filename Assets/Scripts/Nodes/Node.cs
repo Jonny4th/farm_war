@@ -9,7 +9,10 @@ public class Node : MonoBehaviour
 
     public List<Raid> Raids { get { return raidable.RaidList; } }
 
+    [SerializeField]
+    private Shield Shield;
 
+    public bool IsShielded => Shield.gameObject.activeSelf;
 
     [SerializeField] private List<Farmer> farmers;
     public List<Farmer> Farmers { get { return farmers; } }
