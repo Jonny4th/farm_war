@@ -1897,6 +1897,7 @@ Transform:
   m_Children:
   - {fileID: 1320037967}
   - {fileID: 49591534}
+  - {fileID: 1691072579}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &901727215
@@ -2093,6 +2094,14 @@ PrefabInstance:
     - target: {fileID: 1462164185319922189, guid: 458447718231bfe42a19448f26311170, type: 3}
       propertyPath: m_RaycastTarget
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1592767225654594943, guid: 458447718231bfe42a19448f26311170, type: 3}
+      propertyPath: m_Value
+      value: 
+      objectReference: {fileID: 1691072582}
+    - target: {fileID: 1652568909857958363, guid: 458447718231bfe42a19448f26311170, type: 3}
+      propertyPath: m_text
+      value: '###'
       objectReference: {fileID: 0}
     - target: {fileID: 2146233527285350431, guid: 458447718231bfe42a19448f26311170, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4009,6 +4018,7 @@ GameObject:
   - component: {fileID: 1691072578}
   - component: {fileID: 1691072580}
   - component: {fileID: 1691072581}
+  - component: {fileID: 1691072582}
   m_Layer: 0
   m_Name: RaidController
   m_TagString: Untagged
@@ -4041,6 +4051,7 @@ MonoBehaviour:
   m_RaidList: []
   m_Spawner: {fileID: 1691072580}
   m_RaidParent: {fileID: 1675295893}
+  m_Cost: {fileID: 1691072582}
 --- !u!4 &1691072579
 Transform:
   m_ObjectHideFlags: 0
@@ -4049,13 +4060,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1691072577}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1675295893}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 900857517}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1691072580
 MonoBehaviour:
@@ -4092,6 +4103,22 @@ MonoBehaviour:
   - {fileID: 1258632427}
   - {fileID: 124089511}
   - {fileID: 723129163}
+--- !u!114 &1691072582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691072577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a4fa84d7303f647a19ead9686d7f1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Name: AttackCost
+  _UseConstant: 1
+  _ConstantValue: 300
+  _Variable: {fileID: 0}
 --- !u!1001 &1828476450
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4529,7 +4556,6 @@ SceneRoots:
   - {fileID: 397822278}
   - {fileID: 1055688670}
   - {fileID: 1100093899}
-  - {fileID: 1691072579}
   - {fileID: 732182242}
   - {fileID: 901727218}
   - {fileID: 988062515}

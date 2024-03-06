@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -23,6 +20,7 @@ public class StateFinder : StateBase
             node = RandomNodeWithCrop();
         return node;
     }
+
     protected Node RandomNodeWithCrop()
     {
         // var n = manager.NodeMana.nodeCollcetion.FindAll(x => x.plantable.Crop == null);
@@ -31,6 +29,8 @@ public class StateFinder : StateBase
         return nodeCrop[Random.Range(0, nodeCrop.Count)];
         // return manager.NodeMana.nodeCollcetion[Random.Range(0, manager.NodeMana)];
     }
+
+
     protected Node RandomNode()
     {
         return manager.NodeMana.nodeCollcetion[Random.Range(0, manager.NodeMana.nodeCollcetion.Count)];
