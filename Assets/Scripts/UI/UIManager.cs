@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,11 +22,12 @@ public class UIManager : MonoBehaviour
     // [SerializeField] private float speed = 300f;
     [SerializeField] private float speedPanelFace = 300f;
 
-    [Header("Test")]
-    [SerializeField] private TextMeshProUGUI timeState;
-    [SerializeField] private TextMeshProUGUI nodeTarget;
-    [SerializeField] private TextMeshProUGUI currState;
-    [SerializeField] private Farmer farmer;
+
+    [Header("Status UI")]
+    [SerializeField] private UIStatus attackSt;
+    [SerializeField] private UIStatus poisonSt;
+    [SerializeField] private UIStatus healingSt;
+
 
     private GameState state;
 
@@ -57,11 +59,16 @@ public class UIManager : MonoBehaviour
         playerUI.curr = gameManager.PlayerFaction.Hp;
         playerUI.maxHp = gameManager.PlayerFaction.MaxHp;
 
+
         state = gameManager.State;
 
         gameManager.PlayerFaction.UpdateHp += UpdateUiPlayer;
         gameManager.PlayerFaction.UpdateCoin += UpdateCoin;
+        gameManager.PlayerFaction.AttackEven += AttackStatus;
+        gameManager.PlayerFaction.HealingEven += HealingStatus;
+
         gameManager.EmemyFaction.UpdateHp += UpdateUiEmemy;
+
         gameManager.ResetEven += ResetGame;
 
         panelColor = setUpPanel.GetComponent<Image>().color;
@@ -92,6 +99,9 @@ public class UIManager : MonoBehaviour
         {
             case GameState.SetUp:
                 setUpPanel.SetActive(true);
+                attackSt.uiObj.gameObject.SetActive(false);
+                poisonSt.uiObj.gameObject.SetActive(false);
+                healingSt.uiObj.gameObject.SetActive(false);
                 break;
             case GameState.Action:
                 actionPanel.SetActive(true);
@@ -212,29 +222,82 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
+    #region  Status UI
+
+
+    private void AttackStatus() => SetCoroutine(attackSt);
+    private void PoisonStatus() => SetCoroutine(poisonSt);
+    private void HealingStatus() => SetCoroutine(healingSt);
+    private void SetCoroutine(UIStatus uIStatus)
+    {
+        if (uIStatus.em != null)
+            StopCoroutine(uIStatus.em);
+        uIStatus.em = HideStatus(uIStatus);
+        StartCoroutine(uIStatus.em);
+    }
+
+    private IEnumerator HideStatus(UIStatus uistatus)
+    {
+        uistatus.uiObj.SetActive(true);
+
+        if (uistatus.startScaleX == -1)
+            uistatus.startScaleX = uistatus.uiObj.transform.localScale.x;
+
+        uistatus.uiObj.transform.localScale = new Vector3(uistatus.curr, uistatus.curr, 1f);
+
+        float persent = 0;
+        float speed = 1f / uistatus.timeUP / 60f;
+        float st = uistatus.curr;
+        //=======UP=========
+
+        while (persent < 1)
+        {
+            persent += speed;
+            uistatus.curr = Mathf.Lerp(st, uistatus.startScaleX, persent);
+            uistatus.uiObj.transform.localScale = new Vector3(uistatus.curr, uistatus.curr, 1f);
+            yield return null;
+        }
+        //=======Hold========
+        yield return new WaitForSeconds(uistatus.hold);
+        //=======DOWN=========
+        persent = 0;
+        speed = 1f / uistatus.timeDown / 60f;
+        st = uistatus.curr;
+        while (persent < 1)
+        {
+            persent += speed;
+            uistatus.curr = Mathf.Lerp(st, 0, persent);
+            uistatus.uiObj.transform.localScale = new Vector3(uistatus.curr, uistatus.curr, 1f);
+            yield return null;
+        }
+        uistatus.uiObj.SetActive(false);
+        uistatus.em = null;
+    }
+    #endregion
+
     #region Test
-    public void UpdateTime()
-    {
-        if (!farmer) return;
-        var f = farmer.StateManager.CurrentState as StateFinder;
-        if (f is StateFinder)
-            timeState.text = $"StateTime : {(int)f.Timer}";
-        else
-            timeState.text = $"StateTime : xx";
-    }
-    public void UpdateNode()
-    {
-        if (!farmer) return;
-        if (!farmer.nodetarget) return;
-        // nodeTarget.text = $"Index : {farmer.nodetarget.Index}";
-    }
-    public void UpdateCurrentState()
-    {
-        if (!farmer) return;
-        StateBase f = farmer.StateManager.CurrentState;
+    // public void UpdateTime()
+    // {
+    //     if (!farmer) return;
+    //     var f = farmer.StateManager.CurrentState as StateFinder;
+    //     if (f is StateFinder)
+    //         timeState.text = $"StateTime : {(int)f.Timer}";
+    //     else
+    //         timeState.text = $"StateTime : xx";
+    // }
+    // public void UpdateNode()
+    // {
+    //     if (!farmer) return;
+    //     if (!farmer.nodetarget) return;
+    //     // nodeTarget.text = $"Index : {farmer.nodetarget.Index}";
+    // }
+    // public void UpdateCurrentState()
+    // {
+    //     if (!farmer) return;
+    //     StateBase f = farmer.StateManager.CurrentState;
 
-        // currState.text = $"CurreSteta : {f.StateNameStr}";
+    //     // currState.text = $"CurreSteta : {f.StateNameStr}";
 
-    }
+    // }
     #endregion
 }

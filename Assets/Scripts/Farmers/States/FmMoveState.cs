@@ -8,24 +8,37 @@ using UnityEngine;
 public class FmMoveState : StateFinder
 {
     [SerializeField] private float nodeDistance = 2f;
+    private bool moveToPlant;
     public override void StartState()
     {
         base.StartState();
         agent.isStopped = true;
 
-        if (farmer.nodetarget == null)
-            farmer.nodetarget = RandomNode();
+        // if (farmer.nodetarget == null)
+        // {
+
+        // }
+        if (!CropIsNull())
+        {
+            farmer.nodetarget = RandomNodeWithCrop();
+            moveToPlant = true;
+        }
         else
-            farmer.nodetarget = RandomNodeNotCurr(farmer.nodetarget);
+        {
+            farmer.nodetarget = RandomNode();
+            moveToPlant = false;
+        }
+        // else
+        //     farmer.nodetarget = RandomNodeNotCurr(farmer.nodetarget);
 
 
 
         LookAt(farmer.transform.rotation, RotaAngle(farmer.nodetarget), lookAtSpeed, () =>
-        {
-            agent.SetDestination(farmer.nodetarget);
-            farmer.PlayerAnimation(stateName);
-            agent.isStopped = false;
-        });
+            {
+                agent.SetDestination(farmer.nodetarget);
+                farmer.PlayerAnimation(stateName);
+                agent.isStopped = false;
+            });
 
     }
     public override void EndState()
@@ -49,7 +62,10 @@ public class FmMoveState : StateFinder
                 {
                     // int ran = Random.Range(1, 10);
                     // if (ran % 2 != 0)
-                    swichState.SwitchState(farmer.digState);
+                    if (moveToPlant)
+                        swichState.SwitchState(farmer.digState);
+                    else
+                        swichState.SwitchState(farmer.idelState);
                     // else
                     //     swichState.SwitchState(farmer.idelState);
                 }
