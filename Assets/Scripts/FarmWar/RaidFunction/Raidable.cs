@@ -42,12 +42,12 @@ public class Raidable : MonoBehaviour
 
     private void CurrentRaidCompleteHandler(Raid raid)
     {
+        raid.OnRaidCompleted.RemoveListener(CurrentRaidCompleteHandler);
         OnRaidEnd?.Invoke(this);
     }
 
     public void RemoveFromRaidList(Raid raid)
     {
-        raid.OnRaidCompleted.RemoveListener(CurrentRaidCompleteHandler);
         if (m_RaidList.Contains(raid)) m_RaidList.Remove(raid);
     }
 }
