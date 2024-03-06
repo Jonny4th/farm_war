@@ -7,20 +7,35 @@ using Random = UnityEngine.Random;
 
 public class StateFinder : StateBase
 {
-
+    List<Node> nodeCrop;
+    protected bool CropIsNull()
+    {
+        nodeCrop = manager.NodeMana.nodeCollcetion.FindAll(x => x.plantable.Crop == null);
+        if (nodeCrop.Count > 0)
+            return false;
+        else
+            return true;
+    }
     protected Node RandomNodeNotCurr(Node currNode)
     {
-        var node = RandomNode();
+        var node = RandomNodeWithCrop();
         while (node == currNode)
-            node = RandomNode();
+            node = RandomNodeWithCrop();
         return node;
+    }
+    protected Node RandomNodeWithCrop()
+    {
+        // var n = manager.NodeMana.nodeCollcetion.FindAll(x => x.plantable.Crop == null);
+        if (nodeCrop.Count == 1) return nodeCrop[0];
+
+        return nodeCrop[Random.Range(0, nodeCrop.Count)];
+        // return manager.NodeMana.nodeCollcetion[Random.Range(0, manager.NodeMana)];
     }
     protected Node RandomNode()
     {
-        var n = manager.NodeMana.nodeCollcetion.FindAll(x => x.plantable.Crop == null);
-        return n[Random.Range(0, n.Count)];
-        // return manager.NodeMana.nodeCollcetion[Random.Range(0, manager.NodeMana)];
+        return manager.NodeMana.nodeCollcetion[Random.Range(0, manager.NodeMana.nodeCollcetion.Count)];
     }
+
 
     protected List<Node> FindNodeObj(List<Node> noodeList, int count = 2)
     {
