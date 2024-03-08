@@ -158,12 +158,12 @@ public class PlayerFaction : Faction<Raid>
     public void AttackCommand() // used by ui button
     {
         if (!HaveCoin(raidCon.Cost)) return; // not enough coin.
-        // if (!raidCon.IsReady) return; // no fully grown veggies.
-        // ReduceCoin(raidCon.Cost);
+        if (!raidCon.IsReady) return; // no fully grown veggies.
+        ReduceCoin(raidCon.Cost);
 
-        // var raid = raidCon.RandomSpawnOnGround();
-        // aliveUnit.Add(raid);
-        // raid.OnRaidCompleted.AddListener((r) => aliveUnit.Remove(r));
+        var raid = raidCon.RandomSpawnOnGround();
+        aliveUnit.Add(raid);
+        raid.OnRaidCompleted.AddListener((r) => aliveUnit.Remove(r));
     }
 
     public void ShieldCommand() // used by ui button

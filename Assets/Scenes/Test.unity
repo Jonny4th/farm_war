@@ -2283,25 +2283,13 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7924741603645910942, guid: 458447718231bfe42a19448f26311170, type: 3}
-      propertyPath: attackSt
-      value: 
-      objectReference: {fileID: 1856688494}
-    - target: {fileID: 7924741603645910942, guid: 458447718231bfe42a19448f26311170, type: 3}
       propertyPath: gadgomad
       value: 
       objectReference: {fileID: 1856688494}
     - target: {fileID: 7924741603645910942, guid: 458447718231bfe42a19448f26311170, type: 3}
-      propertyPath: poisonSt
-      value: 
-      objectReference: {fileID: 1461299218}
-    - target: {fileID: 7924741603645910942, guid: 458447718231bfe42a19448f26311170, type: 3}
       propertyPath: attackOBJ
       value: 
       objectReference: {fileID: 1856688494}
-    - target: {fileID: 7924741603645910942, guid: 458447718231bfe42a19448f26311170, type: 3}
-      propertyPath: healingSt
-      value: 
-      objectReference: {fileID: 1120189649}
     - target: {fileID: 7924741603645910942, guid: 458447718231bfe42a19448f26311170, type: 3}
       propertyPath: gameManager
       value: 
@@ -2311,32 +2299,12 @@ PrefabInstance:
       value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 7924741603645910942, guid: 458447718231bfe42a19448f26311170, type: 3}
-      propertyPath: attackSt.rect
-      value: 
-      objectReference: {fileID: 1856688495}
-    - target: {fileID: 7924741603645910942, guid: 458447718231bfe42a19448f26311170, type: 3}
-      propertyPath: attackSt.uiObj
-      value: 
-      objectReference: {fileID: 1856688494}
-    - target: {fileID: 7924741603645910942, guid: 458447718231bfe42a19448f26311170, type: 3}
-      propertyPath: poisonSt.uiObj
-      value: 
-      objectReference: {fileID: 1856688494}
-    - target: {fileID: 7924741603645910942, guid: 458447718231bfe42a19448f26311170, type: 3}
       propertyPath: coinUI.minSpeed
       value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 7924741603645910942, guid: 458447718231bfe42a19448f26311170, type: 3}
-      propertyPath: healingSt.uiObj
-      value: 
-      objectReference: {fileID: 1120189649}
-    - target: {fileID: 7924741603645910942, guid: 458447718231bfe42a19448f26311170, type: 3}
       propertyPath: ememyUI.minSpeed
       value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7924741603645910942, guid: 458447718231bfe42a19448f26311170, type: 3}
-      propertyPath: attackSt.timeDown
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7924741603645910942, guid: 458447718231bfe42a19448f26311170, type: 3}
       propertyPath: playerUI.minSpeed
@@ -2865,11 +2833,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1120189649 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6384991818349570229, guid: 458447718231bfe42a19448f26311170, type: 3}
-  m_PrefabInstance: {fileID: 988062515}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1121069430 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1256082536719146212, guid: e6c5f66968e748245baa1d9c5e595e23, type: 3}
@@ -3409,11 +3372,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6c5f66968e748245baa1d9c5e595e23, type: 3}
---- !u!1 &1461299218 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4826502075039765588, guid: 458447718231bfe42a19448f26311170, type: 3}
-  m_PrefabInstance: {fileID: 988062515}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1472542843
 GameObject:
   m_ObjectHideFlags: 0
@@ -3992,11 +3950,6 @@ Transform:
 --- !u!1 &1856688494 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1041162915952225572, guid: 458447718231bfe42a19448f26311170, type: 3}
-  m_PrefabInstance: {fileID: 988062515}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &1856688495 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7337663200745629578, guid: 458447718231bfe42a19448f26311170, type: 3}
   m_PrefabInstance: {fileID: 988062515}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &2121749825 stripped

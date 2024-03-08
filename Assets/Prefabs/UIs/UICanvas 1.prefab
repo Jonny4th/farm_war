@@ -3527,12 +3527,12 @@ MonoBehaviour:
   attackSt:
     uiObj: {fileID: 1041162915952225572}
     timeUP: 0.25
-    timeDown: 0.15
+    timeDown: 0.5
     hold: 1.5
     startScaleX: -1
     curr: 0
   poisonSt:
-    uiObj: {fileID: 1041162915952225572}
+    uiObj: {fileID: 4826502075039765588}
     timeUP: 0.25
     timeDown: 0.15
     hold: 1.5

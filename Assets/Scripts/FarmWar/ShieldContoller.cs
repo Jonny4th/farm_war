@@ -23,7 +23,6 @@ public class ShieldContoller : MonoBehaviour, IAbility
     {
         var nonActivatedShields = Array.FindAll(m_Shields, x => x.IsActivate == false);
 
-        Debug.Log(nonActivatedShields.Length);
         if (nonActivatedShields == null) return null;
         var shield = nonActivatedShields[Random.Range(0, nonActivatedShields.Length)];
         shield.ActivateShield(shieldHitPoint);
