@@ -1,10 +1,11 @@
 using FarmWar.ShieldFunction;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 
 namespace FarmWar.Core
 {
-    public class Node : MonoBehaviour
+    public class Node : MonoBehaviour, IDamageable
     {
         [SerializeField] private Raidable raidable;
         public Raidable Raidable { get { return raidable; } }
@@ -60,6 +61,11 @@ namespace FarmWar.Core
         private void CropReadyHandler(Crop crop, Plantable plantable)
         {
             raidable.SetRaidable(true);
+        }
+
+        public void TakeDamage(float damage)
+        {
+            Shield.TakeDamage(1);
         }
 
         public static implicit operator Vector3(Node node)
