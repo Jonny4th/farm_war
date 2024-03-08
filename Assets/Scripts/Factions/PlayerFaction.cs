@@ -29,6 +29,13 @@ public class PlayerFaction : Faction<Raid>
     private event Action<PlayerFaction> updateCoin;
     public Action<PlayerFaction> UpdateCoin { get { return updateCoin; } set { updateCoin = value; } }
 
+    private Action attackEvent;
+    public Action AttackEvent { get { return attackEvent; } set { attackEvent = value; } }
+    private Action poisonEvent;
+    public Action PoisonEvent { get { return poisonEvent; } set { poisonEvent = value; } }
+    private Action healingEvent;
+    public Action HealingEvent { get { return healingEvent; } set { healingEvent = value; } }
+
     public bool UnitOnGround { get { return CheckUnitOnGround(); } }
     public override void TakeDamage(float damage)
     {
@@ -126,7 +133,7 @@ public class PlayerFaction : Faction<Raid>
     {
         return m_coin >= coin;
     }
-    
+
     public void AddCoin(float coin)
     {
         m_coin += coin;
@@ -144,12 +151,12 @@ public class PlayerFaction : Faction<Raid>
     public void AttackCommand() // use by ui btn
     {
         if (!HaveCoin(raidCon.Cost)) return; // not enough coin.
-        if (!raidCon.IsReady) return; // no fully grown veggies.
-        ReduceCoin(raidCon.Cost);
+        // if (!raidCon.IsReady) return; // no fully grown veggies.
+        // ReduceCoin(raidCon.Cost);
 
-        var raid = raidCon.RandomSpawnOnGround();
-        aliveUnit.Add(raid);
-        raid.OnRaidCompleted.AddListener((r) => aliveUnit.Remove(r));
+        // var raid = raidCon.RandomSpawnOnGround();
+        // aliveUnit.Add(raid);
+        // raid.OnRaidCompleted.AddListener((r) => aliveUnit.Remove(r));
     }
 
     public void AnimalDie(AnimalTest animalTest)
