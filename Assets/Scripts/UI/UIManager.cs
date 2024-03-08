@@ -66,6 +66,7 @@ public class UIManager : MonoBehaviour
         gameManager.PlayerFaction.UpdateCoin += UpdateCoin;
         gameManager.PlayerFaction.AttackEvent += AttackStatus;
         gameManager.PlayerFaction.HealingEvent += HealingStatus;
+        gameManager.PlayerFaction.PoisonEvent += PoisonStatus;
 
         gameManager.EmemyFaction.UpdateHp += UpdateUiEmemy;
 

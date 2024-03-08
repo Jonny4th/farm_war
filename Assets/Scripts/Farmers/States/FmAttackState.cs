@@ -27,6 +27,7 @@ public class FmAttackState : StateFinder
   public override void StartState()
   {
     base.StartState();
+    farmer.SwicthTool(2);
     lastTime = (Time.time + attackTime);
     raidTarget = FindRaidInNode(farmer.nodetarget);
     var targetRotate = lookAtNode ? RotaAngle(farmer.nodetarget) : RotaAngle(raidTarget.transform.position);
@@ -35,7 +36,7 @@ public class FmAttackState : StateFinder
       farmer.PlayerAnimation(FarmerStrate.Attack);
     });
   }
- 
+
   public override void LogiUpdate()
   {
     if (CheckUnitOnGround())

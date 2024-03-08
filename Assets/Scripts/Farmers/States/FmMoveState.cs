@@ -12,6 +12,7 @@ public class FmMoveState : StateFinder
     public override void StartState()
     {
         base.StartState();
+        farmer.SwicthTool(1);
         agent.isStopped = true;
 
         // if (farmer.nodetarget == null)

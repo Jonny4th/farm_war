@@ -7,10 +7,11 @@ using UnityEngine.UIElements;
 [System.Serializable]
 public class FmIdelState : StateBase
 {
-    
+
     public override void StartState()
     {
         base.StartState();
+        farmer.SwicthTool(1);
         agent.isStopped = true;
         if (farmer.nodetarget != null)
             LookAt(farmer, RotaAngle(farmer.nodetarget), lookAtSpeed);

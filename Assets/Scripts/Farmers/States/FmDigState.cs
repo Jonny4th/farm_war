@@ -13,6 +13,7 @@ public class FmDigState : StateBase
   public override void StartState()
   {
     base.StartState();
+    farmer.SwicthTool(1);
     agent.isStopped = true;
     farmer.PlayerAnimation(FarmerStrate.Idel);
     canDig = false;

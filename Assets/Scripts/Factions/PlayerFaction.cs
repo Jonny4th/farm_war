@@ -43,6 +43,7 @@ public class PlayerFaction : Faction<Raid>
         currentHp -= damage;
         // UIManager.instance.UpdateUi(this);
         updateHp?.Invoke(this);
+        attackEvent?.Invoke();
         // Debug.Log("FFFF");
     }
 
@@ -64,6 +65,21 @@ public class PlayerFaction : Faction<Raid>
             updateHp?.Invoke(this);
             updateCoin?.Invoke(this);
         }, 0.2f);
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            attackEvent?.Invoke();
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            healingEvent?.Invoke();
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            poisonEvent?.Invoke();
+        }
     }
     private void FixedUpdate()
     {
@@ -105,6 +121,7 @@ public class PlayerFaction : Faction<Raid>
     public void Health(float hp)
     {
         currentHp += hp;
+        healingEvent?.Invoke();
         // UIManager.instance.UpdateUi(this);
     }
 
@@ -151,12 +168,12 @@ public class PlayerFaction : Faction<Raid>
     public void AttackCommand() // use by ui btn
     {
         if (!HaveCoin(raidCon.Cost)) return; // not enough coin.
-        // if (!raidCon.IsReady) return; // no fully grown veggies.
-        // ReduceCoin(raidCon.Cost);
+        if (!raidCon.IsReady) return; // no fully grown veggies.
+        ReduceCoin(raidCon.Cost);
 
-        // var raid = raidCon.RandomSpawnOnGround();
-        // aliveUnit.Add(raid);
-        // raid.OnRaidCompleted.AddListener((r) => aliveUnit.Remove(r));
+        var raid = raidCon.RandomSpawnOnGround();
+        aliveUnit.Add(raid);
+        raid.OnRaidCompleted.AddListener((r) => aliveUnit.Remove(r));
     }
 
     public void AnimalDie(AnimalTest animalTest)
