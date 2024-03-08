@@ -14,6 +14,11 @@ public class ShieldContoller : MonoBehaviour, IAbility
 
     public bool IsReady => throw new NotImplementedException();
 
+    private void Awake()
+    {
+        m_Shields = FindObjectsOfType<Shield>(true);
+    }
+
     public Shield ActivateShieldRandomly(int shieldHitPoint)
     {
         var nonActivatedShields = Array.FindAll(m_Shields, x => x.IsActivate == false);

@@ -4,6 +4,7 @@ using UnityEngine.Events;
 
 public class Raid : MonoBehaviour, IDamageable
 {
+    public UnityEvent<Raid> OnRaidStarted;
     public UnityEvent<Raid> OnRaidCompleted; // send when raid stops.
     public UnityEvent<Raid> OnOutAnimationDone; // send when animaiton out had done.
 
@@ -31,6 +32,8 @@ public class Raid : MonoBehaviour, IDamageable
 
     IEnumerator UpdateLife()
     {
+        OnRaidStarted?.Invoke(this);
+
         while (m_RemainLifeTime > 0)
         {
             m_RemainLifeTime -= Time.deltaTime;

@@ -18,9 +18,10 @@ public class RaidController : MonoBehaviour, IAbility
 
     [SerializeField]
     private Transform m_RaidParent;
-    private int raidActive;
 
-    public int RaidActive { get { return raidActive; } set { raidActive = value; } }
+    [SerializeField]
+    private int m_RaidActive;
+    public int RaidActive => m_RaidActive;
 
     [SerializeField]
     private FloatReference m_Cost;
@@ -29,6 +30,11 @@ public class RaidController : MonoBehaviour, IAbility
     public bool IsReady { get => Array.Exists(TargetList, x => x.IsRaidable && !x.IsFullyOccupied); }
 
     public event Action<Raid> OnRaidCompleted;
+
+    private void Awake()
+    {
+        m_TargetList = FindObjectsOfType<Raidable>();
+    }
 
     public Raid RandomSpawnOnGround()
     {
@@ -46,10 +52,10 @@ public class RaidController : MonoBehaviour, IAbility
         {
             raid = m_Spawner.Spawn(pos, m_RaidParent.rotation, m_RaidParent);
             m_RaidList.Add(raid);
+            raid.OnRaidCompleted.AddListener(RaidCompleteHandler);
         }
 
-        raidActive++;
-        raid.OnRaidCompleted.AddListener(RaidCompleteHandler);
+        m_RaidActive++;
         raid.SetRaidTarget(target);
 
         return raid;
@@ -57,7 +63,7 @@ public class RaidController : MonoBehaviour, IAbility
 
     private void RaidCompleteHandler(Raid raid)
     {
-        raidActive--;
+        m_RaidActive--;
         OnRaidCompleted?.Invoke(raid);
     }
 
