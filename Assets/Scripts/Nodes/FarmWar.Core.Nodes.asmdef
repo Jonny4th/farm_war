@@ -1,0 +1,18 @@
+{
+    "name": "FarmWar.Core.Nodes",
+    "rootNamespace": "",
+    "references": [
+        "GUID:44fa55db4eb27b6489509f08a9bbbded",
+        "GUID:d2548cff8ff130d4cb21651771db85e8",
+        "GUID:90830f735b6b062478363d7502991897"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

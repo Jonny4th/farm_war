@@ -125,7 +125,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raidable: {fileID: 5086791927257348753}
   Shield: {fileID: 7172202718698830880}
-  farmers: []
   plantable: {fileID: 4779114184590073962}
 --- !u!114 &5086791927257348753
 MonoBehaviour:
@@ -169,7 +168,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3879303304724402552, guid: 9c34111c529fb894a875176d2ce61d56, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 3879303304724402552, guid: 9c34111c529fb894a875176d2ce61d56, type: 3}
       propertyPath: m_LocalPosition.z
@@ -206,6 +205,10 @@ PrefabInstance:
     - target: {fileID: 4847551000047220805, guid: 9c34111c529fb894a875176d2ce61d56, type: 3}
       propertyPath: m_Name
       value: Shield
+      objectReference: {fileID: 0}
+    - target: {fileID: 4847551000047220805, guid: 9c34111c529fb894a875176d2ce61d56, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

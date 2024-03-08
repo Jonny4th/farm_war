@@ -2571,10 +2571,27 @@ MonoBehaviour:
     minSpeed: 100
     speed: 300
   speedPanelFace: 300
-  timeState: {fileID: 0}
-  nodeTarget: {fileID: 0}
-  currState: {fileID: 0}
-  farmer: {fileID: 0}
+  attackSt:
+    uiObj: {fileID: 1041162915952225572}
+    timeUP: 0.25
+    timeDown: 0.15
+    hold: 1.5
+    startScaleX: -1
+    curr: 0
+  poisonSt:
+    uiObj: {fileID: 4826502075039765588}
+    timeUP: 0.25
+    timeDown: 0.15
+    hold: 1.5
+    startScaleX: -1
+    curr: 0
+  healingSt:
+    uiObj: {fileID: 6384991818349570229}
+    timeUP: 0.25
+    timeDown: 0.15
+    hold: 1.5
+    startScaleX: -1
+    curr: 0
 --- !u!1 &7605238482122231830
 GameObject:
   m_ObjectHideFlags: 0
@@ -3554,6 +3571,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 282661d12eb05064a88ce429eec175f5, type: 3}
+--- !u!1 &1041162915952225572 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2466967603938772596, guid: 282661d12eb05064a88ce429eec175f5, type: 3}
+  m_PrefabInstance: {fileID: 3192658307832523600}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2520762561444114177 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1059777345213449297, guid: 282661d12eb05064a88ce429eec175f5, type: 3}
@@ -3565,6 +3587,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4826502075039765588 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7977484352330202884, guid: 282661d12eb05064a88ce429eec175f5, type: 3}
+  m_PrefabInstance: {fileID: 3192658307832523600}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6384991818349570229 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8417955485982835685, guid: 282661d12eb05064a88ce429eec175f5, type: 3}
+  m_PrefabInstance: {fileID: 3192658307832523600}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8301892142757884873 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6879432306465839257, guid: 282661d12eb05064a88ce429eec175f5, type: 3}
@@ -3789,18 +3821,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 6044639977609429936, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
-      propertyPath: m_Color.b
-      value: 0.49056602
-      objectReference: {fileID: 0}
-    - target: {fileID: 6044639977609429936, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
-      propertyPath: m_Color.g
-      value: 0.49056602
-      objectReference: {fileID: 0}
-    - target: {fileID: 6044639977609429936, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
-      propertyPath: m_Color.r
-      value: 0.49056602
-      objectReference: {fileID: 0}
     - target: {fileID: 6711772570209471057, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
       propertyPath: m_Color.b
       value: 0.5283019
@@ -3816,18 +3836,6 @@ PrefabInstance:
     - target: {fileID: 6913027848454919962, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
       propertyPath: m_text
       value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 6925403847365737171, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
-      propertyPath: m_Color.b
-      value: 0.6509434
-      objectReference: {fileID: 0}
-    - target: {fileID: 6925403847365737171, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
-      propertyPath: m_Color.g
-      value: 0.6509434
-      objectReference: {fileID: 0}
-    - target: {fileID: 6925403847365737171, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
-      propertyPath: m_Color.r
-      value: 0.6509434
       objectReference: {fileID: 0}
     - target: {fileID: 7199829307666091287, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
       propertyPath: m_AnchorMax.x

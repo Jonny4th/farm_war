@@ -45,11 +45,10 @@ public class RaidController : MonoBehaviour, IAbility
         else
         {
             raid = m_Spawner.Spawn(pos, m_RaidParent.rotation, m_RaidParent);
-            raid.RaidControll = this;
-            raid.StartSpaw();
             m_RaidList.Add(raid);
         }
 
+        raidActive++;
         raid.OnRaidCompleted.AddListener(RaidCompleteHandler);
         raid.SetRaidTarget(target);
 
@@ -58,6 +57,7 @@ public class RaidController : MonoBehaviour, IAbility
 
     private void RaidCompleteHandler(Raid raid)
     {
+        raidActive--;
         OnRaidCompleted?.Invoke(raid);
     }
 

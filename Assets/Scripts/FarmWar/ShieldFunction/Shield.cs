@@ -7,7 +7,11 @@ namespace FarmWar.ShieldFunction
     {
         public int RemainHit { get; private set; }
 
-        public event Action OnShieldBreak;
+        public bool IsActivate { get; private set; } = false;
+
+
+        public event Action<Shield> OnShieldActivate;
+        public event Action<Shield> OnShieldBreak;
 
         public void SetMaxHit(int maxHit)
         {
@@ -20,8 +24,16 @@ namespace FarmWar.ShieldFunction
 
             if (RemainHit == 0)
             {
-                OnShieldBreak?.Invoke();
+                IsActivate = false;
+                OnShieldBreak?.Invoke(this);
             }
+        }
+
+        public void ActivateShield(int maxHit)
+        {
+            IsActivate = true;
+            SetMaxHit(maxHit);
+            OnShieldActivate?.Invoke(this);
         }
     }
 }

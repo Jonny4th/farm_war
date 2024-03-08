@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerFaction : Faction<Raid>
 {
@@ -14,10 +15,10 @@ public class PlayerFaction : Faction<Raid>
     [SerializeField] private RaidController raidCon;
     public RaidController RaidCon { get { return raidCon; } }
 
-
+    [SerializeField] private ShieldContoller shieldCon;
+    public ShieldContoller ShieldCon { get { return shieldCon; } }
 
     [SerializeField] private Transform groundParent;
-
 
     [SerializeField] private float attackTime = 1;
     [SerializeField] private float damage = 1;
@@ -62,6 +63,7 @@ public class PlayerFaction : Faction<Raid>
             updateCoin?.Invoke(this);
         }, 0.2f);
     }
+
     private void FixedUpdate()
     {
         if (raidCon.RaidActive > 0)
@@ -75,6 +77,7 @@ public class PlayerFaction : Faction<Raid>
             timerAttack = 0;
         }
     }
+
     private void ResetGame(GameManager gameManager)
     {
         timerAttack = 0;
@@ -145,7 +148,7 @@ public class PlayerFaction : Faction<Raid>
         updateCoin?.Invoke(this);
     }
 
-    public void AttackCommand() // use by ui btn
+    public void AttackCommand() // used by ui button
     {
         if (!HaveCoin(raidCon.Cost)) return; // not enough coin.
         if (!raidCon.IsReady) return; // no fully grown veggies.
@@ -154,6 +157,24 @@ public class PlayerFaction : Faction<Raid>
         var raid = raidCon.RandomSpawnOnGround();
         aliveUnit.Add(raid);
         raid.OnRaidCompleted.AddListener((r) => aliveUnit.Remove(r));
+    }
+
+    public void ShieldCommand() // used by ui button
+    {
+        int hitPoint = 2; // default hit point for shield.
+
+        if(!HaveCoin(shieldCon.Cost)) return;
+        ReduceCoin(shieldCon.Cost);
+
+        var unitNodes = GameManager.instance.NodeMana.nodeCollcetion.FindAll(x => x.IsRaided && !x.IsShielded);
+        
+        if (unitNodes.Count == 0)
+        {
+            shieldCon.ActivateShieldRandomly(hitPoint);
+            return;
+        }
+
+        unitNodes[Random.Range(0, unitNodes.Count)].ActivateShield(hitPoint);
     }
 
     public void AnimalDie(AnimalTest animalTest)

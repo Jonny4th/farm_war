@@ -2,64 +2,74 @@ using FarmWar.ShieldFunction;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node : MonoBehaviour
+namespace FarmWar.Core
 {
-    [SerializeField] private Raidable raidable;
-    public Raidable Raidable { get { return raidable; } }
-
-    public List<Raid> Raids { get { return raidable.RaidList; } }
-
-    [SerializeField]
-    private Shield Shield;
-
-    public bool IsShielded => Shield.gameObject.activeSelf;
-
-    [SerializeField] private List<Farmer> farmers;
-    public List<Farmer> Farmers { get { return farmers; } }
-
-    public Plantable plantable;
-
-    private void Awake()
+    public class Node : MonoBehaviour
     {
-        if (raidable == null) raidable = GetComponent<Raidable>();
-        Shield.OnShieldBreak += ShieldBreakHandler;
-        plantable.OnCropReady += CropReadyHandler;
-        plantable.OnCropStolen += CropGoneHandler;
-        raidable.OnRaidEnd += RaidEndHandler;
-    }
+        [SerializeField] private Raidable raidable;
+        public Raidable Raidable { get { return raidable; } }
 
-    private void RaidEndHandler(Raidable raidable)
-    {
-        plantable.Crop.CropStealing();
-    }
+        public List<Raid> Raids { get { return raidable.RaidList; } }
+        public bool IsRaided => Raids.Count > 0;
 
-    private void CropGoneHandler(Plantable plantable)
-    {
-        raidable.SetRaidable(false);
-    }
+        [SerializeField]
+        private Shield Shield;
 
-    private void CropReadyHandler(Crop crop, Plantable plantable)
-    {
-        raidable.SetRaidable(true);
-    }
+        public bool IsShielded => Shield.IsActivate;
 
-    private void ShieldBreakHandler()
-    {
-        Shield.gameObject.SetActive(false);
-    }
+        public Plantable plantable;
 
-    public void ActivateShield(int maxHit)
-    {
-        Shield.SetMaxHit(maxHit);
-        Shield.gameObject.SetActive(true);
-    }
+        private void Awake()
+        {
+            if (raidable == null) raidable = GetComponent<Raidable>();
 
-    public static implicit operator Vector3(Node node)
-    {
-        return node.transform.position;
-    }
-    public static implicit operator Quaternion(Node node)
-    {
-        return node.transform.rotation;
+            plantable.OnCropReady += CropReadyHandler;
+            plantable.OnCropStolen += CropGoneHandler;
+
+            Shield.OnShieldActivate += ShieldActivateHandler;
+            Shield.OnShieldBreak += ShieldBreakHandler;
+
+            raidable.OnRaidEnd += RaidEndHandler;
+        }
+
+        public void ActivateShield(int hitPoint)
+        {
+            Shield.ActivateShield(hitPoint);
+        }
+
+        private void ShieldActivateHandler(Shield shield)
+        {
+            shield.gameObject.SetActive(true);
+        }
+
+        private void ShieldBreakHandler(Shield shield)
+        {
+            shield.gameObject.SetActive(false);
+        }
+
+        private void RaidEndHandler(Raidable raidable)
+        {
+            plantable.Crop.CropStealing();
+        }
+
+        private void CropGoneHandler(Plantable plantable)
+        {
+            raidable.SetRaidable(false);
+        }
+
+        private void CropReadyHandler(Crop crop, Plantable plantable)
+        {
+            raidable.SetRaidable(true);
+        }
+
+        public static implicit operator Vector3(Node node)
+        {
+            return node.transform.position;
+        }
+
+        public static implicit operator Quaternion(Node node)
+        {
+            return node.transform.rotation;
+        }
     }
 }
