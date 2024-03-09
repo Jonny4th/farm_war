@@ -16,7 +16,7 @@ public class CropTestScript : MonoBehaviour
 
         if(Input.GetKeyUp(KeyCode.A))
         {
-            var plots = Array.FindAll(controller.Plantables, x => x.Crop != null && x.Crop.CropIsReady);
+            var plots = Array.FindAll(controller.Plantables, x => x.Crop != null && x.Crop.IsReady);
             if (plots.Length == 0) return;
 
             var plot = plots[Random.Range(0, plots.Length)];

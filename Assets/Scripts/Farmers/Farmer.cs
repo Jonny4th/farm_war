@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
+using FarmWar.Core;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,6 +12,7 @@ public enum FarmerStrate
     Attack,
     Die
 }
+
 public class Farmer : MonoBehaviour
 {
 

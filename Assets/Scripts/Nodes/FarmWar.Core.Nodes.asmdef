@@ -1,11 +1,11 @@
 {
-    "name": "FarmWar.RaidFunction",
+    "name": "FarmWar.Core.Nodes",
     "rootNamespace": "",
     "references": [
-        "GUID:ee304daa643ba8d46aa0e52c98c0aa4a",
+        "GUID:44fa55db4eb27b6489509f08a9bbbded",
+        "GUID:d2548cff8ff130d4cb21651771db85e8",
         "GUID:90830f735b6b062478363d7502991897",
-        "GUID:d504258000a9adc49a533c924e212dc1",
-        "GUID:5d9131b1b5a8a31439050ae2e4b89b14"
+        "GUID:d504258000a9adc49a533c924e212dc1"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
