@@ -306,6 +306,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6184226152538049454, guid: 2e714facff1ac724e9cff934385b58bd, type: 3}
+      propertyPath: scalingMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7774745829082765471, guid: 2e714facff1ac724e9cff934385b58bd, type: 3}
       propertyPath: m_Name
       value: PoisonParticle
@@ -420,6 +424,18 @@ PrefabInstance:
       value: Farmer_Model
       objectReference: {fileID: 0}
     - target: {fileID: 494126, guid: fc70470a9a88b8147b809784d1012ba0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 494126, guid: fc70470a9a88b8147b809784d1012ba0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 494126, guid: fc70470a9a88b8147b809784d1012ba0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 494126, guid: fc70470a9a88b8147b809784d1012ba0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.105625
       objectReference: {fileID: 0}
@@ -458,6 +474,10 @@ PrefabInstance:
     - target: {fileID: 494126, guid: fc70470a9a88b8147b809784d1012ba0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 494126, guid: fc70470a9a88b8147b809784d1012ba0, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
