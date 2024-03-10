@@ -47,15 +47,19 @@ public class Crop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(cropTimer <= GrowthTime && cropCurrentState == 0 && CropStateGameObjects[0].gameObject.transform.position.y <= point.transform.position.y)
+        if(CropStateGameObjects[0].activeSelf)
         {
-            CropStateGameObjects[0].transform.position += new Vector3(0, 0.5f, 0) * Time.deltaTime; //Try Change Y if GrowthTime Change and can't see the crop
-        }
+            if (cropTimer <= GrowthTime && cropCurrentState == 0 && CropStateGameObjects[0].gameObject.transform.position.y <= point.transform.position.y)
+            {
+                CropStateGameObjects[0].transform.position += new Vector3(0, 0.5f, 0) * Time.deltaTime; //Try Change Y if GrowthTime Change and can't see the crop
+            }
 
-        if(CropStateGameObjects[0].gameObject.transform.position.y >= point.transform.position.y && CropStateGameObjects[0].gameObject.transform.localScale != scale)
-        {
-            CropStateGameObjects[0].gameObject.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f) * Time.deltaTime;
+            if (CropStateGameObjects[0].gameObject.transform.position.y >= point.transform.position.y && CropStateGameObjects[0].gameObject.transform.localScale != scale)
+            {
+                CropStateGameObjects[0].gameObject.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f) * Time.deltaTime;
+            }
         }
+       
 
 
         if (cropCurrentState != totalState - 1)

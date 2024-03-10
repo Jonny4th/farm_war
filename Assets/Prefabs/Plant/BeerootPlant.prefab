@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5dbb7bcba49788498f8496afb89915e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CropIsReady: 0
+  IsReady: 0
   cropContainer: {fileID: 4797635520848311485}
   CropStateGameObjects:
   - {fileID: 7048986206412702817}
@@ -58,7 +58,6 @@ MonoBehaviour:
   cropJumpDuration: 1
   point: {fileID: 8419577309331319999}
   scale: {x: 220, y: 220, z: 220}
-  currentPlot: {fileID: 0}
 --- !u!1 &8419577309331319999
 GameObject:
   m_ObjectHideFlags: 0
