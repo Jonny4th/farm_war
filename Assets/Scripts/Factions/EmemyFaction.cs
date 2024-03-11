@@ -1,15 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
 public class EmemyFaction : Faction<Farmer>
 {
-
-
-
     private event Action<EmemyFaction> updateHp;
     public Action<EmemyFaction> UpdateHp { get { return updateHp; } set { updateHp = value; } }
-
 
     public override void TakeDamage(float damage)
     {
@@ -19,6 +12,7 @@ public class EmemyFaction : Faction<Farmer>
         // Debug.Log("Hit");
         updateHp?.Invoke(this);
     }
+
     protected override void Start()
     {
 
@@ -49,6 +43,7 @@ public class EmemyFaction : Faction<Farmer>
         updateHp?.Invoke(this);
         // Delay(() => UIManager.instance.UpdateUi(this), 1f);
     }
+
     private void OnDestroy()
     {
         GameManager.instance.ResetEven -= ResetGame;

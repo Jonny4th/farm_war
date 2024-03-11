@@ -1,9 +1,10 @@
 using DG.Tweening;
+using System;
 using UnityEngine;
 
 public class Crop : MonoBehaviour
 {
-    public bool CropIsReady;
+    public bool IsReady;
 
     [SerializeField]
     private GameObject cropContainer;
@@ -27,14 +28,15 @@ public class Crop : MonoBehaviour
     [SerializeField]
     private Vector3 scale;
 
-    public Plantable currentPlot;
-
     private int cropCurrentState;
     private int totalState;
     private float cropTimer;
     private bool particleIsPlay;
 
  
+    public event Action<Crop> OnCropReady;
+    public event Action<Crop> OnCropStolen;
+
     private void Awake()
     {
         totalState = CropStateGameObjects.Length;
@@ -45,15 +47,19 @@ public class Crop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(cropTimer <= GrowthTime && cropCurrentState == 0 && CropStateGameObjects[0].gameObject.transform.position.y <= point.transform.position.y)
+        if(CropStateGameObjects[0].activeSelf)
         {
-            CropStateGameObjects[0].transform.position += new Vector3(0, 0.5f, 0) * Time.deltaTime; //Try Change Y if GrowthTime Change and can't see the crop
-        }
+            if (cropTimer <= GrowthTime && cropCurrentState == 0 && CropStateGameObjects[0].gameObject.transform.position.y <= point.transform.position.y)
+            {
+                CropStateGameObjects[0].transform.position += new Vector3(0, 0.5f, 0) * Time.deltaTime; //Try Change Y if GrowthTime Change and can't see the crop
+            }
 
-        if(CropStateGameObjects[0].gameObject.transform.position.y >= point.transform.position.y && CropStateGameObjects[0].gameObject.transform.localScale != scale)
-        {
-            CropStateGameObjects[0].gameObject.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f) * Time.deltaTime;
+            if (CropStateGameObjects[0].gameObject.transform.position.y >= point.transform.position.y && CropStateGameObjects[0].gameObject.transform.localScale != scale)
+            {
+                CropStateGameObjects[0].gameObject.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f) * Time.deltaTime;
+            }
         }
+       
 
 
         if (cropCurrentState != totalState - 1)
@@ -62,12 +68,13 @@ public class Crop : MonoBehaviour
         }
         else
         {
-            CropIsReady = true;
+            IsReady = true;
+            OnCropReady?.Invoke(this);
         }
 
-        if (CropIsReady == true && particleIsPlay == false)
+        if (IsReady == true && particleIsPlay == false)
         {
-            CropPartical();
+            CropParticle();
             particleIsPlay = true;
         }
 
@@ -85,7 +92,7 @@ public class Crop : MonoBehaviour
         CropStateGameObjects[cropCurrentState].SetActive(true);
     }
 
-    private void CropPartical()
+    private void CropParticle()
     {
         Instantiate(particle, gameObject.transform.position, Quaternion.Euler(-90f, 0f, 0f));
     }
@@ -93,13 +100,15 @@ public class Crop : MonoBehaviour
     public void CropStealing()
     {
         var move = transform.DOMove(transform.position + cropJump * Vector3.up, cropJumpDuration);
+
         move.onComplete += () =>
         {
             // Reset();
             // gameObject.SetActive(false);
-            currentPlot.Crop = null;
-            Destroy(this.gameObject);
+            OnCropStolen?.Invoke(this);
+            Destroy(gameObject);
         };
+
         Instantiate(particle, gameObject.transform.position, Quaternion.identity);
     }
 
@@ -107,7 +116,7 @@ public class Crop : MonoBehaviour
     {
         cropTimer = 0;
         particleIsPlay = false;
-        CropIsReady = false;
+        IsReady = false;
         foreach (var item in CropStateGameObjects)
         { item.SetActive(false); }
         CropStateGameObjects[0].SetActive(true);

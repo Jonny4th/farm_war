@@ -1,11 +1,8 @@
 {
-    "name": "FarmWar.RaidFunction",
+    "name": "FarmWar.ShieldFunction",
     "rootNamespace": "",
     "references": [
-        "GUID:ee304daa643ba8d46aa0e52c98c0aa4a",
-        "GUID:90830f735b6b062478363d7502991897",
-        "GUID:d504258000a9adc49a533c924e212dc1",
-        "GUID:5d9131b1b5a8a31439050ae2e4b89b14"
+        "GUID:d504258000a9adc49a533c924e212dc1"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

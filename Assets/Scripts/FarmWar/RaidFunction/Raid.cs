@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 public class Raid : MonoBehaviour, IDamageable
 {
-    public UnityEvent<Raid> OnRaidStart;
+    public UnityEvent<Raid> OnRaidStarted;
     public UnityEvent<Raid> OnRaidCompleted; // send when raid stops.
     public UnityEvent<Raid> OnOutAnimationDone; // send when animaiton out had done.
 
@@ -22,29 +22,17 @@ public class Raid : MonoBehaviour, IDamageable
     [SerializeField]
     private Animator m_Animator;
 
-
     private Raidable currentTarget;
-
-    private RaidController raidController;
-    public RaidController RaidControll { get { return raidController; } set { raidController = value; } }
 
     void OnEnable()
     {
         m_RemainLifeTime = m_LifeTime;
-        if (raidController != null) raidController.RaidActive++;
         StartCoroutine(UpdateLife());
     }
-    private void OnDisable()
-    {
-        if (raidController != null) raidController.RaidActive--;
-    }
-    public void StartSpaw()
-    {
-        raidController.RaidActive++;
-    }
+
     IEnumerator UpdateLife()
     {
-        OnRaidStart?.Invoke(this);
+        OnRaidStarted?.Invoke(this);
 
         while (m_RemainLifeTime > 0)
         {
@@ -56,16 +44,11 @@ public class Raid : MonoBehaviour, IDamageable
         OnRaidCompleted?.Invoke(this);
         m_Animator.SetTrigger("Done");
     }
-    public void StealCrop()
-    {
-        currentTarget.plantable.Crop.CropStealing();
-    }
 
     public void SetRaidTarget(Raidable target)
     {
         target.AddToRaidList(this);
         currentTarget = target;
-
     }
 
     public void OnAnimationOutDone() // Used by animation event

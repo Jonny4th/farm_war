@@ -1407,7 +1407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e93528ce12bff75489b3f1170a2e6c4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnRaidStart:
+  OnRaidStarted:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 866984981981948135}

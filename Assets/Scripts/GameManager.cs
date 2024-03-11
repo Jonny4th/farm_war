@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameState state = GameState.Action;
     public GameState State { get { return state; } }
 
-
     [Space]
     [Header("Faction")]
     [SerializeField] private PlayerFaction playerFaction;
