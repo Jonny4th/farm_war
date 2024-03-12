@@ -1,24 +1,19 @@
 using System;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class PlayerFaction : Faction<Raid>
 {
+
     [SerializeField] private float maxCoin;
     public float MaxCoin { get { return maxCoin; } }
-
     private float m_coin;
     public float Coin { get { return m_coin; } }
-
     [SerializeField] private float startCoin = 1000;
 
     [SerializeField] private RaidController raidCon;
     public RaidController RaidCon { get { return raidCon; } }
-
-    [SerializeField] private ShieldContoller shieldCon;
-    public ShieldContoller ShieldCon { get { return shieldCon; } }
-
     [SerializeField] private Transform groundParent;
+
 
     [SerializeField] private float attackTime = 1;
     [SerializeField] private float damage = 1;
@@ -27,6 +22,7 @@ public class PlayerFaction : Faction<Raid>
     [SerializeField] private float timeSteal = 1;
     [SerializeField] private float quantityCoin = 10;
     private float timerSteal;
+
 
     private event Action<PlayerFaction> updateHp;
     public Action<PlayerFaction> UpdateHp { get { return updateHp; } set { updateHp = value; } }
@@ -41,13 +37,13 @@ public class PlayerFaction : Faction<Raid>
     public Action HealingEvent { get { return healingEvent; } set { healingEvent = value; } }
 
     public bool UnitOnGround { get { return CheckUnitOnGround(); } }
-
     public override void TakeDamage(float damage)
     {
         if (GameManager.instance.State != GameState.Action) return;
         currentHp -= damage;
         // UIManager.instance.UpdateUi(this);
         updateHp?.Invoke(this);
+        attackEvent?.Invoke();
         // Debug.Log("FFFF");
     }
 
@@ -70,7 +66,21 @@ public class PlayerFaction : Faction<Raid>
             updateCoin?.Invoke(this);
         }, 0.2f);
     }
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            attackEvent?.Invoke();
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            healingEvent?.Invoke();
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            poisonEvent?.Invoke();
+        }
+    }
     private void FixedUpdate()
     {
         if (raidCon.RaidActive > 0)
@@ -84,7 +94,6 @@ public class PlayerFaction : Faction<Raid>
             timerAttack = 0;
         }
     }
-
     private void ResetGame(GameManager gameManager)
     {
         timerAttack = 0;
@@ -112,6 +121,7 @@ public class PlayerFaction : Faction<Raid>
     public void Health(float hp)
     {
         currentHp += hp;
+        healingEvent?.Invoke();
         // UIManager.instance.UpdateUi(this);
     }
 
@@ -155,7 +165,7 @@ public class PlayerFaction : Faction<Raid>
         updateCoin?.Invoke(this);
     }
 
-    public void AttackCommand() // used by ui button
+    public void AttackCommand() // use by ui btn
     {
         if (!HaveCoin(raidCon.Cost)) return; // not enough coin.
         if (!raidCon.IsReady) return; // no fully grown veggies.
@@ -164,24 +174,6 @@ public class PlayerFaction : Faction<Raid>
         var raid = raidCon.RandomSpawnOnGround();
         aliveUnit.Add(raid);
         raid.OnRaidCompleted.AddListener((r) => aliveUnit.Remove(r));
-    }
-
-    public void ShieldCommand() // used by ui button
-    {
-        int hitPoint = 2; // default hit point for shield.
-
-        if(!HaveCoin(shieldCon.Cost)) return;
-        ReduceCoin(shieldCon.Cost);
-
-        var unitNodes = GameManager.instance.NodeMana.nodeCollcetion.FindAll(x => x.IsRaided && !x.IsShielded);
-        
-        if (unitNodes.Count == 0)
-        {
-            shieldCon.ActivateShieldRandomly(hitPoint);
-            return;
-        }
-
-        unitNodes[Random.Range(0, unitNodes.Count)].ActivateShield(hitPoint);
     }
 
     public void AnimalDie(AnimalTest animalTest)

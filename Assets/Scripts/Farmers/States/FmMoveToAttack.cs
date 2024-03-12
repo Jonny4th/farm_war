@@ -34,6 +34,7 @@ public class FmMoveToAttack : StateFinder
     public override void StartState()
     {
         base.StartState();
+        farmer.SwicthTool(2);
         farmer.PlayerAnimation(FarmerStrate.Idel);
         agent.isStopped = true;
         ieRotate = null;

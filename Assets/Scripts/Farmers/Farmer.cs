@@ -49,10 +49,14 @@ public class Farmer : MonoBehaviour
     // public Raidable raidable;
 
     public FarmerStrate currentState;
+    [Header("Tool")]
+    [SerializeField] private GameObject axe;
+    [SerializeField] private GameObject hoe;
+    private int currToolIndex = 0;
 
     void Awake()
     {
-
+        SwicthTool(1);
     }
     void Start()
     {
@@ -159,5 +163,26 @@ public class Farmer : MonoBehaviour
     public static implicit operator Quaternion(Farmer farmer)
     {
         return farmer.transform.rotation;
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="toolIndex">1 => Hoe,2 => axe</param>
+    public void SwicthTool(int toolIndex)
+    {
+        if (currToolIndex == toolIndex) return;
+        switch (toolIndex)
+        {
+            case 1:
+                axe.SetActive(false);
+                hoe.SetActive(true);
+                currToolIndex = toolIndex;
+                break;
+            case 2:
+                hoe.SetActive(false);
+                axe.SetActive(true);
+                currToolIndex = toolIndex;
+                break;
+        }
     }
 }
