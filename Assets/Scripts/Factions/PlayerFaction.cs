@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-
+using Random = UnityEngine.Random;
 public class PlayerFaction : Faction<Raid>
 {
 
@@ -12,8 +12,12 @@ public class PlayerFaction : Faction<Raid>
 
     [SerializeField] private RaidController raidCon;
     public RaidController RaidCon { get { return raidCon; } }
-    [SerializeField] private Transform groundParent;
 
+    [SerializeField] private ShieldContoller shieldCon;
+    public ShieldContoller ShieldContoller { get {  return shieldCon; } }
+    
+    
+    [SerializeField] private Transform groundParent;
 
     [SerializeField] private float attackTime = 1;
     [SerializeField] private float damage = 1;
@@ -174,6 +178,24 @@ public class PlayerFaction : Faction<Raid>
         var raid = raidCon.RandomSpawnOnGround();
         aliveUnit.Add(raid);
         raid.OnRaidCompleted.AddListener((r) => aliveUnit.Remove(r));
+    }
+
+    public void ShieldCommand() // used by ui button
+    {
+        int hitPoint = 2; // default hit point for shield.
+
+        if (!HaveCoin(shieldCon.Cost)) return;
+        ReduceCoin(shieldCon.Cost);
+
+        var unitNodes = GameManager.instance.NodeMana.nodeCollcetion.FindAll(x => x.IsRaided && !x.IsShielded);
+
+        if (unitNodes.Count == 0)
+        {
+            shieldCon.ActivateShieldRandomly(hitPoint);
+            return;
+        }
+
+        unitNodes[Random.Range(0, unitNodes.Count)].ActivateShield(hitPoint);
     }
 
     public void AnimalDie(AnimalTest animalTest)
