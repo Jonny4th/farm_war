@@ -15,7 +15,9 @@ public class PlayerFaction : Faction<Raid>
 
     [SerializeField] private ShieldContoller shieldCon;
     public ShieldContoller ShieldContoller { get {  return shieldCon; } }
-    
+
+    [SerializeField] private RaidableHealingController healingCon;
+    public RaidableHealingController HealingCon { get { return healingCon; } }
     
     [SerializeField] private Transform groundParent;
 
@@ -182,10 +184,10 @@ public class PlayerFaction : Faction<Raid>
 
     public void ShieldCommand() // used by ui button
     {
-        int hitPoint = 2; // default hit point for shield.
-
         if (!HaveCoin(shieldCon.Cost)) return;
+
         ReduceCoin(shieldCon.Cost);
+        int hitPoint = 2; // default hit point for shield.
 
         var unitNodes = GameManager.instance.NodeMana.nodeCollcetion.FindAll(x => x.IsRaided && !x.IsShielded);
 
@@ -196,6 +198,15 @@ public class PlayerFaction : Faction<Raid>
         }
 
         unitNodes[Random.Range(0, unitNodes.Count)].ActivateShield(hitPoint);
+    }
+
+    public void HealCommand()
+    {
+        if(!healingCon.IsReady) return;
+
+        ReduceCoin(healingCon.Cost);
+
+        healingCon.HealRandomly();
     }
 
     public void AnimalDie(AnimalTest animalTest)
