@@ -202,7 +202,8 @@ public class PlayerFaction : Faction<Raid>
 
     public void HealCommand()
     {
-        if(!healingCon.IsReady) return;
+        if (!HaveCoin(shieldCon.Cost)) return;
+        if (!healingCon.IsReady) return;
 
         ReduceCoin(healingCon.Cost);
 
