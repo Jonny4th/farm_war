@@ -5990,20 +5990,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4440686246357241027, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4440686246357241027, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4440686246357241027, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: AttackCommand
-      objectReference: {fileID: 0}
-    - target: {fileID: 4440686246357241027, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: PlayerFaction, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4440686246357241027, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4440686246357241027, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -6045,6 +6041,10 @@ PrefabInstance:
       propertyPath: m_TargetGraphic
       value: 
       objectReference: {fileID: 1944983919504981361}
+    - target: {fileID: 7502809640710420084, guid: 7e6adf4434068704eaed50033c1b401b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
