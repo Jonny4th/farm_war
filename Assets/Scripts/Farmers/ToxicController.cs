@@ -13,14 +13,9 @@ public class ToxicController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
-    }
+  
     private void Attacked(EmemyFaction ememyFaction)
     {
-        Debug.Log(ememyFaction.Hp);
-        Debug.Log(ememyFaction.MaxHp);
         if (ememyFaction.Hp <= (ememyFaction.MaxHp / 2f) && !m_isSkillActive)
         {
             m_isSkillActive = true;

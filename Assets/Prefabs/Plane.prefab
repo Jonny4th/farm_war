@@ -359,6 +359,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3482414759442588489, guid: 905951d200649db44bb3cde706de555d, type: 3}
+      propertyPath: m_timeUp
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3482414759442588489, guid: 905951d200649db44bb3cde706de555d, type: 3}
+      propertyPath: m_timeDown
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3482414759442588489, guid: 905951d200649db44bb3cde706de555d, type: 3}
       propertyPath: m_particleSystem
       value: 
       objectReference: {fileID: 8121212248440291001}
