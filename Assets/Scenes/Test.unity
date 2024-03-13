@@ -1545,17 +1545,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2841008224920847504, guid: 8df07b19a9fe77a479aee0a773a66176, type: 3}
   m_PrefabInstance: {fileID: 703454490}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &703454492 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 437296359055485809, guid: 8df07b19a9fe77a479aee0a773a66176, type: 3}
-  m_PrefabInstance: {fileID: 703454490}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &703454493 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2913866569938439465, guid: 8df07b19a9fe77a479aee0a773a66176, type: 3}
   m_PrefabInstance: {fileID: 703454490}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 703454492}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9deb3105c666e384ca8c0f4829ca6740, type: 3}
@@ -2337,7 +2332,7 @@ PrefabInstance:
     - target: {fileID: 8452924647332657767, guid: 458447718231bfe42a19448f26311170, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 703454492}
+      objectReference: {fileID: 703454493}
     - target: {fileID: 8452924647332657767, guid: 458447718231bfe42a19448f26311170, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
