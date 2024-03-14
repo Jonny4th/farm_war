@@ -9,6 +9,7 @@ public class StateFinder : StateBase
     protected bool CropIsNull()
     {
         nodeCrop = manager.NodeMana.nodeCollcetion.FindAll(x => x.plantable.Crop == null);
+        if (GameManager.instance.ToxicControll.IsSkillActive) return true;
         if (nodeCrop.Count > 0)
             return false;
         else
