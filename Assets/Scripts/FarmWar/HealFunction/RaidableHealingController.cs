@@ -8,8 +8,12 @@ public class RaidableHealingController : MonoBehaviour, IAbility
 
     [SerializeField]
     private FloatReference m_Cost;
-    public int Cost => (int)m_Cost;
 
+    public event Action<Healer> OnHealingStarted;
+    public event Action<Healer> OnHealing;
+    public event Action<Healer> OnHealingEnd;
+
+    public int Cost => (int)m_Cost;
     public bool IsReady => Array.Exists(m_Healers, x => x.Patient.IsHealingNeeded && !x.IsActivating);
 
     public void HealRandomly()
@@ -26,6 +30,6 @@ public class RaidableHealingController : MonoBehaviour, IAbility
 
     public void Execute()
     {
-        throw new System.NotImplementedException();
+        HealRandomly();
     }
 }

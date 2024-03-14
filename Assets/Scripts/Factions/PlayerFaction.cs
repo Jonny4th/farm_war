@@ -208,6 +208,7 @@ public class PlayerFaction : Faction<Raid>
         ReduceCoin(healingCon.Cost);
 
         healingCon.HealRandomly();
+        healingEvent?.Invoke();
     }
 
     public void AnimalDie(AnimalTest animalTest)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -17,6 +18,10 @@ public class Healer : MonoBehaviour
     public IHealable Patient {  get; private set; }
     public bool IsActivating { get; private set; }
 
+    public event Action<Healer> OnHealingStarted;
+    public event Action<Healer> OnHealing;
+    public event Action<Healer> OnHealingEnd;
+
     private void Awake()
     {
         Patient = GetComponent<IHealable>();
@@ -29,6 +34,7 @@ public class Healer : MonoBehaviour
 
     private IEnumerator Healing()
     {
+        OnHealingStarted?.Invoke(this);
         IsActivating = true;
         m_Visual.SetActive(true);
         var endTime = Time.time + m_HealingDuration;
@@ -36,11 +42,13 @@ public class Healer : MonoBehaviour
         while (Time.time < endTime)
         {
             Patient.Heal(m_HealingRate);
+            OnHealing?.Invoke(this);
             yield return new WaitForSeconds(1f);
         }
 
         m_Visual.SetActive(false);
         IsActivating = false;
+        OnHealingEnd?.Invoke(this);
     }
 
     public void SetPatient(IHealable patient)
