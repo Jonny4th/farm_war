@@ -222,7 +222,6 @@ public class PlayerFaction : Faction<Raid>
 
     private void HandleOnHealing(Healer healer)
     {
-        Debug.Log(healer.gameObject.name);
         healingEvent?.Invoke();
     }
 

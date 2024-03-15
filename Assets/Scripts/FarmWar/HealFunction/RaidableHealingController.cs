@@ -26,11 +26,6 @@ public class RaidableHealingController : MonoBehaviour, IAbility
     public int Cost => (int)m_Cost;
     public bool IsReady => Array.Exists(m_Healers, x => x.Patient.IsHealingNeeded && !x.IsActivating);
 
-    private void HandleOnHealing(Healer healer)
-    {
-        OnHealing?.Invoke(healer);
-    }
-
     public void HealRandomly()
     {
         var healers = Array.FindAll(m_Healers, x => x.Patient.IsHealingNeeded && !x.IsActivating);
