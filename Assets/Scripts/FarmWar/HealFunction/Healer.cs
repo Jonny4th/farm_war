@@ -20,7 +20,7 @@ public class Healer : MonoBehaviour
 
     public event Action<Healer> OnHealingStarted;
     public event Action<Healer> OnHealing;
-    public event Action<Healer> OnHealingEnd;
+    public event Action<Healer> OnHealingEnded;
 
     private void Awake()
     {
@@ -48,7 +48,7 @@ public class Healer : MonoBehaviour
 
         m_Visual.SetActive(false);
         IsActivating = false;
-        OnHealingEnd?.Invoke(this);
+        OnHealingEnded?.Invoke(this);
     }
 
     public void SetPatient(IHealable patient)
