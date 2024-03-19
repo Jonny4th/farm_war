@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class Raidable : MonoBehaviour
+public class Raidable : MonoBehaviour, IHealable
 {
     [SerializeField]
     private List<Raid> m_RaidList = new();
@@ -18,6 +17,8 @@ public class Raidable : MonoBehaviour
     public bool IsRaidable => m_IsRaidable;
 
     public bool IsFullyOccupied => m_RaidList.Count >= m_RaidLimit;
+
+    public bool IsHealingNeeded => m_RaidList.Count > 0;
 
     public event Action<Raid, Raidable> OnRaidStart;
     public event Action<Raidable> OnRaidEnd;
@@ -49,5 +50,13 @@ public class Raidable : MonoBehaviour
     public void RemoveFromRaidList(Raid raid)
     {
         if (m_RaidList.Contains(raid)) m_RaidList.Remove(raid);
+    }
+
+    public void Heal(float healPoints)
+    {
+        foreach(var r in m_RaidList)
+        {
+            r.Heal(healPoints);
+        }
     }
 }

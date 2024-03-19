@@ -15,7 +15,9 @@ public class PlayerFaction : Faction<Raid>
 
     [SerializeField] private ShieldContoller shieldCon;
     public ShieldContoller ShieldContoller { get {  return shieldCon; } }
-    
+
+    [SerializeField] private RaidableHealingController healingCon;
+    public RaidableHealingController HealingCon { get { return healingCon; } }
     
     [SerializeField] private Transform groundParent;
 
@@ -41,6 +43,57 @@ public class PlayerFaction : Faction<Raid>
     public Action HealingEvent { get { return healingEvent; } set { healingEvent = value; } }
 
     public bool UnitOnGround { get { return CheckUnitOnGround(); } }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        healingCon.OnHealing += HandleOnHealing;
+    }
+
+    protected override void Start()
+    {
+
+        currentHp = maxHp;
+        m_coin = startCoin;
+        GameManager.instance.ResetEven += ResetGame;
+        // Delay(() => UIManager.instance.UpdateUi(this), 1f);
+        Delay(() =>
+        {
+            updateHp?.Invoke(this);
+            updateCoin?.Invoke(this);
+        }, 0.2f);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            attackEvent?.Invoke();
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            healingEvent?.Invoke();
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            poisonEvent?.Invoke();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (raidCon.RaidActive > 0)
+        {
+            AttackPlayer();
+            Steal();
+
+        }
+        else if (raidCon.RaidActive == 0 && timerAttack > 0)
+        {
+            timerAttack = 0;
+        }
+    }
+
     public override void TakeDamage(float damage)
     {
         if (GameManager.instance.State != GameState.Action) return;
@@ -57,47 +110,6 @@ public class PlayerFaction : Faction<Raid>
         return raidCon.RaidActive > 0;
     }
 
-    protected override void Start()
-    {
-
-        currentHp = maxHp;
-        m_coin = startCoin;
-        GameManager.instance.ResetEven += ResetGame;
-        // Delay(() => UIManager.instance.UpdateUi(this), 1f);
-        Delay(() =>
-        {
-            updateHp?.Invoke(this);
-            updateCoin?.Invoke(this);
-        }, 0.2f);
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            attackEvent?.Invoke();
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad2))
-        {
-            healingEvent?.Invoke();
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad3))
-        {
-            poisonEvent?.Invoke();
-        }
-    }
-    private void FixedUpdate()
-    {
-        if (raidCon.RaidActive > 0)
-        {
-            AttackPlayer();
-            Steal();
-
-        }
-        else if (raidCon.RaidActive == 0 && timerAttack > 0)
-        {
-            timerAttack = 0;
-        }
-    }
     private void ResetGame(GameManager gameManager)
     {
         timerAttack = 0;
@@ -129,7 +141,6 @@ public class PlayerFaction : Faction<Raid>
         // UIManager.instance.UpdateUi(this);
     }
 
-
     private void AttackPlayer()
     {
         timerAttack += Time.fixedDeltaTime;
@@ -140,6 +151,7 @@ public class PlayerFaction : Faction<Raid>
         }
 
     }
+
     private void Steal()
     {
         timerSteal += Time.deltaTime;
@@ -182,10 +194,10 @@ public class PlayerFaction : Faction<Raid>
 
     public void ShieldCommand() // used by ui button
     {
-        int hitPoint = 2; // default hit point for shield.
-
         if (!HaveCoin(shieldCon.Cost)) return;
+
         ReduceCoin(shieldCon.Cost);
+        int hitPoint = 2; // default hit point for shield.
 
         var unitNodes = GameManager.instance.NodeMana.nodeCollcetion.FindAll(x => x.IsRaided && !x.IsShielded);
 
@@ -196,6 +208,21 @@ public class PlayerFaction : Faction<Raid>
         }
 
         unitNodes[Random.Range(0, unitNodes.Count)].ActivateShield(hitPoint);
+    }
+
+    public void HealCommand()
+    {
+        if (!HaveCoin(shieldCon.Cost)) return;
+        if (!healingCon.IsReady) return;
+
+        ReduceCoin(healingCon.Cost);
+
+        healingCon.HealRandomly();
+    }
+
+    private void HandleOnHealing(Healer healer)
+    {
+        healingEvent?.Invoke();
     }
 
     public void AnimalDie(AnimalTest animalTest)
