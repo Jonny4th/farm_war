@@ -45,12 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1294df4c891e3844a94d49b5076ce222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_timeDuration: 30
   m_particleSystem: {fileID: 0}
   m_particleRoot: {fileID: 2725721152430121427}
   m_timeUp: 1
   m_timeDown: 1
-  m_reducTime: 50
+  m_setting: {fileID: 11400000, guid: 4c9e7e74d76788148ab7edc3c473a837, type: 2}
 --- !u!1 &2725721152430121427
 GameObject:
   m_ObjectHideFlags: 0

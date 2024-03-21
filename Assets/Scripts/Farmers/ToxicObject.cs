@@ -19,17 +19,43 @@ public class ToxicObject : MonoBehaviour
 
     private bool m_isActive = false;
     public bool IsActive => m_isActive;
-    [SerializeField] private float m_reducTime = 50f;
-    [SerializeField] private float m_reducFrequency = 0.3f;
+    [SerializeField] private ToxicSetting m_setting;
+    private float m_reducTime = 10f;
+    private float m_reducFrequency = 0.3f;
 
     private void Awake()
     {
         m_node = transform.parent.GetComponent<Node>();
+        m_reducTime = m_setting.ReducTime;
+        m_reducFrequency = m_setting.ReducFrequency;
+        // if (!m_setting.ToxicList.Contains(this))
+        //     m_setting.ToxicList.Add(this);
+
     }
     void Start()
     {
         m_originalScale = m_particleRoot.transform.localScale;
+        GameManager.instance.ToxicControll.ToxicObj.Add(this);
+
     }
+
+    // public void SetSeting(ToxicSetting toxicSetting)
+    // {
+
+    //     m_setting = toxicSetting;
+    //     if (!m_setting.ToxicList.Contains(this))
+    //         m_setting.ToxicList.Add(this);
+
+    //     Setting();
+    // }
+    // private void Setting()
+    // {
+    //     if (m_setting != null)
+    //     {
+    //         m_reducTime = m_setting.ReducTime;
+    //         m_reducFrequency = m_setting.ReducFrequency;
+    //     }
+    // }
 
     void Update()
     {
@@ -41,7 +67,7 @@ public class ToxicObject : MonoBehaviour
     }
     public void ActiveSkill()
     {
-       
+
         m_isActive = true;
         StartCoroutine(I_AnimationUp());
     }
@@ -95,6 +121,6 @@ public class ToxicObject : MonoBehaviour
         }
         m_particleRoot.SetActive(false);
         m_node.IsToxic = false;
-        m_toxicController.IsSkillActive = false;
+        // m_toxicController.IsSkillActive = false;
     }
 }

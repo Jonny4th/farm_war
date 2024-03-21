@@ -7,16 +7,29 @@ public class ToxicController : MonoBehaviour
 {
 
     [SerializeField] private List<ToxicObject> m_toxicObj;
+    public List<ToxicObject> ToxicObj { get { return m_toxicObj; } set { m_toxicObj = value; } }
     private bool m_isSkillActive = false;
     public bool IsSkillActive { get { return m_isSkillActive; } set { m_isSkillActive = value; } }
-    [SerializeField] private float m_timeDuration = 30f;
+    [SerializeField] private ToxicSetting m_setting;
+    private float m_timeDuration = 10f;
+    private float m_percenActive = 0.3f;
+    private void Awake()
+    {
+        m_timeDuration = m_setting.SkillDuration;
+        m_percenActive = m_setting.PercentActive;
+    }
     void Start()
     {
         GameManager.instance.EmemyFaction.UpdateHp += Attacked;
-        foreach (var T in m_toxicObj)
-        {
-            T.ToxicControll = this;
-        }
+        // foreach (var T in m_toxicObj)
+        // {
+        //   T.ToxicControll = this;
+        // T.SetSeting(m_setting);
+        //  }
+        //  if (m_setting != null)
+        //  {
+
+        // }
     }
 
     // Update is called once per frame
@@ -38,15 +51,11 @@ public class ToxicController : MonoBehaviour
     }
     private IEnumerator I_CountDown()
     {
-        Debug.Log("FDFDFDFDFDFDFDFDFDFD");
         yield return new WaitForSeconds(m_timeDuration);
-        Debug.Log("====================");
         foreach (var T in m_toxicObj)
         {
-
             T.UnActiveSkill();
-
         }
-
+     //   m_isSkillActive = false;
     }
 }
