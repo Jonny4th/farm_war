@@ -65,6 +65,7 @@ Transform:
   - {fileID: 7763675239274963252}
   - {fileID: 3865573155822465676}
   - {fileID: 9062469054382047247}
+  - {fileID: 1403014311332173188}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2913866569938439465
@@ -87,6 +88,7 @@ MonoBehaviour:
   startCoin: 1000
   raidCon: {fileID: 356866762273298650}
   shieldCon: {fileID: 1165217099528972748}
+  healingCon: {fileID: 6711424987915119324}
   groundParent: {fileID: 7763675239274963252}
   attackTime: 1
   damage: 2
@@ -152,9 +154,72 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Name: ShieldCost
-  _UseConstant: 1
-  _ConstantValue: 400
-  _Variable: {fileID: 0}
+  _UseConstant: 0
+  _ConstantValue: 0
+  _Variable: {fileID: 11400000, guid: a85d3a052e24d7e4dae25b0519bca997, type: 2}
+--- !u!1 &3857399295581434844
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1403014311332173188}
+  - component: {fileID: 6711424987915119324}
+  - component: {fileID: 1360984601566795237}
+  m_Layer: 0
+  m_Name: HealController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1403014311332173188
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3857399295581434844}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2841008224920847504}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6711424987915119324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3857399295581434844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80eef4253ea8f3d4ca2d857b6d597672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Healers: []
+  m_Cost: {fileID: 1360984601566795237}
+--- !u!114 &1360984601566795237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3857399295581434844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a4fa84d7303f647a19ead9686d7f1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Name: HealingCost
+  _UseConstant: 0
+  _ConstantValue: 0
+  _Variable: {fileID: 11400000, guid: 301efa8fc340f2c4c874506f548e067c, type: 2}
 --- !u!1 &5583916973710915996
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,6 +333,7 @@ MonoBehaviour:
   m_RaidList: []
   m_Spawner: {fileID: 7708261608310813142}
   m_RaidParent: {fileID: 4158520058584433330}
+  m_RaidActive: 0
   m_Cost: {fileID: 3282886562240650700}
 --- !u!114 &7708261608310813142
 MonoBehaviour:
@@ -295,6 +361,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Name: AttackCost
-  _UseConstant: 1
-  _ConstantValue: 300
-  _Variable: {fileID: 0}
+  _UseConstant: 0
+  _ConstantValue: 0
+  _Variable: {fileID: 11400000, guid: 1f96be9c3f4392641a7c47eecc9fb2fb, type: 2}

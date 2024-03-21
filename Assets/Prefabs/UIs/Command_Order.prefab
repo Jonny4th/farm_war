@@ -237,6 +237,7 @@ GameObject:
   - component: {fileID: 1638357695871940118}
   - component: {fileID: 813571099195853881}
   - component: {fileID: 3518912167159697934}
+  - component: {fileID: 1028521077998802363}
   m_Layer: 5
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
@@ -372,8 +373,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53bc31347472f94dad7c9e1b9de2a4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Value: {fileID: 0}
+  m_Value: {fileID: 1028521077998802363}
   m_Display: {fileID: 813571099195853881}
+--- !u!114 &1028521077998802363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3210631185100371842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a4fa84d7303f647a19ead9686d7f1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Name: 
+  _UseConstant: 0
+  _ConstantValue: 0
+  _Variable: {fileID: 11400000, guid: a85d3a052e24d7e4dae25b0519bca997, type: 2}
 --- !u!1 &3258841032091862149
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,7 +694,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerFaction, Assembly-CSharp
+        m_MethodName: AttackCommand
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 10
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5574697975715601457
 GameObject:
   m_ObjectHideFlags: 0
@@ -769,7 +798,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerFaction, Assembly-CSharp
+        m_MethodName: HealCommand
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5657611310343487968
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,6 +973,7 @@ GameObject:
   - component: {fileID: 9069396602079343324}
   - component: {fileID: 1526958428209198866}
   - component: {fileID: 2685208072820155222}
+  - component: {fileID: 783971350637033664}
   m_Layer: 5
   m_Name: Text (TMP) (2)
   m_TagString: Untagged
@@ -1067,8 +1109,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53bc31347472f94dad7c9e1b9de2a4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Value: {fileID: 0}
+  m_Value: {fileID: 783971350637033664}
   m_Display: {fileID: 1526958428209198866}
+--- !u!114 &783971350637033664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7690390817516373139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a4fa84d7303f647a19ead9686d7f1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Name: 
+  _UseConstant: 0
+  _ConstantValue: 0
+  _Variable: {fileID: 11400000, guid: 301efa8fc340f2c4c874506f548e067c, type: 2}
 --- !u!1 &8589009890384771852
 GameObject:
   m_ObjectHideFlags: 0
@@ -1081,6 +1139,7 @@ GameObject:
   - component: {fileID: 4322645010256297880}
   - component: {fileID: 6913027848454919962}
   - component: {fileID: 6847087454449513406}
+  - component: {fileID: 6567126681535849003}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1216,8 +1275,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53bc31347472f94dad7c9e1b9de2a4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Value: {fileID: 0}
+  m_Value: {fileID: 6567126681535849003}
   m_Display: {fileID: 6913027848454919962}
+--- !u!114 &6567126681535849003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8589009890384771852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a4fa84d7303f647a19ead9686d7f1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Name: 
+  _UseConstant: 0
+  _ConstantValue: 0
+  _Variable: {fileID: 11400000, guid: 1f96be9c3f4392641a7c47eecc9fb2fb, type: 2}
 --- !u!1 &9020548478594973635
 GameObject:
   m_ObjectHideFlags: 0

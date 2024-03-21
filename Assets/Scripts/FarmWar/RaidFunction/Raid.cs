@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Raid : MonoBehaviour, IDamageable
+public class Raid : MonoBehaviour, IDamageable, IHealable
 {
     public UnityEvent<Raid> OnRaidStarted;
     public UnityEvent<Raid> OnRaidCompleted; // send when raid stops.
@@ -15,6 +15,8 @@ public class Raid : MonoBehaviour, IDamageable
     [SerializeField]
     private float m_RemainLifeTime;
     public float RemainLifeTime => m_RemainLifeTime;
+
+    public bool IsHealingNeeded => true;
 
     [SerializeField]
     private FloatReference m_NormalizedTime;
@@ -65,5 +67,11 @@ public class Raid : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         m_RemainLifeTime -= damage;
+    }
+
+    public void Heal(float healPoints)
+    {
+        m_RemainLifeTime += healPoints;
+        if (m_RemainLifeTime > m_LifeTime) m_RemainLifeTime = m_LifeTime; 
     }
 }
