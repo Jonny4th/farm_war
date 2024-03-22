@@ -1559,11 +1559,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2913866569938439465, guid: 8df07b19a9fe77a479aee0a773a66176, type: 3}
       propertyPath: maxCoin
-      value: 10000
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 2913866569938439465, guid: 8df07b19a9fe77a479aee0a773a66176, type: 3}
       propertyPath: startCoin
-      value: 10000
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 6711424987915119324, guid: 8df07b19a9fe77a479aee0a773a66176, type: 3}
       propertyPath: m_Healers.Array.size
