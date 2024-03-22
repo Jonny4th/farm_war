@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Xml.Xsl;
 using UnityEngine;
 
 
@@ -63,6 +64,8 @@ public class FmAttackState : StateFinder
   }
   private void Attack()
   {
+    var node = farmer.nodetarget;
+    node.TakeDamage(lifeTimeReduce);
     GameManager.instance.PlayerFaction.TakeDamage(damage);
     raidTarget.TakeDamage(lifeTimeReduce);
   }

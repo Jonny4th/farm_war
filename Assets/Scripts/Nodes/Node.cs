@@ -67,7 +67,7 @@ namespace FarmWar.Core
 
         public void TakeDamage(float damage)
         {
-            Shield.TakeDamage(1);
+            if(IsShielded) Shield.TakeDamage(1);
         }
 
         public static implicit operator Vector3(Node node)
