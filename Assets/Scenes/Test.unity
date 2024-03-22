@@ -1557,6 +1557,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2913866569938439465, guid: 8df07b19a9fe77a479aee0a773a66176, type: 3}
+      propertyPath: maxCoin
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2913866569938439465, guid: 8df07b19a9fe77a479aee0a773a66176, type: 3}
+      propertyPath: startCoin
+      value: 10000
+      objectReference: {fileID: 0}
     - target: {fileID: 6711424987915119324, guid: 8df07b19a9fe77a479aee0a773a66176, type: 3}
       propertyPath: m_Healers.Array.size
       value: 9
@@ -2478,6 +2486,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 200250785}
+  - {fileID: 1508816983}
   m_Father: {fileID: 49591534}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &998879940
@@ -2497,6 +2506,7 @@ MonoBehaviour:
   maxHp: 100
   currentHp: 0
   unitParent: {fileID: 200250785}
+  m_toxicController: {fileID: 1508816984}
 --- !u!1 &1001789552
 GameObject:
   m_ObjectHideFlags: 0
@@ -3200,6 +3210,7 @@ MonoBehaviour:
   playerFaction: {fileID: 703454493}
   ememyFaction: {fileID: 998879940}
   nodeManager: {fileID: 1320037969}
+  m_toxiocController: {fileID: 1508816984}
   immortal: 0
   setUpTime: 1
 --- !u!114 &1320037969
@@ -3728,6 +3739,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3fd7201dc1b4094fb8067ca406a727a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1508816982
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1508816983}
+  - component: {fileID: 1508816984}
+  m_Layer: 0
+  m_Name: Toxic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1508816983
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508816982}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 998879939}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1508816984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508816982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fd29da330a7b7844826915f86bb02bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_toxicObj: []
+  m_setting: {fileID: 11400000, guid: 7e1bc858c6aec1d449228dd12695d6ea, type: 2}
 --- !u!1001 &1515151156
 PrefabInstance:
   m_ObjectHideFlags: 0
