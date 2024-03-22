@@ -10,7 +10,7 @@ public abstract class Faction<T> : MonoBehaviour
     public List<T> AliveUnit { get { return aliveUnit; } }
     [SerializeField] protected float maxHp = 100;
     public float MaxHp { get { return maxHp; } set { maxHp = value; } }
-    [SerializeField] private protected float currentHp;
+    [SerializeField]  protected float currentHp;
     public float Hp { get { return (int)currentHp; } }
 
     [SerializeField] private Transform unitParent;

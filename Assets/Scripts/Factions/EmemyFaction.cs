@@ -1,9 +1,10 @@
 using System;
+using UnityEngine;
 public class EmemyFaction : Faction<Farmer>
 {
     private event Action<EmemyFaction> updateHp;
     public Action<EmemyFaction> UpdateHp { get { return updateHp; } set { updateHp = value; } }
-
+    [SerializeField] private ToxicController m_toxicController;
     public override void TakeDamage(float damage)
     {
         if (GameManager.instance.State != GameState.Action) return;

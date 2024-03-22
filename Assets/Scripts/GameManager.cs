@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
     public event Action<GameManager> GameOverEven;
     public event Action<GameManager> WinerEven;
     public event Action<GameManager> ResetEven;
+    [SerializeField] private ToxicController m_toxiocController;
+    public ToxicController ToxicControll => m_toxiocController;
 
     // public RaidController raidController;
     [SerializeField] private bool immortal;
