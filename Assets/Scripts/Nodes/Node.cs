@@ -17,7 +17,7 @@ namespace FarmWar.Core
         private Shield Shield;
 
         public bool IsShielded => Shield.IsActivate;
-        private bool m_isToxic;
+       [SerializeField] private bool m_isToxic;
         public bool IsToxic { get { return m_isToxic; } set { m_isToxic = value; } }
 
         public Plantable plantable;

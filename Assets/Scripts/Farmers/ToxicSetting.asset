@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c83e96219e339134784305b80ef8bcaa, type: 3}
   m_Name: ToxicSetting
   m_EditorClassIdentifier: 
-  m_skillDuration: 60
-  m_percenActive: 0.3
+  m_skillDuration: 10
+  m_percenActive: 0.5
   m_reducTime: 10
   m_reducFrequency: 0.3
-  m_toxicList: []

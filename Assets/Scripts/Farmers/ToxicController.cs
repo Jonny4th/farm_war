@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class ToxicController : MonoBehaviour
@@ -13,6 +12,7 @@ public class ToxicController : MonoBehaviour
     [SerializeField] private ToxicSetting m_setting;
     private float m_timeDuration = 10f;
     private float m_percenActive = 0.3f;
+    private int m_numberFoskill = 1;
     private void Awake()
     {
         m_timeDuration = m_setting.SkillDuration;
@@ -36,8 +36,10 @@ public class ToxicController : MonoBehaviour
 
     private void Attacked(EmemyFaction ememyFaction)
     {
-        if (ememyFaction.Hp <= (ememyFaction.MaxHp * 0.8f) && !m_isSkillActive)
+        if (m_numberFoskill == 0) return;
+        if (ememyFaction.Hp <= (ememyFaction.MaxHp * m_setting.PercentActive) && !m_isSkillActive)
         {
+            m_numberFoskill--;
             m_isSkillActive = true;
             foreach (var T in m_toxicObj)
             {
@@ -56,6 +58,6 @@ public class ToxicController : MonoBehaviour
         {
             T.UnActiveSkill();
         }
-     //   m_isSkillActive = false;
+        m_isSkillActive = false;
     }
 }

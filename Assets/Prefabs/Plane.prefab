@@ -266,6 +266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raidable: {fileID: 5086791927257348753}
   Shield: {fileID: 7172202718698830880}
+  m_isToxic: 0
   plantable: {fileID: 4779114184590073962}
 --- !u!114 &5086791927257348753
 MonoBehaviour:
@@ -520,6 +521,18 @@ PrefabInstance:
     - target: {fileID: 2725721152430121427, guid: 905951d200649db44bb3cde706de555d, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3482414759442588489, guid: 905951d200649db44bb3cde706de555d, type: 3}
+      propertyPath: m_timeUp
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3482414759442588489, guid: 905951d200649db44bb3cde706de555d, type: 3}
+      propertyPath: m_setting
+      value: 
+      objectReference: {fileID: 11400000, guid: 7e1bc858c6aec1d449228dd12695d6ea, type: 2}
+    - target: {fileID: 3482414759442588489, guid: 905951d200649db44bb3cde706de555d, type: 3}
+      propertyPath: m_timeDown
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 3482414759442588489, guid: 905951d200649db44bb3cde706de555d, type: 3}
       propertyPath: m_particleSystem

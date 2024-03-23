@@ -17,7 +17,7 @@ public class ToxicSetting : ScriptableObject
     [SerializeField] private float m_reducTime = 10f;
     public float ReducTime => m_reducTime;
     [SerializeField] private float m_reducFrequency = 0.3f;
-    public float ReducFrequency => m_reducTime;
+    public float ReducFrequency => m_reducFrequency;
 
     // [Header("ToxicList")]
     // [SerializeField] private List<ToxicObject> m_toxicList;

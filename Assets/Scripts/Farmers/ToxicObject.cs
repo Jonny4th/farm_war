@@ -20,6 +20,7 @@ public class ToxicObject : MonoBehaviour
     private bool m_isActive = false;
     public bool IsActive => m_isActive;
     [SerializeField] private ToxicSetting m_setting;
+
     private float m_reducTime = 10f;
     private float m_reducFrequency = 0.3f;
 
@@ -121,6 +122,7 @@ public class ToxicObject : MonoBehaviour
         }
         m_particleRoot.SetActive(false);
         m_node.IsToxic = false;
+        StopAllCoroutines();
         // m_toxicController.IsSkillActive = false;
     }
 }
