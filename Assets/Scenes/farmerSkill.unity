@@ -3957,7 +3957,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_toxicObj: []
-  m_setting: {fileID: 11400000, guid: 7e1bc858c6aec1d449228dd12695d6ea, type: 2}
+  m_setting: {fileID: 11400000, guid: 4c9e7e74d76788148ab7edc3c473a837, type: 2}
 --- !u!1001 &1828476450
 PrefabInstance:
   m_ObjectHideFlags: 0
