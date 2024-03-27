@@ -72,7 +72,7 @@ public class Farmer : MonoBehaviour
         moveToAttackState.Init(this, animator, GameManager.instance);
         // gameManager = GameManager.instance;
         GameManager.instance.ResetEven += ResetGame;
-        GameManager.instance.GameOverEven += GameOver;
+        // GameManager.instance.GameOverEven += GameOver;
 
         SetSpawnPosition(transform);
 
@@ -146,7 +146,7 @@ public class Farmer : MonoBehaviour
         transform.position = startPosition;
         transform.rotation = startRotation;
     }
-    private void GameOver(GameManager gameManager)
+    public void GameOver()
     {
         StopAllAnimation();
     }
@@ -154,7 +154,7 @@ public class Farmer : MonoBehaviour
     private void OnDestroy()
     {
         GameManager.instance.ResetEven -= ResetGame;
-        GameManager.instance.GameOverEven -= GameOver;
+        //  GameManager.instance.GameOverEven -= GameOver;
     }
     public static implicit operator Vector3(Farmer farmer)
     {

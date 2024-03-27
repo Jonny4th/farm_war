@@ -4,9 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
-    
-    public void LoadMainScene()
+
+    public void LoadScene(int senceIndex)
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(senceIndex);
+    }
+    public void LoadSceneAsync(int senceIndex)
+    {
+        SceneManager.LoadSceneAsync(senceIndex);
     }
 }
