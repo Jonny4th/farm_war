@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using UnityEngine.SceneManagement;
+using UnityEngine.Events;
+
 
 public enum GameState
 {
@@ -36,11 +37,12 @@ public class GameManager : MonoBehaviour
     // public bool IsRatInArea { get { return isRatInArea; } set { isRatInArea = value; } }
     public event Action<GameManager> SetUpEven;
     public event Action<GameManager> ActionEven;
-    public event Action<GameManager> GameOverEven;
+   // public event Action<GameManager> GameOverEven;
+    public UnityEvent GameOverEven;
     public event Action<GameManager> WinerEven;
     public event Action<GameManager> ResetEven;
-    [SerializeField] private ToxicController m_toxiocController;
-    public ToxicController ToxicControll => m_toxiocController;
+
+   // public ToxicController ToxicControll => m_toxiocController;
 
     // public RaidController raidController;
     [SerializeField] private bool immortal;
@@ -95,7 +97,7 @@ public class GameManager : MonoBehaviour
                 ActionEven?.Invoke(this);
                 break;
             case GameState.GameOver:
-                GameOverEven?.Invoke(this);
+                GameOverEven?.Invoke();
                 break;
             case GameState.Winer:
                 WinerEven?.Invoke(this);
@@ -153,20 +155,6 @@ public class GameManager : MonoBehaviour
     #endregion
 
     //use by ui btn
-    public void PlayAgainBTN()
-    {
-        // StartState(GameState.Restart);
-        SceneManager.LoadScene(0);
-    }
-    public void TryAgainBTN()
-    {
-        // StartState(GameState.Restart);
-        SceneManager.LoadScene(0);
-    }
-    public void QuaitAgain()
-    {
-        Application.Quit();
-    }
 
 
 

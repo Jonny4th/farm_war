@@ -15,23 +15,37 @@ public class Healer : MonoBehaviour
     [SerializeField]
     private GameObject m_Visual;
 
-    public IHealable Patient {  get; private set; }
+    public IHealable Patient { get; private set; }
     public bool IsActivating { get; private set; }
 
     public event Action<Healer> OnHealingStarted;
     public event Action<Healer> OnHealing;
     public event Action<Healer> OnHealingEnded;
+    private bool m_canUseSkill = true;
 
     private void Awake()
     {
         Patient = GetComponent<IHealable>();
     }
-
+    private void Start()
+    {
+        GameManager.instance.EmemyFaction.TOxicController.OnSkillActive += DisableHealing;
+        GameManager.instance.EmemyFaction.TOxicController.OnSkillEnd += ToxicEnd;
+    }
     public void ActivateHealing()
     {
+        if (!m_canUseSkill) return;
         StartCoroutine(nameof(Healing));
     }
-
+    public void DisableHealing()
+    {
+        m_canUseSkill = false;
+        StopAllCoroutines();
+        m_Visual.SetActive(false);
+        IsActivating = false;
+        OnHealingEnded?.Invoke(this);
+    }
+    public void ToxicEnd() => m_canUseSkill = true;
     private IEnumerator Healing()
     {
         OnHealingStarted?.Invoke(this);
@@ -53,7 +67,7 @@ public class Healer : MonoBehaviour
 
     public void SetPatient(IHealable patient)
     {
-        Patient =  patient;
+        Patient = patient;
     }
 
 }

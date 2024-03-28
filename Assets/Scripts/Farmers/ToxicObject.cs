@@ -35,8 +35,9 @@ public class ToxicObject : MonoBehaviour
     }
     void Start()
     {
+        
         m_originalScale = m_particleRoot.transform.localScale;
-        GameManager.instance.ToxicControll.ToxicObj.Add(this);
+        GameManager.instance.EmemyFaction.TOxicController.ToxicObj.Add(this);
 
     }
 

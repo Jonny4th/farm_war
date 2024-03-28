@@ -103,6 +103,8 @@ public class UIManager : MonoBehaviour
                 attackSt.uiObj.gameObject.SetActive(false);
                 poisonSt.uiObj.gameObject.SetActive(false);
                 healingSt.uiObj.gameObject.SetActive(false);
+                winerPanel.SetActive(false);
+                gameOverPanel.SetActive(false);
                 break;
             case GameState.Action:
                 actionPanel.SetActive(true);
