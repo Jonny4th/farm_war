@@ -34,7 +34,7 @@ namespace FarmWar.Core
 
             raidable.OnRaidEnd += RaidEndHandler;
         }
-
+    
         public void ActivateShield(int hitPoint)
         {
             Shield.ActivateShield(hitPoint);
