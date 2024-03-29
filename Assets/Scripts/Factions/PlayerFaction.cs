@@ -14,11 +14,11 @@ public class PlayerFaction : Faction<Raid>
     public RaidController RaidCon { get { return raidCon; } }
 
     [SerializeField] private ShieldContoller shieldCon;
-    public ShieldContoller ShieldContoller { get {  return shieldCon; } }
+    public ShieldContoller ShieldContoller { get { return shieldCon; } }
 
     [SerializeField] private RaidableHealingController healingCon;
     public RaidableHealingController HealingCon { get { return healingCon; } }
-    
+
     [SerializeField] private Transform groundParent;
 
     [SerializeField] private float attackTime = 1;
@@ -197,12 +197,16 @@ public class PlayerFaction : Faction<Raid>
 
     public void ShieldCommand() // used by ui button
     {
+        var unitNodes1 = GameManager.instance.NodeMana.nodeCollcetion.FindAll(x => !x.IsShielded);
+        if (unitNodes1.Count == 0) return;
+        
+        var unitNodes = unitNodes1.FindAll(x => x.IsRaided);
+        
         if (!HaveCoin(shieldCon.Cost)) return;
 
         ReduceCoin(shieldCon.Cost);
         int hitPoint = 2; // default hit point for shield.
 
-        var unitNodes = GameManager.instance.NodeMana.nodeCollcetion.FindAll(x => x.IsRaided && !x.IsShielded);
 
         if (unitNodes.Count == 0)
         {
@@ -210,6 +214,7 @@ public class PlayerFaction : Faction<Raid>
             ActionNotification.ShowText("No present ally. Shield is activated in a random plot.");
             return;
         }
+
 
         unitNodes[Random.Range(0, unitNodes.Count)].ActivateShield(hitPoint);
         ActionNotification.ShowText("Shield is activated to protect an ally.");
