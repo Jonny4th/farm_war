@@ -29,6 +29,7 @@ public class PlayerFaction : Faction<Raid>
     [SerializeField] private float quantityCoin = 10;
     private float timerSteal;
 
+    [SerializeField] private TextSpawner ActionNotification;
 
     private event Action<PlayerFaction> updateHp;
     public Action<PlayerFaction> UpdateHp { get { return updateHp; } set { updateHp = value; } }
@@ -190,6 +191,8 @@ public class PlayerFaction : Faction<Raid>
         var raid = raidCon.RandomSpawnOnGround();
         aliveUnit.Add(raid);
         raid.OnRaidCompleted.AddListener((r) => aliveUnit.Remove(r));
+
+        ActionNotification.ShowText("You sent an ally into the plot.");
     }
 
     public void ShieldCommand() // used by ui button
@@ -204,10 +207,12 @@ public class PlayerFaction : Faction<Raid>
         if (unitNodes.Count == 0)
         {
             shieldCon.ActivateShieldRandomly(hitPoint);
+            ActionNotification.ShowText("No present ally. Shield is activated in a random plot.");
             return;
         }
 
         unitNodes[Random.Range(0, unitNodes.Count)].ActivateShield(hitPoint);
+        ActionNotification.ShowText("Shield is activated to protect an ally.");
     }
 
     public void HealCommand()
@@ -218,6 +223,7 @@ public class PlayerFaction : Faction<Raid>
         ReduceCoin(healingCon.Cost);
 
         healingCon.HealRandomly();
+        ActionNotification.ShowText("An ally is being healed.");
     }
 
     private void HandleOnHealing(Healer healer)
